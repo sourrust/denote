@@ -103,7 +103,7 @@
         this.noteOffset = this.getNextOffset();
         this.filterForComments(notes);
 
-        if(this._html.children.length < 15 &&
+        if(this._html.children.length < 5 &&
            this.canRequestMoreNotes()) {
           this.requestNotes(moreloop);
         } else {
