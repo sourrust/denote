@@ -1,0 +1,8 @@
+# OS Level
+.DS_Store
+
+# Node modules
+node_modules/
+
+# Generated css
+css/
