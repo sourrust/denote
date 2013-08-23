@@ -114,10 +114,29 @@
           display.innerHTML += notes.innerHTML;
 
           this.removeNotesFromCache(notes);
+
+          this.setClickEvent(
+            display.querySelector('.more_comments'),
+            moreloop);
         }
       };
 
       this.requestNotes(moreloop);
+    },
+
+    setClickEvent: function(moreButton, moreloop) {
+      if(moreButton != null) {
+        // Needs to be 'onclick' and not 'addEventListener' to be able to
+        // remove the element first and then request more note.
+        display.querySelector('.more_comments')
+               .onclick = function() {
+          this.remove();
+          denote.toggleLoaderVisiblity();
+          denote.requestNotes.call(denote, function(e) {
+            moreloop.call(this, e);
+          });
+        };
+      }
     },
 
     removeNotesFromCache: function(notes) {
