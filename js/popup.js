@@ -63,6 +63,17 @@
       });
     },
 
+    addMoreNotesButton: function(noteHTML) {
+      var moreNotes = "<li class=\"note more_comments\">" +
+                      "More +" +
+                      "<div class\"clear\"></div>" +
+                      "</li>";
+
+      if(this.canRequestMoreNotes()) {
+        noteHTML.innerHTML += moreNotes;
+      }
+    },
+
     displayNotes: function(initNotes) {
       var notes, moreloop;
 
@@ -98,6 +109,7 @@
         } else {
           this.fixTargetLinks(notes);
           this.toggleLoaderVisiblity();
+          this.addMoreNotesButton(notes);
 
           display.innerHTML += notes.innerHTML;
 
