@@ -6,14 +6,14 @@
   win = window;
   doc = win.document;
 
-  display = doc.querySelector('#note_container');
+  display = doc.querySelector('.notes');
   loader  = doc.querySelector('#loader');
 
   denote = {
     noteOffset: '',
     request: new XMLHttpRequest(),
     url: null,
-    _html: doc.createElement('div'),
+    _html: doc.createElement('ol'),
 
     toggleLoaderVisiblity: function() {
       if(loader.className === 'show') {
@@ -52,7 +52,7 @@
                .split('<!-- START' + endstr)[1]
                .split('<!-- END'   + endstr)[0];
 
-      this._html.children[0].innerHTML += notes;
+      this._html.innerHTML += notes;
     },
 
     fixTargetLinks: function(html) {
@@ -64,47 +64,54 @@
     },
 
     displayNotes: function(initNotes) {
-      var notes, noteHTML, moreloop;
+      var notes, moreloop;
 
-      notes = initNotes;
-      this._html.innerHTML = notes;
+      this._html.innerHTML = initNotes;
 
-      noteHTML = this._html.children[0];
+      notes = this._html;
 
       if(!this.canRequestMoreNotes()) {
-        this.filterForComments(noteHTML);
+        this.filterForComments(notes);
 
-        this.fixTargetLinks(noteHTML);
+        this.fixTargetLinks(notes);
         this.toggleLoaderVisiblity();
 
-        display.innerHTML += noteHTML.outerHTML;
-        this._html.removeChild(noteHTML);
+        display.innerHTML += notes.innerHTML;
+
+        this.removeNotesFromCache(notes);
 
         return;
       }
 
       this.noteOffset = this.getNextOffset();
 
-      this.filterForComments(noteHTML);
+      this.filterForComments(notes);
 
       moreloop = function(e) {
         this.loadMoreNotes(e);
         this.noteOffset = this.getNextOffset();
-        this.filterForComments(noteHTML);
+        this.filterForComments(notes);
 
-        if(this._html.children[0].children.length < 15 &&
+        if(this._html.children.length < 15 &&
            this.canRequestMoreNotes()) {
           this.requestNotes(moreloop);
         } else {
-          this.fixTargetLinks(noteHTML);
+          this.fixTargetLinks(notes);
           this.toggleLoaderVisiblity();
 
-          display.innerHTML += noteHTML.outerHTML;
-          this._html.removeChild(noteHTML);
+          display.innerHTML += notes.innerHTML;
+
+          this.removeNotesFromCache(notes);
         }
       };
 
       this.requestNotes(moreloop);
+    },
+
+    removeNotesFromCache: function(notes) {
+      _.forEach(_.toArray(notes.children), function(note) {
+        this._html.removeChild(note);
+      }, this);
     },
 
     filterForComments: function(notes) {
