@@ -1,0 +1,81 @@
+@import (less) "normalize.css";
+@import 'scrollbar';
+
+#note_container {
+  width: 300px;
+  padding: 0;
+
+  border: 1px #ccc solid;
+}
+
+#loader {
+  width: 16px;
+
+  margin: 10px auto;
+}
+
+ol.notes {
+  padding: 0;
+  margin: 0;
+
+  list-style: none;
+}
+
+li.note {
+  padding: 10px;
+
+  background: #eee;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  border-top: 1px #e7e7e7 solid;
+
+  blockquote {
+    border-left: 1px #ccc solid;
+    margin: 10px 0 1px 0;
+    padding-left: 15px;
+  }
+}
+
+blockquote > a {
+  color: #777;
+  text-decoration: none;
+
+  &:hover { text-decoration: underline; }
+}
+
+.action {
+  font-size: 10px;
+
+  a {
+    color: #4d63d6;
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+}
+
+// Cleafix
+// -------
+//
+// taken from twitter's bootstrap, originally from html5 boilerplate
+// <https://github.com/twitter/bootstrap/blob/master/less/mixins.less#L12>
+.clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: " ";
+    line-height: 0;
+  }
+
+  &:after { clear: both }
+}
+
+.hide {
+  display: none;
+  visibility: hidden;
+}
+
+.show {
+  display: block;
+  visibility: visible;
+}
