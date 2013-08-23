@@ -12,7 +12,7 @@
   if(notes != null)
     noteUrl = notes.innerHTML.match(/\/notes\/\d+\/\w+\???/)[0];
 
-  notesStr = doc.querySelector('ol.notes').outerHTML;
+  notesStr = doc.querySelector('ol.notes').innerHTML;
 
   // Concat the base blog url with note url
   urlStr = win.location.origin + noteUrl;
