@@ -6,3 +6,6 @@ node_modules/
 
 # Generated css
 css/
+
+# Build folder
+build/

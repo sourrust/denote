@@ -17,7 +17,7 @@ module.exports = function(grunt) {
           yuicompress: true
         },
         files: {
-          'build/css/style.css': 'less/main.less'
+          'css/popup.css': 'less/popup.less'
         }
       }
     },
@@ -43,12 +43,25 @@ module.exports = function(grunt) {
         }
       }
     },
+    copy: {
+      main: {
+        files: [
+          { src: 'js/**', dest: 'build/' },
+          { src: ['popup.html', 'manifest.json', 'LICENSE']
+          , dest: 'build/'
+          },
+          { src: ['css/*'], dest: 'build/'},
+          { src: ['images/*'], dest: 'build/'}
+        ]
+      }
+    }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', ['less:development','jshint']);
-  grunt.registerTask('release', ['less:production']);
+  grunt.registerTask('release', ['less:production', 'copy']);
 };
