@@ -17,7 +17,7 @@ module.exports = function(grunt) {
           yuicompress: true
         },
         files: {
-          'build/css/style.css': 'less/main.less'
+          'css/popup.css': 'less/popup.less'
         }
       }
     },
