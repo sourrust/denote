@@ -1,6 +1,10 @@
 {
   "name": "denote",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sourrust/denote.git"
+  },
   "devDependencies":  {
     "grunt": "~0.4.1",
     "grunt-contrib-copy": "~0.4.1",
