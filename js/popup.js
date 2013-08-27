@@ -141,8 +141,8 @@
 
     removeNotesFromCache: function(notes) {
       _.forEach(_.toArray(notes.children), function(note) {
-        this._html.removeChild(note);
-      }, this);
+        note.remove();
+      });
     },
 
     filterForComments: function(notes) {
@@ -150,11 +150,14 @@
       // element properly.
       var notes_ = _.toArray(notes.children);
 
-      _.forEach(notes_, function(x) {
-        if(!_.contains(x.className.split(' '), 'with_commentary')) {
-          notes.removeChild(x);
+      _.forEach(notes_, function(note) {
+        var haveCommentary =
+          _.contains(note.className.split(' '), 'with_commentary');
+
+        if(!haveCommentary) {
+          note.remove();
         }
-      }, this);
+      });
     },
 
     getNextOffset: function() {
