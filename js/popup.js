@@ -151,7 +151,10 @@
       var notes_ = _.toArray(notes.children);
 
       _.forEach(notes_, function(x) {
-        if(!_.contains(x.className.split(' '), 'with_commentary')) {
+        var haveCommentary =
+          _.contains(x.className.split(' '), 'with_commentary');
+
+        if(!haveCommentary) {
           x.remove();
         }
       }, this);
