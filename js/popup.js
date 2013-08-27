@@ -141,7 +141,7 @@
 
     removeNotesFromCache: function(notes) {
       _.forEach(_.toArray(notes.children), function(note) {
-        this._html.removeChild(note);
+        note.remove();
       }, this);
     },
 
@@ -152,7 +152,7 @@
 
       _.forEach(notes_, function(x) {
         if(!_.contains(x.className.split(' '), 'with_commentary')) {
-          notes.removeChild(x);
+          x.remove();
         }
       }, this);
     },
