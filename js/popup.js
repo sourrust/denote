@@ -142,7 +142,7 @@
     removeNotesFromCache: function(notes) {
       _.forEach(_.toArray(notes.children), function(note) {
         note.remove();
-      }, this);
+      });
     },
 
     filterForComments: function(notes) {
@@ -157,7 +157,7 @@
         if(!haveCommentary) {
           note.remove();
         }
-      }, this);
+      });
     },
 
     getNextOffset: function() {
