@@ -22,7 +22,7 @@
   chrome.runtime.onMessage.addListener(
     function(res, sender, sendMessage) {
       sendMessage({
-        url: urlStr || '',
+        url: urlStr,
         notes: notesStr
       });
     });
