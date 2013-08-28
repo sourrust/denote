@@ -6,7 +6,9 @@
   win = window;
   doc = win.document;
 
-  notes = doc.querySelector('.more_notes_link_container');
+  notes   = doc.querySelector('.more_notes_link_container');
+  noteUrl = null;
+  urlStr  = null;
 
   // Grab the notes url
   if(notes != null)
