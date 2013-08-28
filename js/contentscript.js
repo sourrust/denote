@@ -11,13 +11,12 @@
   urlStr  = null;
 
   // Grab the notes url
-  if(notes != null)
-    noteUrl = notes.innerHTML.match(/\/notes\/\d+\/\w+\???/)[0];
-
-  notesStr = doc.querySelector('ol.notes').innerHTML;
-
-  // Concat the base blog url with note url
-  urlStr = win.location.origin + noteUrl;
+  if(notes != null) {
+    noteUrl  = notes.innerHTML.match(/\/notes\/\d+\/\w+\???/)[0];
+    notesStr = doc.querySelector('ol.notes').innerHTML;
+    // Concat the base blog url with note url
+    urlStr   = win.location.origin + noteUrl;
+  }
 
   chrome.runtime.onMessage.addListener(
     function(res, sender, sendMessage) {
