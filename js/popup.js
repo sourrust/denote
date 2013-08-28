@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var display, doc, denote, loader, win;
+  var display, doc, denote, errorToHtml, loader, win;
 
   win = window;
   doc = win.document;
@@ -171,6 +171,10 @@
 
       return offset;
     }
+  };
+
+  errorToHtml = function(message) {
+    return '<li class="error">' + message + '</li>';
   };
 
   doc.addEventListener('DOMContentLoaded', function() {
