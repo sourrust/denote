@@ -20,10 +20,10 @@ require([ 'underscore'
         , 'jquery'
         , 'backbone'
         , 'utility'
-        , 'text!../templates/notes.html'
+        , 'text!../templates/note.html'
         ],
 
-function(_, $, Backbone, utility, notestemplate) {
+function(_, $, Backbone, utility, noteTemplate) {
   'use strict';
 
   var NoteModel, NoteView, Notes, NotesView, $loader, MoreButtonView;
@@ -46,7 +46,7 @@ function(_, $, Backbone, utility, notestemplate) {
   NoteView = Backbone.View.extend({
     tagName: 'li',
 
-    template: _.template(notestemplate),
+    template: _.template(noteTemplate),
 
     initialize: function() {
       _.bindAll(this, 'render');
@@ -82,7 +82,6 @@ function(_, $, Backbone, utility, notestemplate) {
 
   NotesView = Backbone.View.extend({
     el: '.notes',
-    template: _.template(notestemplate),
 
     initialize: function() {
       _.bindAll(this, 'render', 'renderNote', 'requestMoreNotes'
