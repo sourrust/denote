@@ -12,7 +12,8 @@ require.config({
     backbone: 'lib/backbone',
     jquery: 'lib/jquery',
     text: 'lib/text',
-    underscore: 'lib/lodash'
+    underscore: 'lib/lodash',
+    template: '../templates'
   }
 });
 
