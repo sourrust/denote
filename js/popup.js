@@ -19,28 +19,20 @@ require.config({
 require([ 'underscore'
         , 'jquery'
         , 'backbone'
+        , 'models/note'
         , 'utility'
         , 'text!../templates/note.html'
         ],
 
-function(_, $, Backbone, utility, noteTemplate) {
+function(_, $, Backbone, NoteModel, utility, noteTemplate) {
   'use strict';
 
-  var NoteModel, NoteView, Notes, NotesView, $loader, MoreButtonView;
+  var NoteView, Notes, NotesView, $loader, MoreButtonView;
 
   $loader = $('#loader');
 
   Notes = Backbone.Collection.extend({
     model: NoteModel
-  });
-
-  NoteModel = Backbone.Model.extend({
-    defaults: {
-      'preview_text': '',
-      'permalink': '',
-      'classes': [],
-      'blogs': []
-    }
   });
 
   NoteView = Backbone.View.extend({
