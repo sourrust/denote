@@ -1,6 +1,7 @@
 define('views/notecontainer',
 
 [ 'underscore'
+, 'jquery'
 , 'backbone'
 , 'collections/notes'
 , 'models/note'
@@ -9,7 +10,13 @@ define('views/notecontainer',
 , 'views/note'
 ],
 
-function(_, Backbone, Notes, NoteModel, utility, MoreButtonView, NoteView) {
+function
+( _, $, Backbone
+, Notes, NoteModel
+, utility
+, MoreButtonView
+, NoteView
+) {
   'use strict';
 
   var $loader = $('#loader');
