@@ -19,21 +19,18 @@ require.config({
 require([ 'underscore'
         , 'jquery'
         , 'backbone'
+        , 'collections/notes'
         , 'models/note'
         , 'utility'
         , 'text!../templates/note.html'
         ],
 
-function(_, $, Backbone, NoteModel, utility, noteTemplate) {
+function(_, $, Backbone, Notes, NoteModel, utility, noteTemplate) {
   'use strict';
 
-  var NoteView, Notes, NotesView, $loader, MoreButtonView;
+  var NoteView, NotesView, $loader, MoreButtonView;
 
   $loader = $('#loader');
-
-  Notes = Backbone.Collection.extend({
-    model: NoteModel
-  });
 
   NoteView = Backbone.View.extend({
     tagName: 'li',
