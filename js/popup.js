@@ -1,4 +1,3 @@
-(function() {
 require.config({
   shim: {
     backbone: {
@@ -23,202 +22,192 @@ require([ 'underscore'
         , 'utility'
         , 'text!../templates/notes.html'
         ],
+
+function(_, $, Backbone, utility, notestemplate) {
   'use strict';
 
-  var display, doc, denote, errorToHtml, loader, win;
+  var NoteModel, NoteView, Notes, NotesView, $loader, MoreButtonView;
 
-  win = window;
-  doc = win.document;
+  $loader = $('#loader');
 
-  display = doc.querySelector('.notes');
-  loader  = doc.querySelector('#loader');
+  Notes = Backbone.Collection.extend({
+    model: NoteModel
+  });
 
-  denote = {
-    noteOffset: '',
-    request: new XMLHttpRequest(),
-    url: null,
-    _html: doc.createElement('ol'),
-
-    toggleLoaderVisiblity: function() {
-      if(loader.className === 'show') {
-        loader.className = 'hide';
-      } else if(loader.className === 'hide') {
-        loader.className = 'show';
-      }
-    },
-
-    canRequestMoreNotes: function() {
-      var endOfNotes = this._html.querySelector('.original_post');
-
-      return (endOfNotes == null) && this.noteOffset != null;
-    },
-
-    requestNotes: function(callback) {
-      var newURL, req;
-
-      if(!this.canRequestMoreNotes()) return;
-
-      req    = this.request;
-      newURL = this.url + this.noteOffset;
-
-      req.open('GET', newURL, true);
-      req.onload = callback.bind(this);
-      req.send();
-    },
-
-    loadMoreNotes: function(e) {
-      var endstr, notes;
-
-      if(!this.canRequestMoreNotes()) return;
-
-      endstr = ' NOTES -->';
-      notes = e.target.responseText
-               .split('<!-- START' + endstr)[1]
-               .split('<!-- END'   + endstr)[0];
-
-      this._html.innerHTML += notes;
-    },
-
-    fixTargetLinks: function(html) {
-      var anchors = _.toArray(html.querySelectorAll('a'));
-
-      _.forEach(anchors, function(anchor) {
-        anchor.target = '_blank';
-      });
-    },
-
-    addMoreNotesButton: function(noteHTML) {
-      var moreNotes = "<li class=\"note more_comments\">" +
-                      "More +" +
-                      "<div class\"clear\"></div>" +
-                      "</li>";
-
-      if(this.canRequestMoreNotes()) {
-        noteHTML.innerHTML += moreNotes;
-      }
-    },
-
-    displayNotes: function(initNotes) {
-      var notes, moreloop;
-
-      this._html.innerHTML = initNotes;
-
-      notes = this._html;
-
-      if(!this.canRequestMoreNotes()) {
-        this.filterForComments(notes);
-
-        this.fixTargetLinks(notes);
-        this.toggleLoaderVisiblity();
-
-        display.innerHTML += notes.innerHTML;
-
-        this.removeNotesFromCache(notes);
-
-        return;
-      }
-
-      this.noteOffset = this.getNextOffset();
-
-      this.filterForComments(notes);
-
-      moreloop = function(e) {
-        this.loadMoreNotes(e);
-        this.noteOffset = this.getNextOffset();
-        this.filterForComments(notes);
-
-        if(this._html.children.length < 5 &&
-           this.canRequestMoreNotes()) {
-          this.requestNotes(moreloop);
-        } else {
-          this.fixTargetLinks(notes);
-          this.toggleLoaderVisiblity();
-          this.addMoreNotesButton(notes);
-
-          display.innerHTML += notes.innerHTML;
-
-          this.removeNotesFromCache(notes);
-
-          this.setClickEvent(
-            display.querySelector('.more_comments'),
-            moreloop);
-        }
-      };
-
-      this.requestNotes(moreloop);
-    },
-
-    setClickEvent: function(moreButton, moreloop) {
-      if(moreButton != null) {
-        // Needs to be 'onclick' and not 'addEventListener' to be able to
-        // remove the element first and then request more note.
-        display.querySelector('.more_comments')
-               .onclick = function() {
-          this.remove();
-          denote.toggleLoaderVisiblity();
-          denote.requestNotes.call(denote, function(e) {
-            moreloop.call(this, e);
-          });
-        };
-      }
-    },
-
-    removeNotesFromCache: function(notes) {
-      _.forEach(_.toArray(notes.children), function(note) {
-        note.remove();
-      });
-    },
-
-    filterForComments: function(notes) {
-      // Needs to be a real array in order to traverse through each note
-      // element properly.
-      var notes_ = _.toArray(notes.children);
-
-      _.forEach(notes_, function(note) {
-        var haveCommentary =
-          _.contains(note.className.split(' '), 'with_commentary');
-
-        if(!haveCommentary) {
-          note.remove();
-        }
-      });
-    },
-
-    getNextOffset: function() {
-      var offset, str;
-
-      str    = this._html.querySelector('.more_notes_link_container');
-
-      if(str != null) {
-        offset = str.innerHTML.match(/\?from_c=\d+/)[0];
-      }
-
-      return offset;
+  NoteModel = Backbone.Model.extend({
+    defaults: {
+      'preview_text': '',
+      'permalink': '',
+      'classes': [],
+      'blogs': []
     }
-  };
+  });
 
-  errorToHtml = function(message) {
-    return '<li class="error">' + message + '</li>';
-  };
+  NoteView = Backbone.View.extend({
+    tagName: 'li',
 
-  doc.addEventListener('DOMContentLoaded', function() {
+    template: _.template(notestemplate),
+
+    initialize: function() {
+      _.bindAll(this, 'render');
+    },
+
+    render: function() {
+      var html = this.template(this.model.toJSON());
+
+      this.$el.html(html);
+
+      return this;
+    }
+  });
+
+  MoreButtonView = Backbone.View.extend({
+    tagName: 'li',
+    className: 'note more_comments',
+
+    initialize: function() {
+      _.bindAll(this, 'render');
+    },
+
+    render: function() {
+      var html = 'More +';
+
+      html += '<div class="clearfix"></div>';
+
+      this.$el.html(html);
+
+      return this;
+    }
+  });
+
+  NotesView = Backbone.View.extend({
+    el: '.notes',
+    template: _.template(notestemplate),
+
+    initialize: function() {
+      _.bindAll(this, 'render', 'renderNote', 'requestMoreNotes'
+                    , 'addMoreNotesButton');
+
+      this.notesJSON = utility.notesToJSON(
+        this.attributes.tempNotes);
+
+      this.requestMoreNotes(function() {
+        this.collection.add(
+          _.map(this.notesJSON, function(note) {
+            return new NoteModel(note);
+          }));
+
+        this.notesJSON = [];
+
+        utility.toggleVisiblity($loader);
+        this.addMoreNotesButton();
+      }, this);
+
+      this.collection = new Notes();
+
+      this.collection.on('add', this.renderNote);
+
+      this.render();
+    },
+
+    render: function() {
+      this.collection.each(this.renderNote);
+
+      return this;
+    },
+
+    renderNote: function(model) {
+      var note = new NoteView({
+        model: model,
+        className: model.get('classes').join(' ')
+      });
+
+      this.$el.append(note.render().el);
+    },
+
+    requestMoreNotes: function(callback, context) {
+      var offset, notesURL, that;
+
+      offset = utility.findOffset(this.attributes.tempNotes);
+
+      if(offset == null) return;
+
+      notesURL = this.attributes.postURL + offset;
+
+      if(this.notesJSON.length < 5) {
+        that = this;
+        $.get(notesURL, function(data) {
+          var endstr, htmlstr, json;
+
+          endstr  = ' NOTES -->';
+          htmlstr = data.split('<!-- START' + endstr)[1]
+                        .split('<!-- END'   + endstr)[0];
+          that.attributes.tempNotes.html(htmlstr);
+
+          json = utility.notesToJSON(
+            that.attributes.tempNotes);
+
+          that.notesJSON = that.notesJSON.concat(json);
+
+          that.requestMoreNotes(callback, context);
+        });
+      } else {
+        callback.call(context);
+      }
+    },
+
+    addMoreNotesButton: function() {
+      var that = this;
+
+      if(utility.findOffset(this.attributes.tempNotes) == null) return;
+
+      if(this.moreNotesView) {
+        this.moreNotesView.remove();
+      }
+
+      this.moreNotesView = new MoreButtonView({
+        events: {
+          'click': function() {
+            this.$el.addClass('hide');
+            utility.toggleVisiblity($loader);
+            that.requestMoreNotes(function() {
+              this.collection.add(
+                _.map(this.notesJSON, function(note) {
+                  return new NoteModel(note);
+                }));
+
+              this.notesJSON = [];
+
+              utility.toggleVisiblity($loader);
+              this.addMoreNotesButton();
+            }, that);
+          }
+        }
+      });
+
+      this.$el.append(this.moreNotesView.render().el);
+    }
+  });
+
+  $(function() {
     chrome.tabs.query({
       active: true,
       currentWindow: true
     }, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, {}, function(response) {
+        var notesView;
+
         if(response != null) {
           if(response.url != null && response.notes != null) {
-            denote.url = response.url;
-            denote.displayNotes(response.notes);
+            notesView = new NotesView({
+              attributes: {
+                postURL: response.url,
+                tempNotes: $('<ol>').html(response.notes)
+              }
+            });
           }
-        } else {
-          denote.toggleLoaderVisiblity();
-          display.innerHTML = errorToHtml(
-            'Couldn\'t find notes on this page'
-            );
         }
       });
     });
   });
-}).call(this);
+});
