@@ -1,4 +1,28 @@
 (function() {
+require.config({
+  shim: {
+    backbone: {
+      deps: ['underscore', 'jquery'],
+      exports: 'Backbone'
+    },
+    underscore: {
+      exports: '_'
+    }
+  },
+  paths: {
+    backbone: 'lib/backbone',
+    jquery: 'lib/jquery',
+    text: 'lib/text',
+    underscore: 'lib/lodash'
+  }
+});
+
+require([ 'underscore'
+        , 'jquery'
+        , 'backbone'
+        , 'utility'
+        , 'text!../templates/notes.html'
+        ],
   'use strict';
 
   var display, doc, denote, errorToHtml, loader, win;
