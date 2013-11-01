@@ -43,8 +43,9 @@ module.exports = function(grunt) {
         undef: true,
         unused: true,
         globals: {
-          _: true,
-          chrome: true
+          chrome: true,
+          define: true,
+          require: true
         }
       }
     },
