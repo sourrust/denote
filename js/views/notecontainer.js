@@ -73,27 +73,31 @@ function
       if(offset == null) return;
 
       notesURL = this.attributes.postURL + offset;
+      that     = this;
 
-      if(this.notesJSON.length < 5) {
-        that = this;
-        $.get(notesURL, function(data) {
-          var endstr, htmlstr, json;
+      $.get(notesURL, function(data) {
+        var canGrabMore, endstr, htmlstr, json;
 
-          endstr  = ' NOTES -->';
-          htmlstr = data.split('<!-- START' + endstr)[1]
-                        .split('<!-- END'   + endstr)[0];
-          that.attributes.tempNotes.html(htmlstr);
+        endstr  = ' NOTES -->';
+        htmlstr = data.split('<!-- START' + endstr)[1]
+                      .split('<!-- END'   + endstr)[0];
+        that.attributes.tempNotes.html(htmlstr);
 
+        canGrabMore = utility.canGrabMoreNotes(
+          that.notesJSON, that.attributes.tempNotes);
+
+        // check for length and end of notes
+        if(canGrabMore) {
           json = utility.notesToJSON(
             that.attributes.tempNotes);
 
           that.notesJSON = that.notesJSON.concat(json);
 
           that.requestMoreNotes(callback, context);
-        });
-      } else {
-        callback.call(context);
-      }
+        } else {
+          callback.call(context);
+        }
+      });
     },
 
     addMoreNotesButton: function() {
