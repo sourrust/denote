@@ -26,7 +26,12 @@ module.exports = function(grunt) {
       tasks: ['less:development']
     },
     jshint: {
-      all: ['Gruntfile.js','js/*.js'],
+      all: [ 'Gruntfile.js'
+           , 'js/*.js'
+           , 'js/collections/*.js'
+           , 'js/models/*.js'
+           , 'js/views/*.js'
+           ],
       options: {
         asi: false,
         browser: true,
@@ -38,8 +43,9 @@ module.exports = function(grunt) {
         undef: true,
         unused: true,
         globals: {
-          _: true,
-          chrome: true
+          chrome: true,
+          define: true,
+          require: true
         }
       }
     },
@@ -51,7 +57,8 @@ module.exports = function(grunt) {
           , dest: 'build/'
           },
           { src: ['css/*'], dest: 'build/'},
-          { src: ['images/*'], dest: 'build/'}
+          { src: ['images/*'], dest: 'build/'},
+          { src: ['templates/*'], dest: 'build/' }
         ]
       }
     }
