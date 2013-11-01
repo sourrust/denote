@@ -26,7 +26,12 @@ module.exports = function(grunt) {
       tasks: ['less:development']
     },
     jshint: {
-      all: ['Gruntfile.js','js/*.js'],
+      all: [ 'Gruntfile.js'
+           , 'js/*.js'
+           , 'js/collections/*.js'
+           , 'js/models/*.js'
+           , 'js/views/*.js'
+           ],
       options: {
         asi: false,
         browser: true,
