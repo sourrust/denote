@@ -19,7 +19,21 @@ function
 ) {
   'use strict';
 
-  var $loader = $('#loader');
+  var $loader, addToCollection;
+
+  $loader = $('#loader');
+
+  addToCollection = function() {
+    this.collection.add(
+      _.map(this.notesJSON, function(note) {
+        return new NoteModel(note);
+      }));
+
+    this.notesJSON = [];
+
+    utility.toggleVisiblity($loader);
+    this.addMoreNotesButton();
+  };
 
   return Backbone.View.extend({
     el: '.notes',
@@ -31,17 +45,7 @@ function
       this.notesJSON = utility.notesToJSON(
         this.attributes.tempNotes);
 
-      this.requestMoreNotes(function() {
-        this.collection.add(
-          _.map(this.notesJSON, function(note) {
-            return new NoteModel(note);
-          }));
-
-        this.notesJSON = [];
-
-        utility.toggleVisiblity($loader);
-        this.addMoreNotesButton();
-      }, this);
+      this.requestMoreNotes(addToCollection, this);
 
       this.collection = new Notes();
 
@@ -114,17 +118,7 @@ function
           'click': function() {
             this.$el.addClass('hide');
             utility.toggleVisiblity($loader);
-            that.requestMoreNotes(function() {
-              this.collection.add(
-                _.map(this.notesJSON, function(note) {
-                  return new NoteModel(note);
-                }));
-
-              this.notesJSON = [];
-
-              utility.toggleVisiblity($loader);
-              this.addMoreNotesButton();
-            }, that);
+            that.requestMoreNotes(addToCollection, that);
           }
         }
       });
