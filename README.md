@@ -5,4 +5,4 @@ reblogs with comments.
 
 [Chrome Extension][1]
 
-[1]: https://chrome.google.com/webstore/detail/denote/ibfbkmghalfjcfeoocejnhhenidpgnbg/related?hl=en-US
+[1]: https://chrome.google.com/webstore/detail/denote/ibfbkmghalfjcfeoocejnhhenidpgnbg
