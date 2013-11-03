@@ -45,13 +45,17 @@ function
       this.notesJSON = utility.notesToJSON(
         this.attributes.tempNotes);
 
-      this.requestMoreNotes(addToCollection, this);
-
       this.collection = new Notes();
 
       this.collection.on('add', this.renderNote);
 
       this.render();
+
+      if(this.attributes.postURL != null) {
+        this.requestMoreNotes(addToCollection, this);
+      } else {
+        addToCollection.call(this);
+      }
     },
 
     render: function() {
