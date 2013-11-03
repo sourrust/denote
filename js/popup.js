@@ -31,7 +31,7 @@ function($, NotesView) {
         var notesView;
 
         if(response != null) {
-          if(response.url != null && response.notes != null) {
+          if(response.notes != null) {
             notesView = new NotesView({
               attributes: {
                 postURL: response.url,

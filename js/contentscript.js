@@ -1,21 +1,27 @@
 (function() {
   'use strict';
 
-  var doc, notes, notesStr, noteUrl, urlStr, win;
+  var doc, moreNotes, notes, notesStr, noteUrl, urlStr, win;
 
   win = window;
   doc = win.document;
 
-  notes   = doc.querySelector('.more_notes_link_container');
+  notes   = doc.querySelector('ol.notes');
   noteUrl = null;
   urlStr  = null;
 
   // Grab the notes url
   if(notes != null) {
-    noteUrl  = notes.innerHTML.match(/\/notes\/\d+\/\w+\???/)[0];
-    notesStr = doc.querySelector('ol.notes').innerHTML;
-    // Concat the base blog url with note url
-    urlStr   = win.location.origin + noteUrl;
+    moreNotes = doc.querySelector('.more_notes_link_container');
+
+    if(moreNotes != null) {
+      noteUrl = moreNotes.innerHTML.match(/\/notes\/\d+\/\w+\???/)[0];
+
+      // Concat the base blog url with note url
+      urlStr  = win.location.origin + noteUrl;
+    }
+
+    notesStr  = notes.innerHTML;
   }
 
   chrome.runtime.onMessage.addListener(
