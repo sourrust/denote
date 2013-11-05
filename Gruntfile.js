@@ -61,11 +61,23 @@ module.exports = function(grunt) {
           { src: ['templates/*'], dest: 'build/' }
         ]
       }
+    },
+    jst: {
+      compile: {
+        options: {
+          amd: true,
+          namespace: false
+        },
+        files: {
+          'templates/note.js': ['templates/note.html']
+        }
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-jst');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
