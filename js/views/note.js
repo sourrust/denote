@@ -2,7 +2,7 @@ define('views/note',
 
 [ 'underscore'
 , 'backbone'
-, 'text!template/note.html'
+, 'template/note'
 ],
 
 function(_, Backbone, noteTemplate) {
@@ -11,7 +11,7 @@ function(_, Backbone, noteTemplate) {
   return Backbone.View.extend({
     tagName: 'li',
 
-    template: _.template(noteTemplate),
+    template: noteTemplate,
 
     initialize: function() {
       _.bindAll(this, 'render');
