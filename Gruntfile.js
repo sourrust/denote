@@ -58,7 +58,7 @@ module.exports = function(grunt) {
           },
           { src: ['css/*'], dest: 'build/'},
           { src: ['images/*'], dest: 'build/'},
-          { src: ['templates/*'], dest: 'build/' }
+          { src: ['templates/*.js'], dest: 'build/' }
         ]
       }
     },
@@ -81,6 +81,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['less:development','jshint']);
-  grunt.registerTask('release', ['less:production', 'copy']);
+  grunt.registerTask('default', ['less:development','jst','jshint']);
+  grunt.registerTask('release', ['less:production','jst', 'copy']);
 };
