@@ -58,17 +58,29 @@ module.exports = function(grunt) {
           },
           { src: ['css/*'], dest: 'build/'},
           { src: ['images/*'], dest: 'build/'},
-          { src: ['templates/*'], dest: 'build/' }
+          { src: ['templates/*.js'], dest: 'build/' }
         ]
+      }
+    },
+    jst: {
+      compile: {
+        options: {
+          amd: true,
+          namespace: false
+        },
+        files: {
+          'templates/note.js': ['templates/note.html']
+        }
       }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-jst');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['less:development','jshint']);
-  grunt.registerTask('release', ['less:production', 'copy']);
+  grunt.registerTask('default', ['less:development','jst','jshint']);
+  grunt.registerTask('release', ['less:production','jst', 'copy']);
 };

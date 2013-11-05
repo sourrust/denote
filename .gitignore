@@ -9,3 +9,6 @@ css/
 
 # Build folder
 build/
+
+# precompiled templates
+templates/*.js
