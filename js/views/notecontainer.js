@@ -8,6 +8,7 @@ define('views/notecontainer',
 , 'utility'
 , 'views/morenotesbutton'
 , 'views/note'
+, 'views/post'
 ],
 
 function
@@ -16,6 +17,7 @@ function
 , utility
 , MoreButtonView
 , NoteView
+, PostView
 ) {
   'use strict';
 
