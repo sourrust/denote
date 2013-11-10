@@ -45,11 +45,11 @@ function(_, $) {
   utility.findOffset = function(context) {
     var $moreNotes, offset;
 
-    $moreNotes = $('.more_notes_link', context);
+    $moreNotes = context.find('.more_notes_link');
 
     if(!$moreNotes.length) return;
 
-    offset     = $moreNotes.attr('onclick').match(/\?from_c=\d+/)[0];
+    offset = $moreNotes.attr('onclick').match(/\?from_c=\d+/)[0];
 
     return offset;
   };
@@ -66,18 +66,20 @@ function(_, $) {
   utility.notesToJSON = function(context) {
     var $notes, value;
 
-    $notes = $('.with_commentary', context);
+    $notes = context.find('.with_commentary');
     value  = [];
 
     if(!_.isEmpty($notes)) {
-      _.each($notes, function($note) {
+      _.each($notes, function(note) {
+        var $note = $(note);
         value.push({
-          'preview_text': getPreviewText($('blockquote > a', $note)),
-          'permalink': getPermalink($('.action', $note)),
-          'classes': getClasses($($note)),
+          'preview_text': getPreviewText($note.find('blockquote > a')),
+          'permalink': getPermalink($note.find('.action')),
+          'classes': getClasses($note),
           'blogs': [
-            getBlogInfo($('.tumblelog', $note), $('.avatar', $note)),
-            getBlogInfo($('.source_tumblelog', $note))
+            getBlogInfo($note.find('.tumblelog'),
+                        $note.find('.avatar')),
+            getBlogInfo($note.find('.source_tumblelog'))
           ]
         });
       });
