@@ -1,11 +1,12 @@
 define('views/note',
 
 [ 'underscore'
+, 'jquery'
 , 'backbone'
 , 'template/note'
 ],
 
-function(_, Backbone, noteTemplate) {
+function(_, $, Backbone, noteTemplate) {
   'use strict';
 
   return Backbone.View.extend({
