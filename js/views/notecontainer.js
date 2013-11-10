@@ -49,7 +49,19 @@ function
 
       this.collection = new Notes();
 
-      this.collection.on('add', this.renderNote);
+      var that = this;
+      this.collection.on({
+        'add': this.renderNote,
+        'change:is_preview': function(model) {
+          if(that.fullPostView == null) {
+            that.fullPostView = new PostView({
+              model: model
+            });
+          } else {
+            that.fullPostView.model.set(model.toJSON())
+          }
+        }
+      });
 
       this.render();
 
