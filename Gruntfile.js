@@ -19,26 +19,24 @@ module.exports = function(grunt) {
       tasks: ['less:development']
     },
     jshint: {
-      all: [ 'Gruntfile.js'
-           , 'js/*.js'
-           , 'js/collections/*.js'
-           , 'js/models/*.js'
-           , 'js/views/*.js'
-           ],
-      options: {
-        asi: false,
-        browser: true,
-        eqeqeq: true,
-        eqnull: true,
-        laxcomma: true,
-        node: true,
-        strict: true,
-        undef: true,
-        unused: true,
-        globals: {
-          chrome: true,
-          define: true,
-          require: true
+      options: '<%= jshintrc %>',
+      grunt: {
+        src: 'Gruntfile.js',
+        options: {
+          node: true
+        }
+      },
+      js: {
+        src: [ 'js/*.js'
+             , 'js/{collection,model,view}s/*.js'
+             ],
+        options: {
+          browser: true,
+          globals: {
+            chrome: true,
+            define: true,
+            require: true
+          }
         }
       }
     },
