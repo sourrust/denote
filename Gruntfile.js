@@ -2,19 +2,12 @@ module.exports = function(grunt) {
   'use strict';
 
   grunt.initConfig({
+    jshintrc: grunt.file.readJSON('.jshintrc'),
+
     less: {
-      development: {
+      compile: {
         options: {
           paths: ['less']
-        },
-        files: {
-          'css/popup.css': 'less/popup.less'
-        }
-      },
-      production: {
-        options: {
-          paths: ['less'],
-          yuicompress: true
         },
         files: {
           'css/popup.css': 'less/popup.less'
@@ -22,30 +15,37 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: 'less/*.less',
-      tasks: ['less:development']
+      less: {
+        files: 'less/*.less',
+        tasks: 'less'
+      },
+      jshint: {
+        files: [ 'Gruntfile.js'
+               , 'js/**/*.js'
+               , '!js/lib/*'
+               ],
+        tasks: 'jshint'
+      }
     },
     jshint: {
-      all: [ 'Gruntfile.js'
-           , 'js/*.js'
-           , 'js/collections/*.js'
-           , 'js/models/*.js'
-           , 'js/views/*.js'
-           ],
-      options: {
-        asi: false,
-        browser: true,
-        eqeqeq: true,
-        eqnull: true,
-        laxcomma: true,
-        node: true,
-        strict: true,
-        undef: true,
-        unused: true,
-        globals: {
-          chrome: true,
-          define: true,
-          require: true
+      options: '<%= jshintrc %>',
+      grunt: {
+        src: 'Gruntfile.js',
+        options: {
+          node: true
+        }
+      },
+      js: {
+        src: [ 'js/*.js'
+             , 'js/{collection,model,view}s/*.js'
+             ],
+        options: {
+          browser: true,
+          globals: {
+            chrome: true,
+            define: true,
+            require: true
+          }
         }
       }
     },
@@ -81,6 +81,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['less:development','jst','jshint']);
-  grunt.registerTask('release', ['less:production','jst', 'copy']);
+  grunt.registerTask('default', ['less','jst','jshint']);
+  grunt.registerTask('release', ['less','jst', 'copy']);
 };
