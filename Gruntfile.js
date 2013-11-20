@@ -10,15 +10,6 @@ module.exports = function(grunt) {
         files: {
           'css/popup.css': 'less/popup.less'
         }
-      },
-      production: {
-        options: {
-          paths: ['less'],
-          yuicompress: true
-        },
-        files: {
-          'css/popup.css': 'less/popup.less'
-        }
       }
     },
     watch: {
