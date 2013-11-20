@@ -1,0 +1,12 @@
+{
+  "asi": false,
+  "eqeqeq": true,
+  "eqnull": true,
+  "indent": 2,
+  "laxcomma": true,
+  "quotmark": "single",
+  "strict": true,
+  "trailing": true,
+  "undef": true,
+  "unused": true
+}

@@ -2,6 +2,8 @@ module.exports = function(grunt) {
   'use strict';
 
   grunt.initConfig({
+    jshintrc: grunt.file.readJSON('.jshintrc'),
+
     less: {
       compile: {
         options: {
