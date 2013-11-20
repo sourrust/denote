@@ -5,11 +5,12 @@
     "type": "git",
     "url": "https://github.com/sourrust/denote.git"
   },
-  "devDependencies":  {
+  "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-less": "~0.7.0",
-    "grunt-contrib-watch": "~0.5.0"
+    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-contrib-jst": "~0.5.1",
+    "grunt-contrib-less": "~0.8.2",
+    "grunt-contrib-watch": "~0.5.3"
   }
 }
