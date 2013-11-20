@@ -3,7 +3,7 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     less: {
-      development: {
+      compile: {
         options: {
           paths: ['less']
         },
