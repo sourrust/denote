@@ -15,8 +15,17 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: 'less/*.less',
-      tasks: ['less:development']
+      less: {
+        files: 'less/*.less',
+        tasks: 'less'
+      },
+      jshint: {
+        files: [ 'Gruntfile.js'
+               , 'js/**/*.js'
+               , '!js/lib/*'
+               ],
+        tasks: 'jshint'
+      }
     },
     jshint: {
       options: '<%= jshintrc %>',
