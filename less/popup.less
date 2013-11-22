@@ -84,15 +84,15 @@ blockquote > a {
 // taken from twitter's bootstrap, originally from html5 boilerplate
 // <https://github.com/twitter/bootstrap/blob/master/less/mixins.less#L12>
 .clearfix {
-  *zoom: 1;
   &:before,
   &:after {
-    display: table;
     content: " ";
-    line-height: 0;
+    display: table;
   }
 
-  &:after { clear: both }
+  &:after {
+    clear: both;
+  }
 }
 
 .hide {
