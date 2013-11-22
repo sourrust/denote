@@ -1,6 +1,15 @@
 @import (less) "normalize.css";
 @import 'scrollbar';
 
+img {
+  display: block;
+
+  max-width: 100%;
+  height: auto;
+
+  vertical-align: middle;
+}
+
 #note_container {
   width: 300px;
   padding: 0;
@@ -73,17 +82,17 @@ blockquote > a {
 // -------
 //
 // taken from twitter's bootstrap, originally from html5 boilerplate
-// <https://github.com/twitter/bootstrap/blob/master/less/mixins.less#L12>
+// <https://github.com/twbs/bootstrap/blob/master/less/mixins.less#L19>
 .clearfix {
-  *zoom: 1;
   &:before,
   &:after {
-    display: table;
     content: " ";
-    line-height: 0;
+    display: table;
   }
 
-  &:after { clear: both }
+  &:after {
+    clear: both;
+  }
 }
 
 .hide {
