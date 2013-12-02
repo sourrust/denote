@@ -14,6 +14,12 @@ function(_, Backbone, utility, postTemplate) {
 
     template: postTemplate,
 
+    events: {
+      'click.back-to-notes': function() {
+        this.model.set('is_preview', true);
+      }
+    },
+
     initialize: function() {
       _.bindAll(this, 'render');
 
@@ -24,6 +30,7 @@ function(_, Backbone, utility, postTemplate) {
       var html = this.template(this.model.toJSON());
 
       this.$el.html(html);
+      utility.toggleVisiblity(this.$el);
 
       return this;
     }
