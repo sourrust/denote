@@ -4,7 +4,7 @@ function(_, Backbone) {
   'use strict';
 
   return Backbone.View.extend({
-    el: '.post-container',
+    el: '#post-container',
 
     initialize: function() {
       _.bindAll(this, 'render');
