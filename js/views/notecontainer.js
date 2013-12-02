@@ -53,6 +53,7 @@ function
       this.collection.on({
         'add': this.renderNote,
         'change:is_preview': function(model) {
+          utility.toggleVisiblity(that.$el);
           if(that.fullPostView == null) {
             that.fullPostView = new PostView({
               model: model
