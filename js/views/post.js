@@ -30,7 +30,12 @@ function(_, Backbone, utility, postTemplate) {
       var html = this.template(this.model.toJSON());
 
       this.$el.html(html);
-      utility.toggleVisiblity(this.$el);
+
+      if(this.model.get('is_preview')) {
+        utility.swapClass(this.$el, 'show', 'hide');
+      } else {
+        utility.swapClass(this.$el, 'hide', 'show');
+      }
 
       return this;
     }
