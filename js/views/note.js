@@ -50,7 +50,6 @@ function(_, $, Backbone, noteTemplate) {
           content = _.last(body.split('</blockquote>'));
 
           that.model.set('full_text', content.trim());
-          console.log(content);
 
           that.model.togglePreview();
         });
