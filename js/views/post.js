@@ -1,10 +1,18 @@
-define('views/post', ['underscore', 'backbone'],
+define('views/post',
 
-function(_, Backbone) {
+[ 'underscore'
+, 'backbone'
+, 'utility'
+, 'template/post'
+],
+
+function(_, Backbone, utility, postTemplate) {
   'use strict';
 
   return Backbone.View.extend({
     el: '#post-container',
+
+    template: postTemplate,
 
     initialize: function() {
       _.bindAll(this, 'render');
@@ -13,9 +21,9 @@ function(_, Backbone) {
     },
 
     render: function() {
-      var text = this.model.get('full_text');
+      var html = this.template(this.model.toJSON());
 
-      this.$el.html(text);
+      this.$el.html(html);
 
       return this;
     }
