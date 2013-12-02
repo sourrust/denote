@@ -58,7 +58,7 @@ function
               model: model
             });
           } else {
-            that.fullPostView.model.set(model.toJSON())
+            that.fullPostView.model.set(model.toJSON());
           }
         }
       });
