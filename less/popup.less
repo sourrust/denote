@@ -2,6 +2,7 @@
 
 @import 'mixins';
 @import 'scrollbar';
+@import 'variables';
 
 img {
   display: block;
@@ -43,11 +44,13 @@ li.note {
 }
 
 #post-container {
+  color: @text-color;
+
   .note-mixin();
 }
 
 blockquote > a {
-  color: #777;
+  color: @text-color;
   text-decoration: none;
 
   &:hover { text-decoration: underline; }
