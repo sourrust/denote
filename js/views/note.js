@@ -25,7 +25,7 @@ function(_, $, Backbone, noteTemplate) {
 
     events: {
       'click': function(e) {
-        var blogs, blogurl, permalink, postid, that;
+        var blogs, blogurl, permalink, postid, posturl, that;
 
         e.preventDefault();
 
@@ -39,9 +39,10 @@ function(_, $, Backbone, noteTemplate) {
         blogs     = this.model.get('blogs');
         postid    = permalink.match(/\d+$/)[0];
         blogurl   = blogs[0].username + '.tumblr.com';
+        posturl   = makeURL(blogurl, postid);
 
 
-        $.get(makeURL(blogurl, postid), function(data) {
+        $.get(posturl, function(data) {
           var body, content, post;
 
           post    = data.response.posts[0];
