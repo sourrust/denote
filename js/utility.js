@@ -42,6 +42,11 @@ function(_, $) {
     return $el.toggleClass('show hide');
   };
 
+  utility.swapClass = function($el, exchange, forClass) {
+    $el.addClass(forClass);
+    $el.removeClass(exchange);
+  };
+
   utility.findOffset = function(context) {
     var $moreNotes, offset;
 

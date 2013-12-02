@@ -1,5 +1,8 @@
 @import (less) "normalize.css";
+
+@import 'mixins';
 @import 'scrollbar';
+@import 'variables';
 
 img {
   display: block;
@@ -8,6 +11,13 @@ img {
   height: auto;
 
   vertical-align: middle;
+
+  &.avatar {
+    width: 16px;
+    height: 16px;
+
+    display: inline-block;
+  }
 }
 
 #note_container {
@@ -31,11 +41,7 @@ ol.notes {
 }
 
 li.note {
-  padding: 10px;
-
-  background: #eee;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  border-top: 1px #e7e7e7 solid;
+  .note-mixin();
 
   blockquote {
     border-left: 1px #ccc solid;
@@ -44,13 +50,14 @@ li.note {
   }
 }
 
-img.avatar {
-  width: 16px;
-  height: 16px;
+#post-container {
+  color: @text-color;
+
+  .note-mixin();
 }
 
 blockquote > a {
-  color: #777;
+  color: @text-color;
   text-decoration: none;
 
   &:hover { text-decoration: underline; }

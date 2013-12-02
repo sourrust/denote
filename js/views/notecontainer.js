@@ -8,6 +8,7 @@ define('views/notecontainer',
 , 'utility'
 , 'views/morenotesbutton'
 , 'views/note'
+, 'views/post'
 ],
 
 function
@@ -16,6 +17,7 @@ function
 , utility
 , MoreButtonView
 , NoteView
+, PostView
 ) {
   'use strict';
 
@@ -47,7 +49,26 @@ function
 
       this.collection = new Notes();
 
-      this.collection.on('add', this.renderNote);
+      var that = this;
+      this.collection.on({
+        'add': this.renderNote,
+        'change:is_preview': function(model) {
+          if(model.get('is_preview')) {
+            utility.swapClass(that.$el, 'show', 'hide');
+          } else {
+            utility.swapClass(that.$el, 'hide', 'show');
+          }
+
+          utility.toggleVisiblity(that.$el);
+          if(that.fullPostView == null) {
+            that.fullPostView = new PostView({
+              model: model
+            });
+          } else {
+            that.fullPostView.model.set(model.toJSON());
+          }
+        }
+      });
 
       this.render();
 
