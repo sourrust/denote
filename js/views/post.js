@@ -17,7 +17,7 @@ function(_, Backbone, utility, postTemplate) {
     events: {
       'click .back-to-notes': function(e) {
         e.preventDefault();
-        this.model.set('is_preview', true);
+        this.model.togglePreview();
       }
     },
 
