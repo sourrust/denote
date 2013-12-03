@@ -63,19 +63,17 @@ blockquote > a {
   &:hover { text-decoration: underline; }
 }
 
-.action,
-.back-to-notes {
+.action {
   font-size: 10px;
 
-  a {
-    color: #4d63d6;
-    text-decoration: none;
-
-    &:hover { text-decoration: underline; }
-  }
+  a { .link-style(); }
 }
 
-.back-to-notes { font-size: 12px; }
+.back-to-notes {
+  font-size: 12px;
+
+  .link-style();
+}
 
 .more_comments {
   text-align: center;
