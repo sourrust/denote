@@ -24,7 +24,7 @@ function(_, $, Backbone, noteTemplate) {
     template: noteTemplate,
 
     events: {
-      'click': function(e) {
+      'click .preview-link': function(e) {
         var blogs, blogurl, permalink, postid, posturl, that;
 
         e.preventDefault();
