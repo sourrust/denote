@@ -56,15 +56,15 @@ function
           if(model.get('is_preview')) {
             utility.swapClass(that.$el, 'hide', 'show');
           } else {
-            utility.swapClass(that.$el, 'show', 'hide');
-          }
+            if(that.fullPostView == null) {
+              that.fullPostView = new PostView({
+                model: model
+              });
+            } else {
+              that.fullPostView.model.set(model.toJSON());
+            }
 
-          if(that.fullPostView == null) {
-            that.fullPostView = new PostView({
-              model: model
-            });
-          } else {
-            that.fullPostView.model.set(model.toJSON());
+            utility.swapClass(that.$el, 'show', 'hide');
           }
         }
       });
