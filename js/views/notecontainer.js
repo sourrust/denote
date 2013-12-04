@@ -54,12 +54,11 @@ function
         'add': this.renderNote,
         'change:is_preview': function(model) {
           if(model.get('is_preview')) {
-            utility.swapClass(that.$el, 'show', 'hide');
-          } else {
             utility.swapClass(that.$el, 'hide', 'show');
+          } else {
+            utility.swapClass(that.$el, 'show', 'hide');
           }
 
-          utility.toggleVisiblity(that.$el);
           if(that.fullPostView == null) {
             that.fullPostView = new PostView({
               model: model
