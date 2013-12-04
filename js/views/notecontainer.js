@@ -45,7 +45,7 @@ function
                     , 'addMoreNotesButton');
 
       this.notesJSON = utility.notesToJSON(
-        this.attributes.tempNotes);
+        this.model.get('notes_html'));
 
       this.collection = new Notes();
 
@@ -71,10 +71,10 @@ function
 
       this.render();
 
-      if(this.attributes.postURL != null) {
-        this.requestMoreNotes(addToCollection, this);
-      } else {
+      if(_.isEmpty(this.model.get('post_url'))) {
         addToCollection.call(this);
+      } else {
+        this.requestMoreNotes(addToCollection, this);
       }
     },
 
@@ -94,13 +94,14 @@ function
     },
 
     requestMoreNotes: function(callback, context) {
-      var offset, notesURL, that;
+      var offset, notesURL, that, tempNotes;
 
-      offset = utility.findOffset(this.attributes.tempNotes);
+      tempNotes = this.model.get('notes_html');
+      offset = utility.findOffset(tempNotes);
 
       if(offset == null) return;
 
-      notesURL = this.attributes.postURL + offset;
+      notesURL = this.model.get('post_url') + offset;
       that     = this;
 
       $.get(notesURL, function(data) {
@@ -109,15 +110,15 @@ function
         endstr  = ' NOTES -->';
         htmlstr = data.split('<!-- START' + endstr)[1]
                       .split('<!-- END'   + endstr)[0];
-        that.attributes.tempNotes.html(htmlstr);
+        tempNotes.html(htmlstr);
 
         canGrabMore = utility.canGrabMoreNotes(
-          that.notesJSON, that.attributes.tempNotes);
+          that.notesJSON, tempNotes);
 
         // check for length and end of notes
         if(canGrabMore) {
           json = utility.notesToJSON(
-            that.attributes.tempNotes);
+            tempNotes);
 
           that.notesJSON = that.notesJSON.concat(json);
 
@@ -131,7 +132,7 @@ function
     addMoreNotesButton: function() {
       var that = this;
 
-      if(utility.findOffset(this.attributes.tempNotes) == null) return;
+      if(utility.findOffset(this.model.get('notes_html')) == null) return;
 
       if(this.moreNotesView) {
         this.moreNotesView.remove();
