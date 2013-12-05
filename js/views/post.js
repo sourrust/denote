@@ -23,8 +23,6 @@ function(_, Backbone, utility, postTemplate) {
 
     initialize: function() {
       _.bindAll(this, 'render');
-
-      this.model.on('change', this.render);
     },
 
     render: function() {

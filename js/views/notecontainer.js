@@ -33,6 +33,8 @@ function
       this.collection = new Notes();
       this.collection.storeInitialData(this.model);
 
+      this.fullPostView = new PostView();
+
       var that = this;
       this.collection.on({
         'add': this.renderNote,
@@ -45,13 +47,8 @@ function
             utility.swapClass($el[0], 'hide', 'show');
             utility.swapClass($el[1], 'show', 'hide');
           } else {
-            if(that.fullPostView == null) {
-              that.fullPostView = new PostView({
-                model: model
-              });
-            } else {
-              that.fullPostView.model.set(model.toJSON());
-            }
+            that.fullPostView.model = model
+            that.fullPostView.render();
 
             utility.swapClass($el[0], 'show', 'hide');
             utility.swapClass($el[1], 'hide', 'show');
