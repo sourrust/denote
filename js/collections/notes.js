@@ -1,11 +1,12 @@
 define('collections/notes',
 
-[ 'backbone'
+[ 'underscore'
+, 'backbone'
 , 'models/note'
 , 'utility'
 ],
 
-function(Backbone, NoteModel, utility) {
+function(_, Backbone, NoteModel, utility) {
   'use strict';
 
   var findOffset = function(context) {
