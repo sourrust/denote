@@ -23,6 +23,13 @@ function(Backbone, NoteModel, utility) {
   return Backbone.Collection.extend({
     model: NoteModel,
 
+    initialize: function() {
+      _.bindAll(this, 'storeInitialData', 'url', 'parse'
+               , 'canFetchMore');
+
+      this.count = 0;
+    },
+
     storeInitialData: function(model) {
       this.postURL   = model.get('post_url');
       this.notesHTML = model.get('notes_html');
