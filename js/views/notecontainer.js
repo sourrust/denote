@@ -44,10 +44,8 @@ function
       _.bindAll(this, 'render', 'renderNote', 'requestMoreNotes'
                     , 'addMoreNotesButton');
 
-      this.notesJSON = utility.notesToJSON(
-        this.model.get('notes_html'));
-
       this.collection = new Notes();
+      this.collection.storeInitialData(this.model);
 
       var that = this;
       this.collection.on({
