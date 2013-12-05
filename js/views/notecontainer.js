@@ -91,39 +91,23 @@ function
       this.$el.append(note.render().el);
     },
 
-    requestMoreNotes: function(callback, context) {
-      var offset, notesURL, that, tempNotes;
+    requestMoreNotes: function() {
+      if(!this.collection.canFetchMore()) return;
 
-      tempNotes = this.model.get('notes_html');
-      offset = utility.findOffset(tempNotes);
+      var that = this;
 
-      if(offset == null) return;
+      this.collection.fetch({
+        success: function(collection, response, options) {
+          if(collection.canFetchMore()) {
+            that.requestMoreNotes.call(that);
+          } else {
+            collection.count = 0;
 
-      notesURL = this.model.get('post_url') + offset;
-      that     = this;
-
-      $.get(notesURL, function(data) {
-        var canGrabMore, endstr, htmlstr, json;
-
-        endstr  = ' NOTES -->';
-        htmlstr = data.split('<!-- START' + endstr)[1]
-                      .split('<!-- END'   + endstr)[0];
-        tempNotes.html(htmlstr);
-
-        canGrabMore = utility.canGrabMoreNotes(
-          that.notesJSON, tempNotes);
-
-        // check for length and end of notes
-        if(canGrabMore) {
-          json = utility.notesToJSON(
-            tempNotes);
-
-          that.notesJSON = that.notesJSON.concat(json);
-
-          that.requestMoreNotes(callback, context);
-        } else {
-          callback.call(context);
-        }
+            utility.toggleVisiblity($loader);
+            that.addMoreNotesButton();
+          }
+        },
+        remove: false
       });
     },
 
