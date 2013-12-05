@@ -92,7 +92,7 @@ function
       var that = this;
 
       this.collection.fetch({
-        success: function(collection, response, options) {
+        success: function(collection) {
           if(collection.canFetchMore()) {
             that.requestMoreNotes.call(that);
           } else {
