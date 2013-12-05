@@ -47,18 +47,6 @@ function(_, $) {
     $el.removeClass(exchange);
   };
 
-  utility.findOffset = function(context) {
-    var $moreNotes, offset;
-
-    $moreNotes = context.find('.more_notes_link');
-
-    if(!$moreNotes.length) return;
-
-    offset = $moreNotes.attr('onclick').match(/\?from_c=\d+/)[0];
-
-    return offset;
-  };
-
   utility.canGrabMoreNotes = function(notesJSON, context) {
     var correctLength, endOfNotes;
 
