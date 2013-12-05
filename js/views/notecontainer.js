@@ -35,25 +35,9 @@ function
 
       this.fullPostView = new PostView();
 
-      var that = this;
       this.collection.on({
         'add': this.renderNote,
-        'change:is_preview': function(model) {
-          var $el = [ that.$el
-                    , that.fullPostView.$el
-                    ];
-
-          if(model.get('is_preview')) {
-            utility.swapClass($el[0], 'hide', 'show');
-            utility.swapClass($el[1], 'show', 'hide');
-          } else {
-            that.fullPostView.model = model
-            that.fullPostView.render();
-
-            utility.swapClass($el[0], 'show', 'hide');
-            utility.swapClass($el[1], 'hide', 'show');
-          }
-        }
+        'change:is_preview': this.displayPostView
       });
 
       this.render();
@@ -73,6 +57,23 @@ function
       });
 
       this.$el.append(note.render().el);
+    },
+
+    displayPostView: function(model) {
+      var $el = [ this.$el
+                , this.fullPostView.$el
+                ];
+
+      if(model.get('is_preview')) {
+        utility.swapClass($el[0], 'hide', 'show');
+        utility.swapClass($el[1], 'show', 'hide');
+      } else {
+        this.fullPostView.model = model
+        this.fullPostView.render();
+
+        utility.swapClass($el[0], 'show', 'hide');
+        utility.swapClass($el[1], 'hide', 'show');
+      }
     },
 
     requestMoreNotes: function() {
