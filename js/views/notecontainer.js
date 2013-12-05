@@ -21,50 +21,22 @@ function
 ) {
   'use strict';
 
-  var $loader, addToCollection;
-
-  $loader = $('#loader');
-
-  addToCollection = function() {
-    this.collection.add(
-      _.map(this.notesJSON, function(note) {
-        return new NoteModel(note);
-      }));
-
-    this.notesJSON = [];
-
-    utility.toggleVisiblity($loader);
-    this.addMoreNotesButton();
-  };
+  var $loader = $('#loader');
 
   return Backbone.View.extend({
     el: '.notes',
 
     initialize: function() {
-      _.bindAll(this, 'render', 'renderNote', 'requestMoreNotes'
-                    , 'addMoreNotesButton');
+      _.bindAll(this);
 
       this.collection = new Notes();
       this.collection.storeInitialData(this.model);
 
-      var that = this;
+      this.fullPostView = new PostView();
+
       this.collection.on({
         'add': this.renderNote,
-        'change:is_preview': function(model) {
-          if(model.get('is_preview')) {
-            utility.swapClass(that.$el, 'hide', 'show');
-          } else {
-            if(that.fullPostView == null) {
-              that.fullPostView = new PostView({
-                model: model
-              });
-            } else {
-              that.fullPostView.model.set(model.toJSON());
-            }
-
-            utility.swapClass(that.$el, 'show', 'hide');
-          }
-        }
+        'change:is_preview': this.displayPostView
       });
 
       this.render();
@@ -84,6 +56,23 @@ function
       });
 
       this.$el.append(note.render().el);
+    },
+
+    displayPostView: function(model) {
+      var $el = [ this.$el
+                , this.fullPostView.$el
+                ];
+
+      if(model.get('is_preview')) {
+        utility.swapClass($el[0], 'hide', 'show');
+        utility.swapClass($el[1], 'show', 'hide');
+      } else {
+        this.fullPostView.model = model;
+        this.fullPostView.render();
+
+        utility.swapClass($el[0], 'show', 'hide');
+        utility.swapClass($el[1], 'hide', 'show');
+      }
     },
 
     requestMoreNotes: function() {
@@ -122,7 +111,7 @@ function
           'click': function() {
             this.$el.addClass('hide');
             utility.toggleVisiblity($loader);
-            that.requestMoreNotes(addToCollection, that);
+            that.requestMoreNotes();
           }
         }
       });

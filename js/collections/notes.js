@@ -25,8 +25,7 @@ function(_, Backbone, NoteModel, utility) {
     model: NoteModel,
 
     initialize: function() {
-      _.bindAll(this, 'storeInitialData', 'url', 'parse'
-               , 'canFetchMore');
+      _.bindAll(this);
 
       this.count = 0;
     },
