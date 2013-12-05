@@ -27,8 +27,7 @@ function
     el: '.notes',
 
     initialize: function() {
-      _.bindAll(this, 'render', 'renderNote', 'requestMoreNotes'
-                    , 'addMoreNotesButton');
+      _.bindAll(this);
 
       this.collection = new Notes();
       this.collection.storeInitialData(this.model);
