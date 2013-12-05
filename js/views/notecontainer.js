@@ -128,9 +128,11 @@ function
     },
 
     addMoreNotesButton: function() {
-      var that = this;
+      var that = this, noMoreNotes;
 
-      if(utility.findOffset(this.model.get('notes_html')) == null) return;
+      noMoreNotes = !this.collection.canFetchMore();
+
+      if(noMoreNotes) return;
 
       if(this.moreNotesView) {
         this.moreNotesView.remove();
