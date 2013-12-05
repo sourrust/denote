@@ -32,6 +32,15 @@ function(Backbone, NoteModel, utility) {
 
     url: function() {
       return this.postURL + findOffset(this.notesHTML);
+    },
+
+    canFetchMore: function() {
+      var correctLength, endOfNotes;
+
+      correctLength = this.count < 5;
+      endOfNotes    = findOffset(this.notesHTML) != null;
+
+      return correctLength && endOfNotes;
     }
   });
 });

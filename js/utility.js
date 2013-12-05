@@ -47,15 +47,6 @@ function(_, $) {
     $el.removeClass(exchange);
   };
 
-  utility.canGrabMoreNotes = function(notesJSON, context) {
-    var correctLength, endOfNotes;
-
-    correctLength = notesJSON.length < 5;
-    endOfNotes    = utility.findOffset(context) != null;
-
-    return correctLength && endOfNotes;
-  };
-
   utility.notesToJSON = function(context) {
     var $notes, value;
 
