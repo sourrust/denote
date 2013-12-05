@@ -1,6 +1,11 @@
-define('collections/notes', ['backbone', 'models/note'],
+define('collections/notes',
 
-function(Backbone, NoteModel) {
+[ 'backbone'
+, 'models/note'
+, 'utility'
+],
+
+function(Backbone, NoteModel, utility) {
   'use strict';
 
   var findOffset = function(context) {
@@ -16,6 +21,17 @@ function(Backbone, NoteModel) {
   };
 
   return Backbone.Collection.extend({
-    model: NoteModel
+    model: NoteModel,
+
+    storeInitialData: function(model) {
+      this.postURL   = model.get('post_url');
+      this.notesHTML = model.get('notes_html');
+
+      this.add(utility.notesToJSON(this.notesHTML));
+    },
+
+    url: function() {
+      return this.postURL + findOffset(this.notesHTML);
+    }
   });
 });
