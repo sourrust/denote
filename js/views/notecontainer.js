@@ -21,21 +21,7 @@ function
 ) {
   'use strict';
 
-  var $loader, addToCollection;
-
-  $loader = $('#loader');
-
-  addToCollection = function() {
-    this.collection.add(
-      _.map(this.notesJSON, function(note) {
-        return new NoteModel(note);
-      }));
-
-    this.notesJSON = [];
-
-    utility.toggleVisiblity($loader);
-    this.addMoreNotesButton();
-  };
+  var $loader = $('#loader');
 
   return Backbone.View.extend({
     el: '.notes',
