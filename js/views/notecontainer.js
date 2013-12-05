@@ -108,7 +108,7 @@ function
           'click': function() {
             this.$el.addClass('hide');
             utility.toggleVisiblity($loader);
-            that.requestMoreNotes(addToCollection, that);
+            that.requestMoreNotes();
           }
         }
       });
