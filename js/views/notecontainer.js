@@ -44,10 +44,8 @@ function
       _.bindAll(this, 'render', 'renderNote', 'requestMoreNotes'
                     , 'addMoreNotesButton');
 
-      this.notesJSON = utility.notesToJSON(
-        this.attributes.tempNotes);
-
       this.collection = new Notes();
+      this.collection.storeInitialData(this.model);
 
       var that = this;
       this.collection.on({
@@ -70,12 +68,7 @@ function
       });
 
       this.render();
-
-      if(this.attributes.postURL != null) {
-        this.requestMoreNotes(addToCollection, this);
-      } else {
-        addToCollection.call(this);
-      }
+      this.requestMoreNotes();
     },
 
     render: function() {
@@ -93,45 +86,32 @@ function
       this.$el.append(note.render().el);
     },
 
-    requestMoreNotes: function(callback, context) {
-      var offset, notesURL, that;
+    requestMoreNotes: function() {
+      if(!this.collection.canFetchMore()) return;
 
-      offset = utility.findOffset(this.attributes.tempNotes);
+      var that = this;
 
-      if(offset == null) return;
+      this.collection.fetch({
+        success: function(collection, response, options) {
+          if(collection.canFetchMore()) {
+            that.requestMoreNotes.call(that);
+          } else {
+            collection.count = 0;
 
-      notesURL = this.attributes.postURL + offset;
-      that     = this;
-
-      $.get(notesURL, function(data) {
-        var canGrabMore, endstr, htmlstr, json;
-
-        endstr  = ' NOTES -->';
-        htmlstr = data.split('<!-- START' + endstr)[1]
-                      .split('<!-- END'   + endstr)[0];
-        that.attributes.tempNotes.html(htmlstr);
-
-        canGrabMore = utility.canGrabMoreNotes(
-          that.notesJSON, that.attributes.tempNotes);
-
-        // check for length and end of notes
-        if(canGrabMore) {
-          json = utility.notesToJSON(
-            that.attributes.tempNotes);
-
-          that.notesJSON = that.notesJSON.concat(json);
-
-          that.requestMoreNotes(callback, context);
-        } else {
-          callback.call(context);
-        }
+            utility.toggleVisiblity($loader);
+            that.addMoreNotesButton();
+          }
+        },
+        remove: false
       });
     },
 
     addMoreNotesButton: function() {
-      var that = this;
+      var that = this, noMoreNotes;
 
-      if(utility.findOffset(this.attributes.tempNotes) == null) return;
+      noMoreNotes = !this.collection.canFetchMore();
+
+      if(noMoreNotes) return;
 
       if(this.moreNotesView) {
         this.moreNotesView.remove();
