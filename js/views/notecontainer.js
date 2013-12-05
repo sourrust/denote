@@ -68,12 +68,7 @@ function
       });
 
       this.render();
-
-      if(_.isEmpty(this.model.get('post_url'))) {
-        addToCollection.call(this);
-      } else {
-        this.requestMoreNotes(addToCollection, this);
-      }
+      this.requestMoreNotes();
     },
 
     render: function() {
