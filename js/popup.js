@@ -17,10 +17,21 @@ require.config({
   }
 });
 
-require(['jquery', 'models/initial', 'views/notecontainer'],
+require(
 
-function($, InitialModel, NotesView) {
+[ 'jquery'
+, 'backbone'
+, 'models/initial'
+, 'views/notecontainer'
+],
+
+function($, Backbone, InitialModel, NotesView) {
   'use strict';
+
+  Backbone.ajax = function(method, model, options) {
+    arguments[0].dataType = 'html';
+    return Backbone.$.ajax.apply(Backbone.$, arguments);
+  };
 
   $(function() {
     chrome.tabs.query({
