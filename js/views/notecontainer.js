@@ -37,8 +37,13 @@ function
       this.collection.on({
         'add': this.renderNote,
         'change:is_preview': function(model) {
+          var $el = [ that.$el
+                    , that.fullPostView.$el
+                    ];
+
           if(model.get('is_preview')) {
-            utility.swapClass(that.$el, 'hide', 'show');
+            utility.swapClass($el[0], 'hide', 'show');
+            utility.swapClass($el[1], 'show', 'hide');
           } else {
             if(that.fullPostView == null) {
               that.fullPostView = new PostView({
@@ -48,7 +53,8 @@ function
               that.fullPostView.model.set(model.toJSON());
             }
 
-            utility.swapClass(that.$el, 'show', 'hide');
+            utility.swapClass($el[0], 'show', 'hide');
+            utility.swapClass($el[1], 'hide', 'show');
           }
         }
       });

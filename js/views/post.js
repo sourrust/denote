@@ -32,12 +32,6 @@ function(_, Backbone, utility, postTemplate) {
 
       this.$el.html(html);
 
-      if(this.model.get('is_preview')) {
-        utility.swapClass(this.$el, 'show', 'hide');
-      } else {
-        utility.swapClass(this.$el, 'hide', 'show');
-      }
-
       return this;
     }
   });
