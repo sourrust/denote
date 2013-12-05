@@ -34,6 +34,22 @@ function(Backbone, NoteModel, utility) {
       return this.postURL + findOffset(this.notesHTML);
     },
 
+    parse: function(response) {
+      var endstr, htmlstr, json;
+
+      endstr  = ' NOTES -->';
+      htmlstr = response.split('<!-- START' + endstr)[1]
+                        .split('<!-- END'   + endstr)[0];
+
+      this.notesHTML.html(htmlstr);
+
+      json = utility.notesToJSON(this.notesHTML);
+
+      this.count += json.length;
+
+      return json;
+    },
+
     canFetchMore: function() {
       var correctLength, endOfNotes;
 
