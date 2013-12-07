@@ -4,7 +4,6 @@ define('views/notecontainer',
 , 'jquery'
 , 'backbone'
 , 'collections/notes'
-, 'models/note'
 , 'utility'
 , 'views/morenotesbutton'
 , 'views/note'
@@ -13,8 +12,7 @@ define('views/notecontainer',
 
 function
 ( _, $, Backbone
-, Notes, NoteModel
-, utility
+, Notes, utility
 , MoreButtonView
 , NoteView
 , PostView
@@ -91,7 +89,8 @@ function
             that.addMoreNotesButton();
           }
         },
-        remove: false
+        remove: false,
+        dataType: 'html'
       });
     },
 
