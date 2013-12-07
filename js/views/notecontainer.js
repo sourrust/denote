@@ -89,7 +89,8 @@ function
             that.addMoreNotesButton();
           }
         },
-        remove: false
+        remove: false,
+        dataType: 'html'
       });
     },
 

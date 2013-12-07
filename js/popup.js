@@ -28,11 +28,6 @@ require(
 function($, Backbone, InitialModel, NotesView) {
   'use strict';
 
-  Backbone.ajax = function() {
-    arguments[0].dataType = 'html';
-    return Backbone.$.ajax.apply(Backbone.$, arguments);
-  };
-
   $(function() {
     chrome.tabs.query({
       active: true,
