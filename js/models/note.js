@@ -1,6 +1,6 @@
-define('models/note', ['backbone'],
+define('models/note', ['underscore', 'backbone'],
 
-function(Backbone) {
+function(_, Backbone) {
   'use strict';
 
   return Backbone.Model.extend({
@@ -11,6 +11,10 @@ function(Backbone) {
       'classes': [],
       'blogs': [],
       'is_preview': true
+    },
+
+    initialize: function() {
+      _.bindAll(this, 'url', 'togglePreview');
     },
 
     url: function() {
