@@ -9,15 +9,6 @@ define('views/note',
 function(_, $, Backbone, noteTemplate) {
   'use strict';
 
-  var makeURL = function(base, postid) {
-    var apibase, apikey;
-
-    apibase = 'http://api.tumblr.com/v2/blog/';
-    apikey  = '&api_key=<api key>';
-
-    return apibase + base + '/posts?id=' + postid + apikey;
-  };
-
   return Backbone.View.extend({
     tagName: 'li',
 
