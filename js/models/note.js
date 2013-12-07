@@ -28,6 +28,21 @@ function(Backbone) {
       return apibase + base + '/posts?id=' + postid + apikey;
     },
 
+    parse: function(response, options) {
+      var body, content, post;
+
+      // Parse function in model gets called when the collection fetch
+      // method gets called. Simply returns the model that has already been
+      // parsed because we are looking for tumblr api reponses to parse.
+      if(options.dataType) return response;
+
+      post    = response.response.posts[0];
+      body    = post.body || post.description || post.caption;
+      content = _.last(body.split('</blockquote>'));
+
+      return { 'full_text': content.trim() };
+    },
+
     togglePreview: function() {
       var isPreview = this.get('is_preview');
 
