@@ -5,6 +5,22 @@ reblogs with comments.
 
 [Chrome Extension][1]
 
+## Getting Started
+
+Denote does rely on [node.js][4] and [npm][5] to build, so this section
+assumes you have both already installed on your system.
+
+```bash
+git clone https://github.com/sourrust/denote.git
+cd denote
+npm install
+```
+
+Depending on what you want to work on, the `watch` tasks will come in
+handy to lint JavaScript or transpile less files. The safest choice is
+to use `grunt watch` to watch for both, but you can also be more
+specific with `grunt watch:less` or `grunt watch:jshint`.
+
 ## Tumblr API Calls
 
 One part of this extension uses the [Tumblr API][2] to pull in the full
@@ -31,3 +47,5 @@ in the packaged extension, so it will be in the same place.
 [1]: https://chrome.google.com/webstore/detail/denote/ibfbkmghalfjcfeoocejnhhenidpgnbg
 [2]: http://www.tumblr.com/docs/en/api/v2
 [3]: https://github.com/sourrust/denote/blob/master/js/models/note.js
+[4]: http://nodejs.org/
+[5]: https://npmjs.org/
