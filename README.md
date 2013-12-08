@@ -7,7 +7,7 @@ reblogs with comments.
 
 ## Getting Started
 
-Denote does rely on [node.js][4] and [npm][5] to build, so this section
+Denote does rely on [node.js][2] and [npm][3] to build, so this section
 assumes you have both already installed on your system.
 
 ```bash
@@ -23,12 +23,12 @@ specific with `grunt watch:less` or `grunt watch:jshint`.
 
 ## Tumblr API Calls
 
-One part of this extension uses the [Tumblr API][2] to pull in the full
+One part of this extension uses the [Tumblr API][4] to pull in the full
 contents of a post that was clicked. With the reliance on the API calls,
 you will need to add in your own api key to actually get this feature
 working locally without it 401-ing on you. Where you put the api key is
 in the `url` method inside of the model located in
-[js/models/note.js][3].
+[js/models/note.js][5].
 
 The change will look some like:
 
@@ -88,10 +88,10 @@ everything else — as far as JavaScript goes when linting the code.
 Simple as that.
 
 [1]: https://chrome.google.com/webstore/detail/denote/ibfbkmghalfjcfeoocejnhhenidpgnbg
-[2]: http://www.tumblr.com/docs/en/api/v2
-[3]: https://github.com/sourrust/denote/blob/master/js/models/note.js
-[4]: http://nodejs.org/
-[5]: https://npmjs.org/
-[6]: https://github.com/sourrust/karver/issues
+[2]: http://nodejs.org/
+[3]: https://npmjs.org/
+[4]: http://www.tumblr.com/docs/en/api/v2
+[5]: https://github.com/sourrust/denote/blob/master/js/models/note.js
+[6]: https://github.com/sourrust/denote/issues
 [7]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
 [8]: https://github.com/tpope/vim-fugitive
