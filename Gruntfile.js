@@ -52,13 +52,16 @@ module.exports = function(grunt) {
     copy: {
       main: {
         files: [
-          { src: 'js/**', dest: 'build/' },
-          { src: ['popup.html', 'manifest.json', 'LICENSE']
+          { src: [ 'popup.html'
+                 , 'manifest.json'
+                 , 'LICENSE'
+                 , 'js/**'
+                 , 'css/*'
+                 , 'images/*'
+                 , 'templates/*.js'
+                 ]
           , dest: 'build/'
-          },
-          { src: ['css/*'], dest: 'build/'},
-          { src: ['images/*'], dest: 'build/'},
-          { src: ['templates/*.js'], dest: 'build/' }
+          }
         ]
       }
     },
