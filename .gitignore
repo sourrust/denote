@@ -15,3 +15,6 @@ build/
 
 # precompiled templates
 templates/*.js
+
+# Browser libs
+js/lib/
