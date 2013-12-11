@@ -50,6 +50,20 @@ module.exports = function(grunt) {
       }
     },
     copy: {
+      bower: {
+        files: [
+          { src: [ 'backbone/backbone.js'
+                 , 'jquery/jquery.js'
+                 , 'lodash/dist/lodash.underscore.js'
+                 , 'requirejs/require.js'
+                 ]
+          , cwd: 'bower_components/'
+          , expand: true
+          , flatten: true
+          , dest: 'js/lib/'
+          }
+        ]
+      },
       main: {
         files: [
           { src: [ 'popup.html'
