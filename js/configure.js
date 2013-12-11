@@ -8,7 +8,7 @@ require.config({
   paths: {
     backbone: 'lib/backbone',
     jquery: 'lib/jquery',
-    underscore: 'lib/lodash',
+    underscore: 'lib/lodash.underscore',
     template: '../templates'
   }
 });
