@@ -99,6 +99,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['less','jst','jshint']);
+  grunt.registerTask('default', ['less','jst','copy:bower','jshint']);
   grunt.registerTask('release', ['less','jst', 'copy']);
 };
