@@ -1,22 +1,3 @@
-require.config({
-  shim: {
-    backbone: {
-      deps: ['underscore', 'jquery'],
-      exports: 'Backbone'
-    },
-    underscore: {
-      exports: '_'
-    }
-  },
-  paths: {
-    backbone: 'lib/backbone',
-    jquery: 'lib/jquery',
-    text: 'lib/text',
-    underscore: 'lib/lodash',
-    template: '../templates'
-  }
-});
-
 require(
 
 [ 'jquery'

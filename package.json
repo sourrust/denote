@@ -6,6 +6,7 @@
     "url": "https://github.com/sourrust/denote.git"
   },
   "devDependencies": {
+    "bower": "~1.2.8",
     "grunt": "~0.4.1",
     "grunt-contrib-copy": "~0.4.1",
     "grunt-contrib-jshint": "~0.7.2",

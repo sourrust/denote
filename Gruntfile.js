@@ -50,15 +50,32 @@ module.exports = function(grunt) {
       }
     },
     copy: {
+      bower: {
+        files: [
+          { src: [ 'backbone/backbone.js'
+                 , 'jquery/jquery.js'
+                 , 'lodash/dist/lodash.underscore.js'
+                 , 'requirejs/require.js'
+                 ]
+          , cwd: 'bower_components/'
+          , expand: true
+          , flatten: true
+          , dest: 'js/lib/'
+          }
+        ]
+      },
       main: {
         files: [
-          { src: 'js/**', dest: 'build/' },
-          { src: ['popup.html', 'manifest.json', 'LICENSE']
+          { src: [ 'popup.html'
+                 , 'manifest.json'
+                 , 'LICENSE'
+                 , 'js/**'
+                 , 'css/*'
+                 , 'images/*'
+                 , 'templates/*.js'
+                 ]
           , dest: 'build/'
-          },
-          { src: ['css/*'], dest: 'build/'},
-          { src: ['images/*'], dest: 'build/'},
-          { src: ['templates/*.js'], dest: 'build/' }
+          }
         ]
       }
     },
@@ -82,6 +99,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['less','jst','jshint']);
+  grunt.registerTask('default', ['less','jst','copy:bower','jshint']);
   grunt.registerTask('release', ['less','jst', 'copy']);
 };

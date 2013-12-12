@@ -14,6 +14,7 @@ assumes you have both already installed on your system.
 git clone https://github.com/sourrust/denote.git
 cd denote
 npm install
+bower install
 ```
 
 Depending on what you want to work on, the `watch` tasks will come in
