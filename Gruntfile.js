@@ -90,6 +90,29 @@ module.exports = function(grunt) {
           'templates/post.js': ['templates/post.html']
         }
       }
+    },
+    requirejs: {
+      compile: {
+        options: {
+          baseUrl: 'js',
+          name: 'popup',
+          out: 'build/js/popup.js',
+          cjsTranslate: true,
+          optimize: 'none',
+          shim: {
+            backbone: {
+              deps: ['underscore', 'jquery'],
+              exports: 'Backbone'
+            }
+          },
+          paths: {
+            backbone: '../bower_components/backbone/backbone',
+            jquery: '../bower_components/jquery/jquery',
+            underscore: '../bower_components/lodash/dist/lodash.underscore',
+            template: '../templates'
+          }
+        }
+      }
     }
   });
 
@@ -97,6 +120,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-jst');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', ['less','jst','copy:bower','jshint']);
