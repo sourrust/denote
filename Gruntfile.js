@@ -114,6 +114,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['less','jst','copy:bower','jshint']);
-  grunt.registerTask('release', ['less','jst', 'copy']);
+  var tasks = ['less','jst', 'copy','requirejs'];
+
+  grunt.registerTask('default', tasks.concat('jshint'));
+  grunt.registerTask('release', tasks);
 };
