@@ -29,23 +29,14 @@ module.exports = function(grunt) {
     },
     jshint: {
       options: '<%= jshintrc %>',
-      grunt: {
-        src: 'Gruntfile.js',
-        options: {
-          node: true
-        }
-      },
+      grunt: { src: 'Gruntfile.js' },
       js: {
         src: [ 'js/*.js'
              , 'js/{collection,model,view}s/*.js'
              ],
         options: {
           browser: true,
-          globals: {
-            chrome: true,
-            define: true,
-            require: true
-          }
+          globals: { chrome: true }
         }
       }
     },
