@@ -1,44 +1,38 @@
-define('views/note',
+'use strict';
 
-[ 'underscore'
-, 'jquery'
-, 'backbone'
-, 'template/note'
-],
+var _            = require('underscore'),
+    Backbone     = require('backbone'),
+    noteTemplate = require('template/note');
 
-function(_, $, Backbone, noteTemplate) {
-  'use strict';
+module.exports = Backbone.View.extend({
+  tagName: 'li',
 
-  return Backbone.View.extend({
-    tagName: 'li',
+  template: noteTemplate,
 
-    template: noteTemplate,
+  events: {
+    'click .preview-link': function(e) {
+      e.preventDefault();
 
-    events: {
-      'click .preview-link': function(e) {
-        e.preventDefault();
+      var model = this.model;
 
-        var model = this.model;
-
-        if(_.isEmpty(model.get('full_text'))) {
-          model.fetch({ success: model.togglePreview });
-        } else {
-          model.togglePreview();
-        }
-
+      if(_.isEmpty(model.get('full_text'))) {
+        model.fetch({ success: model.togglePreview });
+      } else {
+        model.togglePreview();
       }
-    },
 
-    initialize: function() {
-      _.bindAll(this, 'render');
-    },
-
-    render: function() {
-      var html = this.template(this.model.toJSON());
-
-      this.$el.html(html);
-
-      return this;
     }
-  });
+  },
+
+  initialize: function() {
+    _.bindAll(this, 'render');
+  },
+
+  render: function() {
+    var html = this.template(this.model.toJSON());
+
+    this.$el.html(html);
+
+    return this;
+  }
 });

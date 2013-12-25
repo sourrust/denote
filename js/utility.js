@@ -1,76 +1,70 @@
-define('utility', ['underscore','jquery'],
+'use strict';
 
-function(_, $) {
-  'use strict';
+var _ = require('underscore'),
+    $ = require('jquery');
 
-  var getAvatar, getBlogInfo, getClasses, getPermalink, getPreviewText
-    , utility;
+var getAvatar, getBlogInfo, getClasses, getPermalink, getPreviewText;
 
-  utility = {};
+getAvatar = function($el) {
+  return $el.attr('src');
+};
 
-  getAvatar = function($el) {
-    return $el.attr('src');
+getBlogInfo = function($el, $avatarEl) {
+  var info = {
+    'username': $el.html(),
+    'link': $el.attr('href'),
+    'title': $el.attr('title')
   };
 
-  getBlogInfo = function($el, $avatarEl) {
-    var info = {
-      'username': $el.html(),
-      'link': $el.attr('href'),
-      'title': $el.attr('title')
-    };
+  if($avatarEl) {
+    info.avatar = getAvatar($avatarEl);
+  }
 
-    if($avatarEl) {
-      info.avatar = getAvatar($avatarEl);
-    }
+  return info;
+};
 
-    return info;
-  };
+getPreviewText = function($el) {
+  return $el.html().trim();
+};
 
-  getPreviewText = function($el) {
-    return $el.html().trim();
-  };
+getPermalink = function($el) {
+  return $el.attr('data-post-url');
+};
 
-  getPermalink = function($el) {
-    return $el.attr('data-post-url');
-  };
+getClasses = function($el) {
+  return $el.attr('class').split(' ');
+};
 
-  getClasses = function($el) {
-    return $el.attr('class').split(' ');
-  };
+exports.toggleVisiblity = function($el) {
+  return $el.toggleClass('show hide');
+};
 
-  utility.toggleVisiblity = function($el) {
-    return $el.toggleClass('show hide');
-  };
+exports.swapClass = function($el, exchange, forClass) {
+  $el.addClass(forClass);
+  $el.removeClass(exchange);
+};
 
-  utility.swapClass = function($el, exchange, forClass) {
-    $el.addClass(forClass);
-    $el.removeClass(exchange);
-  };
+exports.notesToJSON = function(context) {
+  var $notes, value;
 
-  utility.notesToJSON = function(context) {
-    var $notes, value;
+  $notes = context.find('.with_commentary');
+  value  = [];
 
-    $notes = context.find('.with_commentary');
-    value  = [];
-
-    if(!_.isEmpty($notes)) {
-      _.each($notes, function(note) {
-        var $note = $(note);
-        value.push({
-          'preview_text': getPreviewText($note.find('blockquote > a')),
-          'permalink': getPermalink($note.find('.action')),
-          'classes': getClasses($note),
-          'blogs': [
-            getBlogInfo($note.find('.tumblelog'),
-                        $note.find('.avatar')),
-            getBlogInfo($note.find('.source_tumblelog'))
-          ]
-        });
+  if(!_.isEmpty($notes)) {
+    _.each($notes, function(note) {
+      var $note = $(note);
+      value.push({
+        'preview_text': getPreviewText($note.find('blockquote > a')),
+        'permalink': getPermalink($note.find('.action')),
+        'classes': getClasses($note),
+        'blogs': [
+          getBlogInfo($note.find('.tumblelog'),
+                      $note.find('.avatar')),
+          getBlogInfo($note.find('.source_tumblelog'))
+        ]
       });
-    }
+    });
+  }
 
-    return value;
-  };
-
-  return utility;
-});
+  return value;
+};
