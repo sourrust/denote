@@ -43,15 +43,11 @@ module.exports = function(grunt) {
     copy: {
       bower: {
         files: [
-          { src: [ 'backbone/backbone.js'
-                 , 'jquery/jquery.js'
-                 , 'lodash/dist/lodash.underscore.js'
-                 , 'requirejs/require.js'
-                 ]
+          { src: [ 'requirejs/require.js' ]
           , cwd: 'bower_components/'
           , expand: true
           , flatten: true
-          , dest: 'js/lib/'
+          , dest: 'build/js/lib/'
           }
         ]
       },
@@ -60,10 +56,9 @@ module.exports = function(grunt) {
           { src: [ 'popup.html'
                  , 'manifest.json'
                  , 'LICENSE'
-                 , 'js/**'
+                 , 'js/contentscript.js'
                  , 'css/*'
                  , 'images/*'
-                 , 'templates/*.js'
                  ]
           , dest: 'build/'
           }
