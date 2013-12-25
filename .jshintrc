@@ -4,6 +4,7 @@
   "eqnull": true,
   "indent": 2,
   "laxcomma": true,
+  "node": true,
   "quotmark": "single",
   "strict": true,
   "trailing": true,

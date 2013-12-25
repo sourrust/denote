@@ -29,38 +29,25 @@ module.exports = function(grunt) {
     },
     jshint: {
       options: '<%= jshintrc %>',
-      grunt: {
-        src: 'Gruntfile.js',
-        options: {
-          node: true
-        }
-      },
+      grunt: { src: 'Gruntfile.js' },
       js: {
         src: [ 'js/*.js'
              , 'js/{collection,model,view}s/*.js'
              ],
         options: {
           browser: true,
-          globals: {
-            chrome: true,
-            define: true,
-            require: true
-          }
+          globals: { chrome: true }
         }
       }
     },
     copy: {
       bower: {
         files: [
-          { src: [ 'backbone/backbone.js'
-                 , 'jquery/jquery.js'
-                 , 'lodash/dist/lodash.underscore.js'
-                 , 'requirejs/require.js'
-                 ]
+          { src: [ 'requirejs/require.js' ]
           , cwd: 'bower_components/'
           , expand: true
           , flatten: true
-          , dest: 'js/lib/'
+          , dest: 'build/js/lib/'
           }
         ]
       },
@@ -69,10 +56,9 @@ module.exports = function(grunt) {
           { src: [ 'popup.html'
                  , 'manifest.json'
                  , 'LICENSE'
-                 , 'js/**'
+                 , 'js/contentscript.js'
                  , 'css/*'
                  , 'images/*'
-                 , 'templates/*.js'
                  ]
           , dest: 'build/'
           }
@@ -90,6 +76,29 @@ module.exports = function(grunt) {
           'templates/post.js': ['templates/post.html']
         }
       }
+    },
+    requirejs: {
+      compile: {
+        options: {
+          baseUrl: 'js',
+          name: 'popup',
+          out: 'build/js/popup.js',
+          cjsTranslate: true,
+          optimize: 'none',
+          shim: {
+            backbone: {
+              deps: ['underscore', 'jquery'],
+              exports: 'Backbone'
+            }
+          },
+          paths: {
+            backbone: '../bower_components/backbone/backbone',
+            jquery: '../bower_components/jquery/jquery',
+            underscore: '../bower_components/lodash/dist/lodash.underscore',
+            template: '../templates'
+          }
+        }
+      }
     }
   });
 
@@ -97,8 +106,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-jst');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['less','jst','copy:bower','jshint']);
-  grunt.registerTask('release', ['less','jst', 'copy']);
+  var tasks = ['less','jst', 'copy','requirejs'];
+
+  grunt.registerTask('default', tasks.concat('jshint'));
+  grunt.registerTask('release', tasks);
 };

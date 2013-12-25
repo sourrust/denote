@@ -1,36 +1,30 @@
-define('views/post',
+'use strict';
 
-[ 'underscore'
-, 'backbone'
-, 'utility'
-, 'template/post'
-],
+var _            = require('underscore'),
+    Backbone     = require('backbone'),
+    postTemplate = require('template/post');
 
-function(_, Backbone, utility, postTemplate) {
-  'use strict';
+module.exports = Backbone.View.extend({
+  el: '#post-container',
 
-  return Backbone.View.extend({
-    el: '#post-container',
+  template: postTemplate,
 
-    template: postTemplate,
-
-    events: {
-      'click .back-to-notes': function(e) {
-        e.preventDefault();
-        this.model.togglePreview();
-      }
-    },
-
-    initialize: function() {
-      _.bindAll(this, 'render');
-    },
-
-    render: function() {
-      var html = this.template(this.model.toJSON());
-
-      this.$el.html(html);
-
-      return this;
+  events: {
+    'click .back-to-notes': function(e) {
+      e.preventDefault();
+      this.model.togglePreview();
     }
-  });
+  },
+
+  initialize: function() {
+    _.bindAll(this, 'render');
+  },
+
+  render: function() {
+    var html = this.template(this.model.toJSON());
+
+    this.$el.html(html);
+
+    return this;
+  }
 });

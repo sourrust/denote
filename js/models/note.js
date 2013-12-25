@@ -1,56 +1,55 @@
-define('models/note', ['underscore', 'backbone'],
+'use strict';
 
-function(_, Backbone) {
-  'use strict';
+var _        = require('underscore'),
+    Backbone = require('backbone');
 
-  return Backbone.Model.extend({
-    defaults: {
-      'preview_text': '',
-      'full_text': '',
-      'permalink': '',
-      'classes': [],
-      'blogs': [],
-      'is_preview': true
-    },
+module.exports = Backbone.Model.extend({
+  defaults: {
+    'preview_text': '',
+    'full_text': '',
+    'permalink': '',
+    'classes': [],
+    'blogs': [],
+    'is_preview': true
+  },
 
-    initialize: function() {
-      _.bindAll(this, 'url', 'togglePreview');
-    },
+  initialize: function() {
+    _.bindAll(this, 'url', 'togglePreview');
+  },
 
-    url: function() {
-      var apibase, apikey, base, blogs, permalink, postid;
+  url: function() {
+    var apibase, apikey, base, blogs, permalink, postid;
 
-      apibase   = 'http://api.tumblr.com/v2/blog/';
-      apikey    = '&api_key=<api key>';
+    apibase   = 'http://api.tumblr.com/v2/blog/';
+    apikey    = '&api_key=<api key>';
 
-      permalink = this.get('permalink');
-      blogs     = this.get('blogs');
+    permalink = this.get('permalink');
+    blogs     = this.get('blogs');
 
-      postid    = permalink.match(/\d+$/)[0];
-      base      = blogs[0].username + '.tumblr.com';
+    postid    = permalink.match(/\d+$/)[0];
+    base      = blogs[0].username + '.tumblr.com';
 
-      return apibase + base + '/posts?id=' + postid + apikey;
-    },
+    return apibase + base + '/posts?id=' + postid + apikey;
+  },
 
-    parse: function(response, options) {
-      var body, content, post;
+  parse: function(response, options) {
+    var body, content, post;
 
-      // Parse function in model gets called when the collection fetch
-      // method gets called. Simply returns the model that has already been
-      // parsed because we are looking for tumblr api reponses to parse.
-      if(options.dataType) return response;
+    // Parse function in model gets called when the collection fetch
+    // method gets called. Simply returns the model that has already been
+    // parsed because we are looking for tumblr api reponses to parse.
+    if(options.dataType) return response;
 
-      post    = response.response.posts[0];
-      body    = post.body || post.description || post.caption;
-      content = _.last(body.split('</blockquote>'));
+    post    = response.response.posts[0];
+    body    = post.body || post.description || post.caption;
+    content = _.last(body.split('</blockquote>'));
 
-      return { 'full_text': content.trim() };
-    },
+    return { 'full_text': content.trim() };
+  },
 
-    togglePreview: function() {
-      var isPreview = this.get('is_preview');
+  togglePreview: function() {
+    var isPreview = this.get('is_preview');
 
-      this.set('is_preview', !isPreview);
-    }
-  });
+    this.set('is_preview', !isPreview);
+  }
 });

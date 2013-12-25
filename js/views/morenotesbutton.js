@@ -1,24 +1,23 @@
-define('views/morenotesbutton', ['underscore', 'backbone'],
+'use strict';
 
-function(_, Backbone) {
-  'use strict';
+var _        = require('underscore'),
+    Backbone = require('backbone');
 
-  return Backbone.View.extend({
-    tagName: 'li',
-    className: 'note more_comments',
+module.exports = Backbone.View.extend({
+  tagName: 'li',
+  className: 'note more_comments',
 
-    initialize: function() {
-      _.bindAll(this, 'render');
-    },
+  initialize: function() {
+    _.bindAll(this, 'render');
+  },
 
-    render: function() {
-      var html = 'More +';
+  render: function() {
+    var html = 'More +';
 
-      html += '<div class="clearfix"></div>';
+    html += '<div class="clearfix"></div>';
 
-      this.$el.html(html);
+    this.$el.html(html);
 
-      return this;
-    }
-  });
+    return this;
+  }
 });

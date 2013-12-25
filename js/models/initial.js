@@ -1,12 +1,10 @@
-define('models/initial', ['backbone'],
+'use strict';
 
-function(Backbone) {
-  'use strict';
+var Backbone = require('backbone');
 
-  return Backbone.Model.extend({
-    defaults: {
-      'notes_html': '',
-      'post_url': ''
-    }
-  });
+module.exports = Backbone.Model.extend({
+  defaults: {
+    'notes_html': '',
+    'post_url': ''
+  }
 });
