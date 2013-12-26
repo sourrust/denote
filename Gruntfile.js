@@ -127,6 +127,6 @@ module.exports = function(grunt) {
 
   tasks = ['less', 'jst', 'copy', 'requirejs'];
 
-  grunt.registerTask('default', tasks.concat('jshint'));
+  grunt.registerTask('default', ['jshint'].concat(tasks));
   grunt.registerTask('release', tasks);
 };
