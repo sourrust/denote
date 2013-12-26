@@ -1,6 +1,10 @@
 module.exports = function(grunt) {
   'use strict';
 
+  var config, tasks;
+
+  config = grunt.file.readJSON('.secret/config.json');
+
   grunt.initConfig({
     jshintrc: grunt.file.readJSON('.jshintrc'),
 
@@ -96,6 +100,18 @@ module.exports = function(grunt) {
             jquery: '../bower_components/jquery/jquery',
             underscore: '../bower_components/lodash/dist/lodash.underscore',
             template: '../templates'
+          },
+          onBuildRead: function(moduleName, path, content) {
+            var newContent;
+
+            if(moduleName === 'models/note') {
+              newContent =
+                grunt.template.process(content, { data: config });
+            } else {
+              newContent = content;
+            }
+
+            return newContent;
           }
         }
       }
@@ -109,7 +125,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  var tasks = ['less','jst', 'copy','requirejs'];
+  tasks = ['less', 'jst', 'copy', 'requirejs'];
 
   grunt.registerTask('default', tasks.concat('jshint'));
   grunt.registerTask('release', tasks);

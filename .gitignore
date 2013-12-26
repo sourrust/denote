@@ -16,5 +16,5 @@ build/
 # precompiled templates
 templates/*.js
 
-# Browser libs
-js/lib/
+# Place to keep things like API keys secret
+.secret/
