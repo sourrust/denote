@@ -21,7 +21,7 @@ module.exports = Backbone.Model.extend({
     var apibase, apikey, base, blogs, permalink, postid;
 
     apibase   = 'http://api.tumblr.com/v2/blog/';
-    apikey    = '&api_key=<api key>';
+    apikey    = '&api_key=<%= apikey %>';
 
     permalink = this.get('permalink');
     blogs     = this.get('blogs');
