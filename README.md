@@ -28,22 +28,15 @@ One part of this extension uses the [Tumblr API][4] to pull in the full
 contents of a post that was clicked. With the reliance on the API calls,
 you will need to add in your own api key to actually get this feature
 working locally without it 401-ing on you. Where you put the api key is
-in the `url` method inside of the model located in
-[js/models/note.js][5].
+in a file located in `.secret/config.json`. This file will be read and
+added in during the build step.
 
-The change will look some like:
-
-```diff
-- apikey    = '&api_key=<api key>';
-+ apikey    = '&api_key=123apikey';
-```
-
-Obviously that isn't a real key, but you get the idea that you will need
-to get your own, just made sure you don't accidentally commit it into
-the repository. However, just a small side note, when I release the
-extension to the chrome web store, my api key will be package in there;
-If you wish to go though the steps to get it, I don't compress the code
-in the packaged extension, so it will be in the same place.
+API keys are not to be put into the repository, which is why the
+`.secret` fold is ignore in [.gitignore][5]. However, just a small side
+note, when I release the extension to the chrome web store, my api key
+will be package in there; If you wish to go though the steps to get it,
+I don't compress the code in the packaged extension, so it will be some
+where in the generated `popup.js` file.
 
 ## How to Contribute
 
@@ -92,7 +85,7 @@ Simple as that.
 [2]: http://nodejs.org/
 [3]: https://npmjs.org/
 [4]: http://www.tumblr.com/docs/en/api/v2
-[5]: https://github.com/sourrust/denote/blob/master/js/models/note.js
+[5]: https://github.com/sourrust/denote/blob/master/.gitignore
 [6]: https://github.com/sourrust/denote/issues
 [7]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
 [8]: https://github.com/tpope/vim-fugitive
