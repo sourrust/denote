@@ -1,0 +1,31 @@
+// Cleafix
+// -------
+//
+// taken from twitter's bootstrap, originally from html5 boilerplate
+// <https://github.com/twbs/bootstrap/blob/master/less/mixins.less#L19>
+.clearfix {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+.hide {
+  display: none;
+  visibility: hidden;
+}
+
+.show {
+  display: block;
+  visibility: visible;
+}
+
+.error {
+  padding: 20px;
+  text-align: center;
+}

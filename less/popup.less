@@ -1,5 +1,6 @@
 @import (less) "normalize.css";
 
+@import 'classes';
 @import 'mixins';
 @import 'scrollbar';
 @import 'variables';
@@ -51,13 +52,13 @@ li.note {
 }
 
 #post-container {
-  color: @text-color;
+  color: @base;
 
   .note-mixin();
 }
 
 blockquote > a {
-  color: @text-color;
+  color: @base;
   text-decoration: none;
 
   &:hover { text-decoration: underline; }
@@ -91,44 +92,12 @@ blockquote > a {
 
   padding: 6px 0;
 
-  background: #4d63d6;
-  color: #eee;
+  background: @accent;
+  color: @base0;
 
   font-size: 13px;
   text-align: center;
   text-decoration: none;
 
-  &:hover { background: darken(#4d63d6, 5%); }
-}
-
-// Cleafix
-// -------
-//
-// taken from twitter's bootstrap, originally from html5 boilerplate
-// <https://github.com/twbs/bootstrap/blob/master/less/mixins.less#L19>
-.clearfix {
-  &:before,
-  &:after {
-    content: " ";
-    display: table;
-  }
-
-  &:after {
-    clear: both;
-  }
-}
-
-.hide {
-  display: none;
-  visibility: hidden;
-}
-
-.show {
-  display: block;
-  visibility: visible;
-}
-
-.error {
-  padding: 20px;
-  text-align: center;
+  &:hover { background: darken(@accent, 5%); }
 }
