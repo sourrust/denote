@@ -51,13 +51,13 @@ li.note {
 }
 
 #post-container {
-  color: @text-color;
+  color: @base;
 
   .note-mixin();
 }
 
 blockquote > a {
-  color: @text-color;
+  color: @base;
   text-decoration: none;
 
   &:hover { text-decoration: underline; }
@@ -91,14 +91,14 @@ blockquote > a {
 
   padding: 6px 0;
 
-  background: #4d63d6;
-  color: #eee;
+  background: @accent;
+  color: @base0;
 
   font-size: 13px;
   text-align: center;
   text-decoration: none;
 
-  &:hover { background: darken(#4d63d6, 5%); }
+  &:hover { background: darken(@accent, 5%); }
 }
 
 // Cleafix
