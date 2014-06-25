@@ -1,13 +1,13 @@
 'use strict';
 
-var _            = require('underscore'),
-    Backbone     = require('backbone'),
-    noteTemplate = require('template/note');
+var _              = require('underscore'),
+    Backbone       = require('backbone'),
+    reblogTemplate = require('template/reblog');
 
 module.exports = Backbone.View.extend({
   tagName: 'li',
 
-  template: noteTemplate,
+  template: reblogTemplate,
 
   events: {
     'click .preview-link': function(e) {
