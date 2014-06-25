@@ -77,7 +77,8 @@ module.exports = function(grunt) {
         },
         files: {
           'templates/note.js': ['templates/note.html'],
-          'templates/post.js': ['templates/post.html']
+          'templates/post.js': ['templates/post.html'],
+          'templates/reply.js': ['templates/reply.html']
         }
       }
     },
