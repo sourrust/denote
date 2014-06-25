@@ -58,6 +58,7 @@ exports.notesToJSON = function(context) {
 
     if(_.contains(classes, 'reply')) {
       value.push({
+        'note_type': 'reply',
         'text': getPreviewText($note.find('.answer_content')),
         'classes': classes,
         'blog': getBlogInfo($note.find('.action > a'),
@@ -65,6 +66,7 @@ exports.notesToJSON = function(context) {
       });
     } else {
       value.push({
+        'note_type': 'reblog',
         'preview_text': getPreviewText($note.find('blockquote > a')),
         'permalink': getPermalink($note.find('.action')),
         'classes': classes,
