@@ -7,7 +7,8 @@ var _              = require('underscore'),
     utility        = require('utility'),
     MoreButtonView = require('views/morenotesbutton'),
     NoteView       = require('views/note'),
-    PostView       = require('views/post');
+    PostView       = require('views/post'),
+    ReplyView      = require('views/reply');
 
 var $loader = $('#loader');
 
@@ -38,7 +39,12 @@ module.exports = Backbone.View.extend({
   },
 
   renderNote: function(model) {
-    var note = new NoteView({
+    var note, NoteType, isReply;
+
+    isReply  = model.get('note_type') === 'reply';
+    NoteType = isReply ? ReplyView : NoteView;
+
+    note = new NoteType({
       model: model,
       className: model.get('classes').join(' ')
     });
