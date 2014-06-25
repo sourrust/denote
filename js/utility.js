@@ -51,18 +51,30 @@ exports.notesToJSON = function(context) {
   value  = [];
 
   _.each($notes, function(note) {
-    var $note = $(note);
+    var $note, classes;
 
-    value.push({
-      'preview_text': getPreviewText($note.find('blockquote > a')),
-      'permalink': getPermalink($note.find('.action')),
-      'classes': getClasses($note),
-      'blogs': [
-        getBlogInfo($note.find('.tumblelog'),
-                    $note.find('.avatar')),
-        getBlogInfo($note.find('.source_tumblelog'))
-      ]
-    });
+    $note   = $(note);
+    classes = getClasses($note);
+
+    if(_.contains(classes, 'reply')) {
+      value.push({
+        'text': getPreviewText($note.find('.answer_content')),
+        'classes': classes,
+        'blog': getBlogInfo($note.find('.action > a'),
+                            $note.find('.avatar'))
+      });
+    } else {
+      value.push({
+        'preview_text': getPreviewText($note.find('blockquote > a')),
+        'permalink': getPermalink($note.find('.action')),
+        'classes': classes,
+        'blogs': [
+          getBlogInfo($note.find('.tumblelog'),
+                      $note.find('.avatar')),
+          getBlogInfo($note.find('.source_tumblelog'))
+        ]
+      });
+    }
   });
 
   return value;
