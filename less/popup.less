@@ -12,13 +12,14 @@ img {
   height: auto;
 
   vertical-align: middle;
+}
 
-  &.avatar {
-    width: 16px;
-    height: 16px;
+.avatar_frame,
+img.avatar {
+  width: 16px;
+  height: 16px;
 
-    display: inline-block;
-  }
+  display: inline-block;
 }
 
 #note_container {
@@ -100,4 +101,10 @@ blockquote > a {
   text-decoration: none;
 
   &:hover { background: darken(@accent, 5%); }
+}
+
+.answer_content {
+  color: @base;
+  font-size: 16px;
+  line-height: 24px;
 }

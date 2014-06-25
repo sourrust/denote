@@ -5,12 +5,9 @@ var _        = require('underscore'),
 
 module.exports = Backbone.Model.extend({
   defaults: {
-    'preview_text': '',
-    'full_text': '',
-    'permalink': '',
-    'classes': [],
     'blogs': [],
-    'is_preview': true
+    'is_preview': true,
+    'permalink': ''
   },
 
   initialize: function() {
