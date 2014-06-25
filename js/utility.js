@@ -50,21 +50,20 @@ exports.notesToJSON = function(context) {
   $notes = context.find('.with_commentary');
   value  = [];
 
-  if(!_.isEmpty($notes)) {
-    _.each($notes, function(note) {
-      var $note = $(note);
-      value.push({
-        'preview_text': getPreviewText($note.find('blockquote > a')),
-        'permalink': getPermalink($note.find('.action')),
-        'classes': getClasses($note),
-        'blogs': [
-          getBlogInfo($note.find('.tumblelog'),
-                      $note.find('.avatar')),
-          getBlogInfo($note.find('.source_tumblelog'))
-        ]
-      });
+  _.each($notes, function(note) {
+    var $note = $(note);
+
+    value.push({
+      'preview_text': getPreviewText($note.find('blockquote > a')),
+      'permalink': getPermalink($note.find('.action')),
+      'classes': getClasses($note),
+      'blogs': [
+        getBlogInfo($note.find('.tumblelog'),
+                    $note.find('.avatar')),
+        getBlogInfo($note.find('.source_tumblelog'))
+      ]
     });
-  }
+  });
 
   return value;
 };
