@@ -47,7 +47,7 @@ exports.swapClass = function($el, exchange, forClass) {
 exports.notesToJSON = function(context) {
   var $notes, value;
 
-  $notes = context.find('.with_commentary');
+  $notes = context.find('.with_commentary, .reply');
   value  = [];
 
   _.each($notes, function(note) {
