@@ -1,0 +1,51 @@
+ol.notes {
+  padding: 0;
+  margin: 0;
+
+  list-style: none;
+}
+
+li.note blockquote {
+  border-left: 1px #ccc solid;
+  margin: 10px 0 1px 0;
+  padding-left: 15px;
+}
+
+blockquote > a {
+  color: @base;
+  text-decoration: none;
+
+  &:hover { text-decoration: underline; }
+}
+
+#note_container {
+  width: 300px;
+  padding: 0;
+
+  border: 1px #ccc solid;
+}
+
+#loader {
+  width: 16px;
+
+  margin: 10px auto;
+}
+
+#post-container { color: @base; }
+
+.more_comments {
+  text-align: center;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.answer_content {
+  color: @base;
+  font-size: 16px;
+  line-height: 24px;
+}
