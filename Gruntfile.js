@@ -14,7 +14,7 @@ module.exports = function(grunt) {
           paths: ['less', 'bower_components/normalize-css']
         },
         files: {
-          'css/popup.css': 'less/popup.less'
+          'css/popup.css': 'less/main.less'
         }
       }
     },

@@ -5,7 +5,7 @@ var _        = require('underscore'),
 
 module.exports = Backbone.View.extend({
   tagName: 'li',
-  className: 'note more_comments',
+  className: 'note more-comments',
 
   initialize: function() {
     _.bindAll(this, 'render');
