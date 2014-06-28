@@ -24,7 +24,7 @@ specific with `grunt watch:less` or `grunt watch:jshint`.
 
 ## Tumblr API Calls
 
-One part of this extension uses the [Tumblr API][4] to pull in the full
+One part of this extension uses the [Tumblr API][5] to pull in the full
 contents of a post that was clicked. With the reliance on the API calls,
 you will need to add in your own api key to actually get this feature
 working locally without it 401-ing on you. Where you put the api key is
@@ -40,7 +40,7 @@ The JSON for this is pretty simple, it only have one key entry:
 ```
 
 API keys are not to be put into the repository, which is why the
-`.secret` fold is ignore in [.gitignore][5]. However, just a small side
+`.secret` fold is ignore in [.gitignore][6]. However, just a small side
 note, when I release the extension to the chrome web store, my api key
 will be package in there; If you wish to go though the steps to get it,
 I don't compress the code in the packaged extension, so it will be some
@@ -53,7 +53,7 @@ pretty safe to use on an everyday basis. So really the feature set is
 pretty small and should be the main concern at this point — at least
 within the scope of the problem denote is trying to solve. If there are
 features that you would like to see in denote, either put it in an
-[issue][6] or start hacking on it yourself.
+[issue][7] or start hacking on it yourself.
 
 And before you do start hacking on denote, here is small guide to go
 from adding code to you local repo to getting it into the main repo.
@@ -75,9 +75,9 @@ what has changed during development. It is almost like a self documented
 changelog in the commit message.
 
 For a easy guide on how to structure you commit message just [follow
-tpope's, guide][7]. And if you want to make things easier on yourself,
+tpope's, guide][8]. And if you want to make things easier on yourself,
 use a client for working with commit message. For me personally, I use
-[fugitive][8] because my editor of choice is vim.
+[fugitive][9] because my editor of choice is vim.
 
 ### Run `grunt jshint` before committing
 
@@ -92,8 +92,9 @@ Simple as that.
 [1]: https://chrome.google.com/webstore/detail/denote/ibfbkmghalfjcfeoocejnhhenidpgnbg
 [2]: http://nodejs.org/
 [3]: https://npmjs.org/
-[4]: http://www.tumblr.com/docs/en/api/v2
-[5]: https://github.com/sourrust/denote/blob/master/.gitignore
-[6]: https://github.com/sourrust/denote/issues
-[7]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
-[8]: https://github.com/tpope/vim-fugitive
+[4]: http://bower.io/
+[5]: http://www.tumblr.com/docs/en/api/v2
+[6]: https://github.com/sourrust/denote/blob/master/.gitignore
+[7]: https://github.com/sourrust/denote/issues
+[8]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+[9]: https://github.com/tpope/vim-fugitive
