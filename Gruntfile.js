@@ -98,7 +98,7 @@ module.exports = function(grunt) {
           },
           paths: {
             backbone: '../bower_components/backbone/backbone',
-            jquery: '../bower_components/jquery/jquery',
+            jquery: '../bower_components/jquery/dist/jquery',
             underscore: '../bower_components/lodash/dist/lodash.underscore',
             template: '../templates'
           },
