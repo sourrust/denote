@@ -7,8 +7,8 @@ reblogs with comments.
 
 ## Getting Started
 
-Denote does rely on [node.js][2] and [npm][3] to build, so this section
-assumes you have both already installed on your system.
+Denote does rely on [node.js][2], [npm][3], and [bower][4] to build, so
+this section assumes you have both already installed on your system.
 
 ```bash
 git clone https://github.com/sourrust/denote.git
