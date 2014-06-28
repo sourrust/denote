@@ -31,6 +31,14 @@ working locally without it 401-ing on you. Where you put the api key is
 in a file located in `.secret/config.json`. This file will be read and
 added in during the build step.
 
+The JSON for this is pretty simple, it only have one key entry:
+
+```json
+{
+  "apikey": "Enter api key here..."
+}
+```
+
 API keys are not to be put into the repository, which is why the
 `.secret` fold is ignore in [.gitignore][5]. However, just a small side
 note, when I release the extension to the chrome web store, my api key
