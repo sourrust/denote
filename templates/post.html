@@ -1,4 +1,19 @@
 <a href="#" class="back-to-notes">‹ Back to Notes</a>
+<% if(responses.length) { %>
+<div id="response-container">
+  <ol class="responses">
+  <% for(var i = 0, l = responses.length; i < l; i++) { %>
+    <% var response = responses[i]; %>
+    <li class="response">
+      <%= response.blog %>
+      <div class="content">
+        <%= response.content %>
+      </div>
+    </li>
+  <% } %>
+  </ol>
+</div>
+<% } %>
 <div class="full-post">
   <%= full_text %>
 </div>
