@@ -4,6 +4,33 @@ var _        = require('underscore'),
     $        = require('jquery'),
     Backbone = require('backbone');
 
+function getResponses($blogs, $contents) {
+  var contentsLen, reponses;
+
+  contentsLen = $contents.length - 1;
+
+  reponses = _.map($contents, function(content, i) {
+    var blog, children, html, strHTML;
+
+    blog     = $blogs[i];
+    children = content.children;
+
+    html = (i === contentsLen) ? children
+                               : _.drop(children, 2);
+
+    strHTML = _.foldl(html, function(x, y) {
+      return x + y.outerHTML;
+    }, '');
+
+    return {
+      'blog': blog.outerHTML,
+      'content': strHTML
+    };
+  });
+
+  return reponses.reverse();
+}
+
 module.exports = Backbone.Model.extend({
   defaults: {
     'blogs': [],
