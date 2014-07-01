@@ -16,7 +16,9 @@ img.avatar {
 }
 
 li.note,
-#post-container {
+#post-container,
+li.response,
+#response-container + .full-post {
   padding: 10px;
 
   background: @base0;
@@ -26,8 +28,7 @@ li.note,
 
 .action { font-size: 10px; }
 
-.action a,
-.back-to-notes {
+a {
   color: @accent;
   text-decoration: none;
 
