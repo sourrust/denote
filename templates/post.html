@@ -1,7 +1,8 @@
 <a href="#" class="back-to-notes">‹ Back to Notes</a>
 <% if(responses.length) { %>
 <div id="response-container">
-  <ol class="responses">
+  <p id="response-button">Show Responses</p>
+  <ol class="responses hide">
   <% for(var i = 0, l = responses.length; i < l; i++) { %>
     <% var response = responses[i]; %>
     <li class="response">
