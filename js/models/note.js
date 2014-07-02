@@ -19,7 +19,7 @@ function getResponses($blogs, $contents) {
                                : _.drop(children, 2);
 
     // check if there is a blog name present
-    if($blogs) {
+    if($blogs && $blogs[i]) {
       result.blog = $blogs[i].outerHTML;
     }
 
