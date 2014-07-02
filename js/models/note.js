@@ -10,22 +10,24 @@ function getResponses($blogs, $contents) {
   contentsLen = $contents.length - 1;
 
   reponses = _.map($contents, function(content, i) {
-    var blog, children, html, strHTML;
+    var children, html, result;
 
-    blog     = $blogs[i];
+    result   = {};
     children = content.children;
 
     html = (i === contentsLen) ? children
                                : _.drop(children, 2);
 
-    strHTML = _.foldl(html, function(x, y) {
+    // check if there is a blog name present
+    if($blogs) {
+      result.blog = $blogs[i];
+    }
+
+    result.content = _.foldl(html, function(x, y) {
       return x + y.outerHTML;
     }, '');
 
-    return {
-      'blog': blog.outerHTML,
-      'content': strHTML
-    };
+    return result;
   });
 
   return reponses.reverse();
