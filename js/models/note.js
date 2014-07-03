@@ -77,7 +77,7 @@ module.exports = Backbone.Model.extend({
     $body    = $('<div></div>').append(body);
     content  = _.last(body.split('</blockquote>'));
     $blogs   = $body.find('.tumblr_blog');
-    $content = $body.find('blockquote');
+    $content = $body.find('p + blockquote');
 
     return { 'full_text': content.trim()
            , 'responses': getResponses($blogs, $content)
