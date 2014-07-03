@@ -32,5 +32,12 @@
 
 .content {
   padding: 0 15px;
-  border-left: 1px #ccc solid
+  border-left: 1px @lightGrey solid;
+
+  blockquote {
+    margin: 0;
+    padding-left: 15px;
+
+    border-left: 2px lighten(@lightGrey, 5%) dotted;
+  }
 }
