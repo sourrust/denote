@@ -3,13 +3,11 @@
 var _ = require('underscore'),
     $ = require('jquery');
 
-var getAvatar, getBlogInfo, getClasses, getPermalink, getPreviewText;
-
-getAvatar = function($el) {
+function getAvatar($el) {
   return $el.attr('src');
-};
+}
 
-getBlogInfo = function($el, $avatarEl) {
+function getBlogInfo($el, $avatarEl) {
   var info = {
     'username': $el.html(),
     'link': $el.attr('href'),
@@ -21,19 +19,19 @@ getBlogInfo = function($el, $avatarEl) {
   }
 
   return info;
-};
+}
 
-getPreviewText = function($el) {
+function getPreviewText($el) {
   return $el.html().trim();
-};
+}
 
-getPermalink = function($el) {
+function getPermalink($el) {
   return $el.attr('data-post-url');
-};
+}
 
-getClasses = function($el) {
+function getClasses($el) {
   return $el.attr('class').split(' ');
-};
+}
 
 exports.toggleVisiblity = function($el) {
   return $el.toggleClass('show hide');
