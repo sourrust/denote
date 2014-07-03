@@ -3,13 +3,11 @@
 var _ = require('underscore'),
     $ = require('jquery');
 
-var getAvatar, getBlogInfo, getClasses, getPermalink, getPreviewText;
-
-getAvatar = function($el) {
+function getAvatar($el) {
   return $el.attr('src');
-};
+}
 
-getBlogInfo = function($el, $avatarEl) {
+function getBlogInfo($el, $avatarEl) {
   var info = {
     'username': $el.html(),
     'link': $el.attr('href'),
@@ -21,63 +19,60 @@ getBlogInfo = function($el, $avatarEl) {
   }
 
   return info;
-};
+}
 
-getPreviewText = function($el) {
+function getPreviewText($el) {
   return $el.html().trim();
-};
+}
 
-getPermalink = function($el) {
+function getPermalink($el) {
   return $el.attr('data-post-url');
-};
+}
 
-getClasses = function($el) {
+function getClasses($el) {
   return $el.attr('class').split(' ');
-};
+}
 
 exports.toggleVisiblity = function($el) {
   return $el.toggleClass('show hide');
 };
 
 exports.swapClass = function($el, exchange, forClass) {
-  $el.addClass(forClass);
-  $el.removeClass(exchange);
+  return $el.addClass(forClass)
+            .removeClass(exchange);
 };
 
+function noteToJSON(note) {
+  var $note, classes;
+
+  $note   = $(note);
+  classes = getClasses($note);
+
+  if(_.contains(classes, 'reply')) {
+    return {
+      'note_type': 'reply',
+      'text': getPreviewText($note.find('.answer_content')),
+      'classes': classes,
+      'blog': getBlogInfo($note.find('.action > a'),
+                          $note.find('.avatar'))
+    };
+  } else {
+    return {
+      'note_type': 'reblog',
+      'preview_text': getPreviewText($note.find('blockquote > a')),
+      'permalink': getPermalink($note.find('.action')),
+      'classes': classes,
+      'blogs': [
+        getBlogInfo($note.find('.tumblelog'),
+                    $note.find('.avatar')),
+        getBlogInfo($note.find('.source_tumblelog'))
+      ]
+    };
+  }
+}
+
 exports.notesToJSON = function(context) {
-  var $notes, value;
+  var $notes = context.find('.with_commentary, .reply');
 
-  $notes = context.find('.with_commentary, .reply');
-  value  = [];
-
-  _.each($notes, function(note) {
-    var $note, classes;
-
-    $note   = $(note);
-    classes = getClasses($note);
-
-    if(_.contains(classes, 'reply')) {
-      value.push({
-        'note_type': 'reply',
-        'text': getPreviewText($note.find('.answer_content')),
-        'classes': classes,
-        'blog': getBlogInfo($note.find('.action > a'),
-                            $note.find('.avatar'))
-      });
-    } else {
-      value.push({
-        'note_type': 'reblog',
-        'preview_text': getPreviewText($note.find('blockquote > a')),
-        'permalink': getPermalink($note.find('.action')),
-        'classes': classes,
-        'blogs': [
-          getBlogInfo($note.find('.tumblelog'),
-                      $note.find('.avatar')),
-          getBlogInfo($note.find('.source_tumblelog'))
-        ]
-      });
-    }
-  });
-
-  return value;
+  return _.map($notes, noteToJSON);
 };
