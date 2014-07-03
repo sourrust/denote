@@ -38,8 +38,8 @@ exports.toggleVisiblity = function($el) {
 };
 
 exports.swapClass = function($el, exchange, forClass) {
-  $el.addClass(forClass);
-  $el.removeClass(exchange);
+  return $el.addClass(forClass)
+            .removeClass(exchange);
 };
 
 function noteToJSON(note) {
