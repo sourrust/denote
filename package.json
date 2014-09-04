@@ -6,7 +6,6 @@
     "url": "https://github.com/sourrust/denote.git"
   },
   "devDependencies": {
-    "bower": "~1.2.8",
     "gulp": "^3.8.7",
     "gulp-jshint": "^1.8.4",
     "gulp-jst": "^0.1.1",
