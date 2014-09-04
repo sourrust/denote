@@ -20,7 +20,7 @@ gulp.task('default', ['jshint', 'less', 'jst', 'copy', 'requirejs']);
 
 gulp.task('less', function() {
   var options = {
-    paths: ['less', 'bower_components/normalize-css']
+    paths: ['less', 'node_modules/normalize.css']
   };
 
   return gulp.src('less/main.less')
@@ -69,9 +69,9 @@ function _copy(files, dest, useBaseDir) {
     .pipe(gulp.dest(dest));
 }
 
-gulp.task('copy:bower', function() {
+gulp.task('copy:vendor', function() {
   var dest  = path.join(defaults.dest, 'js', 'lib');
-  var files = 'bower_components/requirejs/require.js';
+  var files = 'node_modules/requirejs/require.js';
 
   return _copy(files, dest);
 });
@@ -88,7 +88,7 @@ gulp.task('copy:main', function() {
   return _copy(files, defaults.dest, true);
 });
 
-gulp.task('copy', ['copy:bower', 'copy:main']);
+gulp.task('copy', ['copy:vendor', 'copy:main']);
 
 function addAmdWrapper(content) {
   var template = [ 'define(function(){'
@@ -117,9 +117,9 @@ gulp.task('requirejs', function(callback) {
     cjsTranslate: true,
     optimize: 'none',
     paths: {
-      backbone: '../bower_components/backbone/backbone',
-      jquery: '../bower_components/jquery/dist/jquery',
-      underscore: '../bower_components/lodash/dist/lodash.underscore',
+      backbone: '../node_modules/backbone/backbone',
+      jquery: '../node_modules/jquery/dist/jquery',
+      underscore: '../node_modules/lodash/dist/lodash.underscore',
       template: '../templates'
     },
     onBuildRead: function(moduleName, path, content) {
