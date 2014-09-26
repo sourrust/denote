@@ -45,23 +45,6 @@ module.exports = Backbone.View.extend({
     this.$el.append(note.render().el);
   },
 
-  displayPostView: function(model) {
-    var $el = [ this.$el
-              , this.fullPostView.$el
-              ];
-
-    if(model.get('is_preview')) {
-      utility.swapClass($el[0], 'hide', 'show');
-      utility.swapClass($el[1], 'show', 'hide');
-    } else {
-      this.fullPostView.model = model;
-      this.fullPostView.render();
-
-      utility.swapClass($el[0], 'show', 'hide');
-      utility.swapClass($el[1], 'hide', 'show');
-    }
-  },
-
   requestMoreNotes: function() {
     if(!this.collection.canFetchMore()) return;
 
