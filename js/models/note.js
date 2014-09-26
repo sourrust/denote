@@ -38,12 +38,11 @@ var router;
 module.exports = Backbone.Model.extend({
   defaults: {
     'blogs': [],
-    'is_preview': true,
     'permalink': ''
   },
 
   initialize: function(options) {
-    _.bindAll(this, 'url', 'togglePreview');
+    _.bindAll(this, 'url');
 
     router = options.router;
   },
@@ -86,11 +85,5 @@ module.exports = Backbone.Model.extend({
     return { 'full_text': content.trim()
            , 'responses': getResponses($blogs, $content)
            };
-  },
-
-  togglePreview: function() {
-    var isPreview = this.get('is_preview');
-
-    this.set('is_preview', !isPreview);
   }
 });
