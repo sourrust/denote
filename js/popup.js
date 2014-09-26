@@ -1,8 +1,8 @@
 'use strict';
 
 var $            = require('jquery'),
-    InitialModel = require('models/initial'),
-    NotesView    = require('views/notecontainer');
+    Backbone     = require('backbone'),
+    Router       = require('router');
 
 $(function() {
   chrome.tabs.query({
@@ -10,19 +10,19 @@ $(function() {
     currentWindow: true
   }, function(tabs) {
     chrome.tabs.sendMessage(tabs[0].id, {}, function(response) {
-      var notesView, initialModel;
+      var data, router;
 
       response = response || {};
 
       if(response.notes != null) {
-        initialModel = new InitialModel({
+        data = {
           post_url: response.url,
           notes_html: $('<ol>').html(response.notes)
-        });
+        };
 
-        notesView = new NotesView({
-          model: initialModel
-        });
+        router = new Router({ data: data });
+
+        Backbone.history.start({ pushState: true });
       }
     });
   });
