@@ -3,30 +3,22 @@
 var _              = require('underscore'),
     $              = require('jquery'),
     Backbone       = require('backbone'),
-    Notes          = require('collections/notes'),
     utility        = require('utility'),
     MoreButtonView = require('views/morenotesbutton'),
-    PostView       = require('views/post'),
     ReblogView     = require('views/reblog'),
     ReplyView      = require('views/reply');
 
-var $loader = $('#loader');
+var router, $loader = $('#loader');
 
 module.exports = Backbone.View.extend({
   el: '.notes',
 
-  initialize: function() {
+  initialize: function(options) {
     _.bindAll(this);
 
-    this.collection = new Notes();
-    this.collection.storeInitialData(this.model);
+    this.collection.on('add', this.renderNote);
 
-    this.fullPostView = new PostView();
-
-    this.collection.on({
-      'add': this.renderNote,
-      'change:is_preview': this.displayPostView
-    });
+    router = options.router;
 
     this.render();
     this.requestMoreNotes();
@@ -46,7 +38,8 @@ module.exports = Backbone.View.extend({
 
     note = new NoteType({
       model: model,
-      className: model.get('classes').join(' ')
+      className: model.get('classes').join(' '),
+      router: router
     });
 
     this.$el.append(note.render().el);

@@ -33,6 +33,8 @@ function getResponses($blogs, $contents) {
   return reponses.reverse();
 }
 
+var router;
+
 module.exports = Backbone.Model.extend({
   defaults: {
     'blogs': [],
@@ -40,8 +42,10 @@ module.exports = Backbone.Model.extend({
     'permalink': ''
   },
 
-  initialize: function() {
+  initialize: function(options) {
     _.bindAll(this, 'url', 'togglePreview');
+
+    router = options.router;
   },
 
   url: function() {

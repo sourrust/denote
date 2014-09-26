@@ -4,6 +4,8 @@ var _              = require('underscore'),
     Backbone       = require('backbone'),
     reblogTemplate = require('template/reblog');
 
+var router;
+
 module.exports = Backbone.View.extend({
   tagName: 'li',
 
@@ -13,19 +15,25 @@ module.exports = Backbone.View.extend({
     'click .preview-link': function(e) {
       e.preventDefault();
 
-      var model = this.model;
+      var model = this.model,
+          route = function() {
+            return router.navigate('post/' + model.cid, {
+              trigger: true
+            });
+          };
 
       if(_.isEmpty(model.get('full_text'))) {
-        model.fetch({ success: model.togglePreview });
+        model.fetch({ success: route });
       } else {
-        model.togglePreview();
+        route();
       }
-
     }
   },
 
-  initialize: function() {
+  initialize: function(options) {
     _.bindAll(this, 'render');
+
+    router = options.router;
   },
 
   render: function() {

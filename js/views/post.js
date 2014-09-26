@@ -5,6 +5,8 @@ var _            = require('underscore'),
     postTemplate = require('template/post'),
     utility      = require('utility');
 
+var router;
+
 module.exports = Backbone.View.extend({
   el: '#post-container',
 
@@ -13,7 +15,7 @@ module.exports = Backbone.View.extend({
   events: {
     'click .back-to-notes': function(e) {
       e.preventDefault();
-      this.model.togglePreview();
+      router.navigate('index', { trigger: true });
     },
     'click #response-button': function() {
       var $button, $responses;
@@ -31,8 +33,10 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  initialize: function() {
+  initialize: function(options) {
     _.bindAll(this, 'render');
+
+    router = options.router;
   },
 
   render: function() {
