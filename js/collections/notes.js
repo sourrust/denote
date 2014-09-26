@@ -26,9 +26,9 @@ module.exports = Backbone.Collection.extend({
     this.count = 0;
   },
 
-  storeInitialData: function(model) {
-    this.postURL   = model.get('post_url');
-    this.notesHTML = model.get('notes_html');
+  storeInitialData: function(data) {
+    this.postURL   = data.post_url;
+    this.notesHTML = data.notes_html;
 
     this.add(utility.notesToJSON(this.notesHTML));
   },
