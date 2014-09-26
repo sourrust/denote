@@ -20,15 +20,12 @@ var findOffset = function(context) {
 module.exports = Backbone.Collection.extend({
   model: NoteModel,
 
-  initialize: function() {
+  initialize: function(models, options) {
     _.bindAll(this);
 
-    this.count = 0;
-  },
-
-  storeInitialData: function(data) {
-    this.postURL   = data.post_url;
-    this.notesHTML = data.notes_html;
+    this.count     = 0;
+    this.postURL   = options.data.post_url;
+    this.notesHTML = options.data.notes_html;
 
     this.add(utility.notesToJSON(this.notesHTML));
   },
