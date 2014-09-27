@@ -33,15 +33,18 @@ function getResponses($blogs, $contents) {
   return reponses.reverse();
 }
 
+var router;
+
 module.exports = Backbone.Model.extend({
   defaults: {
     'blogs': [],
-    'is_preview': true,
     'permalink': ''
   },
 
-  initialize: function() {
-    _.bindAll(this, 'url', 'togglePreview');
+  initialize: function(options) {
+    _.bindAll(this, 'url');
+
+    router = options.router;
   },
 
   url: function() {
@@ -82,11 +85,5 @@ module.exports = Backbone.Model.extend({
     return { 'full_text': content.trim()
            , 'responses': getResponses($blogs, $content)
            };
-  },
-
-  togglePreview: function() {
-    var isPreview = this.get('is_preview');
-
-    this.set('is_preview', !isPreview);
   }
 });
