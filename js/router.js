@@ -25,8 +25,8 @@ module.exports = Backbone.Router.extend({
   },
 
   noteContainer: function() {
-    utility.swapClass(views.notes.$el, 'hide', 'show');
-    utility.swapClass(views.fullPost.$el, 'show', 'hide');
+    views.fullPost.hide();
+    views.notes.show();
   },
 
   fullPost: function(id) {
@@ -36,7 +36,7 @@ module.exports = Backbone.Router.extend({
     newView.model = collection.get(id);
     newView.render();
 
-    utility.swapClass(oldView.$el, 'show', 'hide');
-    utility.swapClass(newView.$el, 'hide', 'show');
+    oldView.hide();
+    newView.show();
   }
 });
