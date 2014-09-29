@@ -45,6 +45,14 @@ module.exports = Backbone.View.extend({
     this.$el.append(note.render().el);
   },
 
+  show: function() {
+    utility.swapClass(this.$el, 'hide', 'show');
+  },
+
+  hide: function() {
+    utility.swapClass(this.$el, 'show', 'hide');
+  },
+
   requestMoreNotes: function() {
     if(!this.collection.canFetchMore()) return;
 

@@ -45,5 +45,13 @@ module.exports = Backbone.View.extend({
     this.$el.html(html);
 
     return this;
+  },
+
+  show: function() {
+    utility.swapClass(this.$el, 'hide', 'show');
+  },
+
+  hide: function() {
+    utility.swapClass(this.$el, 'show', 'hide');
   }
 });
