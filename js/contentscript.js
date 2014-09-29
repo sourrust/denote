@@ -1,20 +1,15 @@
-(function() {
+(function(win, doc) {
   'use strict';
 
-  var doc, moreNotes, notes, notesStr, noteUrl, urlStr, win;
+  var moreNotes, notes, notesStr, noteUrl, urlStr;
 
-  win = window;
-  doc = win.document;
-
-  notes   = doc.querySelector('ol.notes');
-  noteUrl = null;
-  urlStr  = null;
+  notes = doc.querySelector('ol.notes');
 
   // Grab the notes url
-  if(notes != null) {
+  if(notes) {
     moreNotes = doc.querySelector('.more_notes_link_container');
 
-    if(moreNotes != null) {
+    if(moreNotes) {
       noteUrl = moreNotes.innerHTML.match(/\/notes\/\d+\/\w+\???/)[0];
 
       // Concat the base blog url with note url
@@ -31,4 +26,4 @@
         notes: notesStr
       });
     });
-}).call(this);
+}).call(this, window, document);

@@ -1,12 +1,12 @@
 'use strict';
 
-var _              = require('underscore'),
-    $              = require('jquery'),
-    Backbone       = require('backbone'),
-    utility        = require('utility'),
-    MoreButtonView = require('views/morenotesbutton'),
-    ReblogView     = require('views/reblog'),
-    ReplyView      = require('views/reply');
+var _              = require('underscore');
+var $              = require('jquery');
+var Backbone       = require('backbone');
+var utility        = require('utility');
+var MoreButtonView = require('views/morenotesbutton');
+var ReblogView     = require('views/reblog');
+var ReplyView      = require('views/reply');
 
 var router, $loader = $('#loader');
 
@@ -43,6 +43,14 @@ module.exports = Backbone.View.extend({
     });
 
     this.$el.append(note.render().el);
+  },
+
+  show: function() {
+    utility.swapClass(this.$el, 'hide', 'show');
+  },
+
+  hide: function() {
+    utility.swapClass(this.$el, 'show', 'hide');
   },
 
   requestMoreNotes: function() {
