@@ -1,14 +1,9 @@
-(function() {
+(function(win, doc) {
   'use strict';
 
-  var doc, moreNotes, notes, notesStr, noteUrl, urlStr, win;
+  var moreNotes, notes, notesStr, noteUrl, urlStr;
 
-  win = window;
-  doc = win.document;
-
-  notes   = doc.querySelector('ol.notes');
-  noteUrl = null;
-  urlStr  = null;
+  notes = doc.querySelector('ol.notes');
 
   // Grab the notes url
   if(notes) {
@@ -31,4 +26,4 @@
         notes: notesStr
       });
     });
-}).call(this);
+}).call(this, window, document);
