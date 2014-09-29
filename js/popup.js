@@ -4,26 +4,26 @@ var $        = require('jquery');
 var Backbone = require('backbone');
 var Router   = require('router');
 
-$(function() {
-  chrome.tabs.query({
-    active: true,
-    currentWindow: true
-  }, function(tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, {}, function(response) {
-      var data, router;
+var tabInfo = {
+  active: true,
+  currentWindow: true
+};
 
-      response = response || {};
+chrome.tabs.query(tabInfo, function(tabs) {
+ chrome.tabs.sendMessage(tabs[0].id, {}, function(response) {
+    var data, router;
 
-      if(response.notes != null) {
-        data = {
-          post_url: response.url,
-          notes_html: $('<ol>').html(response.notes)
-        };
+    response = response || {};
 
-        router = new Router({ data: data });
+    if(response.notes) {
+      data = {
+        post_url: response.url,
+        notes_html: $('<ol>').html(response.notes)
+      };
 
-        Backbone.history.start({ pushState: true });
-      }
-    });
+      router = new Router({ data: data });
+
+      Backbone.history.start({ pushState: true });
+    }
   });
 });
