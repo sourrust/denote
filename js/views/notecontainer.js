@@ -75,26 +75,10 @@ module.exports = Backbone.View.extend({
   },
 
   addMoreNotesButton: function() {
-    var that = this, noMoreNotes;
+    if(!this.collection.canFetchMore()) return;
 
-    noMoreNotes = !this.collection.canFetchMore();
+    var moreNotesView = new MoreButtonView({ parentView: this });
 
-    if(noMoreNotes) return;
-
-    if(this.moreNotesView) {
-      this.moreNotesView.remove();
-    }
-
-    this.moreNotesView = new MoreButtonView({
-      events: {
-        'click': function() {
-          this.$el.addClass('hide');
-          utility.toggleVisiblity($loader);
-          that.requestMoreNotes();
-        }
-      }
-    });
-
-    this.$el.append(this.moreNotesView.render().el);
+    this.$el.append(moreNotesView.render().el);
   }
 });
