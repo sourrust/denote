@@ -13,24 +13,8 @@ module.exports = Backbone.View.extend({
   template: postTemplate,
 
   events: {
-    'click .back-to-notes': function(e) {
-      e.preventDefault();
-      router.navigate('index', { trigger: true });
-    },
-    'click #response-button': function() {
-      var $button, $responses;
-
-      $button    = this.$el.find('#response-button');
-      $responses = this.$el.find('ol.responses');
-
-      if($responses.hasClass('hide')) {
-        $button.html('Hide Responses');
-      } else {
-        $button.html('Show Responses');
-      }
-
-      utility.toggleVisiblity($responses);
-    }
+    'click .back-to-notes': 'backToNotes',
+    'click #response-button': 'toggleResponses'
   },
 
   initialize: function(options) {
@@ -53,5 +37,22 @@ module.exports = Backbone.View.extend({
 
   hide: function() {
     utility.swapClass(this.$el, 'show', 'hide');
+  },
+
+  backToNotes: function(event) {
+    event.preventDefault();
+    router.navigate('index', { trigger: true });
+  },
+
+  toggleResponses: function() {
+    var $button, $responses, visiblity;
+
+    $button    = this.$el.find('#response-button');
+    $responses = this.$el.find('ol.responses');
+    visiblity  = $responses.hasClass('hide') ? 'Hide' : 'Show';
+
+    $button.html(visiblity + ' Responses');
+
+    utility.toggleVisiblity($responses);
   }
 });
