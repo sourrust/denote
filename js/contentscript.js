@@ -11,10 +11,10 @@
   urlStr  = null;
 
   // Grab the notes url
-  if(notes != null) {
+  if(notes) {
     moreNotes = doc.querySelector('.more_notes_link_container');
 
-    if(moreNotes != null) {
+    if(moreNotes) {
       noteUrl = moreNotes.innerHTML.match(/\/notes\/\d+\/\w+\???/)[0];
 
       // Concat the base blog url with note url
