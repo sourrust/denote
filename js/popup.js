@@ -1,8 +1,8 @@
 'use strict';
 
-var $            = require('jquery'),
-    Backbone     = require('backbone'),
-    Router       = require('router');
+var $        = require('jquery');
+var Backbone = require('backbone');
+var Router   = require('router');
 
 $(function() {
   chrome.tabs.query({

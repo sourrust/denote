@@ -1,9 +1,9 @@
 'use strict';
 
-var _         = require('underscore'),
-    Backbone  = require('backbone'),
-    NoteModel = require('models/note'),
-    utility   = require('utility');
+var _         = require('underscore');
+var Backbone  = require('backbone');
+var NoteModel = require('models/note');
+var utility   = require('utility');
 
 var findOffset = function(context) {
   var $moreNotes, offset;

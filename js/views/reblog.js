@@ -1,8 +1,8 @@
 'use strict';
 
-var _              = require('underscore'),
-    Backbone       = require('backbone'),
-    reblogTemplate = require('template/reblog');
+var _              = require('underscore');
+var Backbone       = require('backbone');
+var reblogTemplate = require('template/reblog');
 
 var router;
 

@@ -1,10 +1,9 @@
 'use strict';
 
-var Backbone  = require('backbone'),
-    Notes     = require('collections/notes'),
-    NotesView = require('views/notecontainer'),
-    PostView  = require('views/post'),
-    utility   = require('utility');
+var Backbone  = require('backbone');
+var Notes     = require('collections/notes');
+var NotesView = require('views/notecontainer');
+var PostView  = require('views/post');
 
 var collection, views = {};
 

@@ -1,9 +1,9 @@
 'use strict';
 
-var _            = require('underscore'),
-    Backbone     = require('backbone'),
-    postTemplate = require('template/post'),
-    utility      = require('utility');
+var _            = require('underscore');
+var Backbone     = require('backbone');
+var postTemplate = require('template/post');
+var utility      = require('utility');
 
 var router;
 

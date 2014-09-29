@@ -1,8 +1,8 @@
 'use strict';
 
-var _        = require('underscore'),
-    $        = require('jquery'),
-    Backbone = require('backbone');
+var _        = require('underscore');
+var $        = require('jquery');
+var Backbone = require('backbone');
 
 function getResponses($blogs, $contents) {
   var contentsLen, reponses;

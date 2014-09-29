@@ -1,8 +1,8 @@
 'use strict';
 
-var _             = require('underscore'),
-    Backbone      = require('backbone'),
-    replyTemplate = require('template/reply');
+var _             = require('underscore');
+var Backbone      = require('backbone');
+var replyTemplate = require('template/reply');
 
 module.exports = Backbone.View.extend({
   tagName: 'li',
