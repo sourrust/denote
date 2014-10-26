@@ -1,4 +1,4 @@
-## How to Contribute
+# How to Contribute
 
 Denote is in it's early state of development, but the code itself seem
 pretty safe to use on an everyday basis. So really the feature set is
@@ -10,7 +10,7 @@ features that you would like to see in denote, either put it in an
 And before you do start hacking on denote, here is small guide to go
 from adding code to you local repo to getting it into the main repo.
 
-### Never use the `master` branch while developing a feature.
+## Never use the `master` branch while developing a feature.
 
 When writing a new feature use a branch name that describes what you are
 working one, e.g. `fix/post-preview` if you were working on a fix for
@@ -20,7 +20,7 @@ The `master` branch is mainly for merging and some times version
 bumping; but, most of the time, you are never going to touch it
 directly.
 
-### Keep commits to one idea at a time.
+## Keep commits to one idea at a time.
 
 Committing small changes is the best way, for me at least, to look at
 what has changed during development. It is almost like a self documented
@@ -31,13 +31,13 @@ tpope's, guide][2]. And if you want to make things easier on yourself,
 use a client for working with commit message. For me personally, I use
 [fugitive][3] because my editor of choice is vim.
 
-### Run `gulp jshint` before committing
+## Run `gulp jshint` before committing
 
 This is just so I know, at the very least, the code is in the style I
 want it to be. Much rather have the code base be consistent with
 everything else — as far as JavaScript goes when linting the code.
 
-### Submit pull request using the branch you are working on.
+## Submit pull request using the branch you are working on.
 
 Simple as that.
 
