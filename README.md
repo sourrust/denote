@@ -38,12 +38,11 @@ The JSON for this is pretty simple, it only have one key entry:
 ```
 
 API keys are not to be put into the repository, which is why the
-`.secret` fold is ignore in [.gitignore][5]. However, just a small side
-note, when I release the extension to the chrome web store, my api key
-will be package in there; If you wish to go though the steps to get it,
-I don't compress the code in the packaged extension, so it will be some
-where in the generated `popup.js` file.
-
+`.secret` folder is ignored in [.gitignore][5]. However, just a small
+side note, when I release the extension to the chrome web store, my api
+key will be package in there; If you wish to go though the steps to get
+it, I don't compress the code in the packaged extension, so it will be
+some where in the generated `popup.js` file.
 
 [1]: https://chrome.google.com/webstore/detail/denote/ibfbkmghalfjcfeoocejnhhenidpgnbg
 [2]: http://nodejs.org/
