@@ -1,9 +1,12 @@
 {
   "asi": false,
+  "browser": true,
   "eqeqeq": true,
   "eqnull": true,
+  "globals": { "chrome": true },
   "indent": 2,
   "laxcomma": true,
+  "maxlen": 76,
   "node": true,
   "quotmark": "single",
   "strict": true,
