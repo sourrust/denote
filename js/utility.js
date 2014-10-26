@@ -1,7 +1,7 @@
 'use strict';
 
-var _ = require('underscore'),
-    $ = require('jquery');
+var _ = require('underscore');
+var $ = require('jquery');
 
 function getAvatar($el) {
   return $el.attr('src');
