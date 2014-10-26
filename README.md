@@ -18,8 +18,7 @@ npm install
 
 Depending on what you want to work on, the `watch` tasks will come in
 handy to lint JavaScript or transpile less files. The safest choice is
-to use `grunt watch` to watch for both, but you can also be more
-specific with `grunt watch:less` or `grunt watch:jshint`.
+to use `gulp watch` to watch for both.
 
 ## Tumblr API Calls
 
