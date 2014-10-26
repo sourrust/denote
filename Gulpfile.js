@@ -29,35 +29,19 @@ gulp.task('less', function() {
     .pipe(gulp.dest('css'));
 });
 
-function _lint(files, options) {
+gulp.task('jshint', function() {
+  var files   = ['Gulpfile.js', 'js/**/*.js'];
+  var options = defaults.jshint;
+
   return gulp.src(files)
     .pipe(jshint(options))
     .pipe(defaults.reporter);
-}
-
-gulp.task('jshint:gulp', function() {
-  var files   = 'Gulpfile.js';
-  var options = defaults.jshint;
-
-  return _lint(files, options);
 });
-
-gulp.task('jshint:source', function() {
-  var files   = 'js/**.js';
-  var options = _.merge({
-    browser: true,
-    globals: { chrome: true }
-  }, defaults.jshint);
-
-  return _lint(files, options);
-});
-
-gulp.task('jshint', ['jshint:gulp', 'jshint:source']);
 
 gulp.task('watch', function() {
   gulp.watch('less/*.less', ['less']);
   gulp.watch('templates/*.html', ['jst']);
-  gulp.watch('js/**/*.js', ['jshint:source', 'requirejs']);
+  gulp.watch('js/**/*.js', ['jshint', 'requirejs']);
 });
 
 function _copy(files, dest, useBaseDir) {
