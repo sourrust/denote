@@ -12,22 +12,7 @@ module.exports = Backbone.View.extend({
   template: reblogTemplate,
 
   events: {
-    'click .preview-link': function(e) {
-      e.preventDefault();
-
-      var model = this.model,
-          route = function() {
-            return router.navigate('post/' + model.cid, {
-              trigger: true
-            });
-          };
-
-      if(_.isEmpty(model.get('full_text'))) {
-        model.fetch({ success: route });
-      } else {
-        route();
-      }
-    }
+    'click .preview-link': 'showFullPreview'
   },
 
   initialize: function(options) {
@@ -42,5 +27,23 @@ module.exports = Backbone.View.extend({
     this.$el.html(html);
 
     return this;
+  },
+
+  showFullPreview: function(e) {
+    e.preventDefault();
+
+    var model = this.model;
+
+    function route() {
+      var url = 'post/' + model.cid;
+
+      return router.navigate(url, { trigger: true });
+    }
+
+    if(_.isEmpty(model.get('full_text'))) {
+      model.fetch({ success: route });
+    } else {
+      route();
+    }
   }
 });
