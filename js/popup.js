@@ -10,7 +10,7 @@ var tabInfo = {
 };
 
 chrome.tabs.query(tabInfo, function(tabs) {
- chrome.tabs.sendMessage(tabs[0].id, {}, function(response) {
+  chrome.tabs.sendMessage(tabs[0].id, {}, function(response) {
     var data, router;
 
     response = response || {};
