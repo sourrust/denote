@@ -14,7 +14,7 @@ module.exports = Backbone.Router.extend({
   },
 
   initialize: function(options) {
-    collection = new Notes([], { data: options.data });
+    collection = new Notes(null, { data: options.data });
 
     views.notes = new NotesView({
       collection: collection,
