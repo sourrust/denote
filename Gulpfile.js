@@ -103,7 +103,7 @@ gulp.task('requirejs', function(callback) {
     paths: {
       backbone: '../node_modules/backbone/backbone',
       jquery: '../node_modules/jquery/dist/jquery',
-      underscore: '../node_modules/lodash/dist/lodash.underscore',
+      underscore: '../node_modules/lodash/index',
       template: '../templates'
     },
     onBuildRead: function(moduleName, path, content) {
@@ -112,7 +112,7 @@ gulp.task('requirejs', function(callback) {
 
       if(moduleName === 'models/note') {
         apiKey     = require('./.secret/config.json');
-        newContent = _.template(content, apiKey);
+        newContent = _.template(content)(apiKey);
       }
 
       return newContent;
