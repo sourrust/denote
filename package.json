@@ -17,7 +17,7 @@
   "dependencies": {
     "backbone": "^1.1.2",
     "jquery": "^2.1.1",
-    "lodash": "^2.4.1",
+    "lodash": "^3.6.0",
     "normalize.css": "^3.0.2"
   }
 }
