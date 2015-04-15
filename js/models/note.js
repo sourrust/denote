@@ -37,8 +37,8 @@ var router;
 
 module.exports = Backbone.Model.extend({
   defaults: {
-    'blogs': [],
-    'permalink': ''
+    blogs: [],
+    permalink: ''
   },
 
   initialize: function(options) {

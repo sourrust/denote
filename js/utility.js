@@ -9,9 +9,9 @@ function getAvatar($el) {
 
 function getBlogInfo($el, $avatarEl) {
   var info = {
-    'username': $el.html(),
-    'link': $el.attr('href'),
-    'title': $el.attr('title')
+    username: $el.html(),
+    link: $el.attr('href'),
+    title: $el.attr('title')
   };
 
   if($avatarEl) {
@@ -50,19 +50,19 @@ function noteToJSON(note) {
 
   if(_.contains(classes, 'reply')) {
     return {
-      'note_type': 'reply',
-      'text': getPreviewText($note.find('.answer_content')),
-      'classes': classes,
-      'blog': getBlogInfo($note.find('.action > a'),
+      note_type: 'reply',
+      text: getPreviewText($note.find('.answer_content')),
+      classes: classes,
+      blog: getBlogInfo($note.find('.action > a'),
                           $note.find('.avatar'))
     };
   } else {
     return {
-      'note_type': 'reblog',
-      'preview_text': getPreviewText($note.find('blockquote > a')),
-      'permalink': getPermalink($note.find('.action')),
-      'classes': classes,
-      'blogs': [
+      note_type: 'reblog',
+      preview_text: getPreviewText($note.find('blockquote > a')),
+      permalink: getPermalink($note.find('.action')),
+      classes: classes,
+      blogs: [
         getBlogInfo($note.find('.tumblelog'),
                     $note.find('.avatar')),
         getBlogInfo($note.find('.source_tumblelog'))
