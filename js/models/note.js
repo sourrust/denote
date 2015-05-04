@@ -1,7 +1,6 @@
 'use strict';
 
 var _        = require('underscore');
-var $        = require('jquery');
 var Backbone = require('backbone');
 
 function getResponses(trail) {
@@ -52,7 +51,7 @@ module.exports = Backbone.Model.extend({
   },
 
   parse: function(response, options) {
-    var $blogs, $content, $body, body, content, post;
+    var body, content, post, trail;
 
     // Parse function in model gets called when the collection fetch
     // method gets called. Simply returns the model that has already been
