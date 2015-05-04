@@ -73,14 +73,8 @@ module.exports = Backbone.Model.extend({
     post = response.response.posts[0];
     body = post.body || post.description || post.caption;
 
-    // Appending a container onto the body of the post contents allows
-    // jQuery to find top level tags. This is mainly for finding blockquote
-    // tags because when there is only one response, and one top level
-    // blockquote, jQuery couldn't find that tag.
-    $body    = $('<div></div>').append(body);
-    content  = _.last(body.split('</blockquote>'));
-    $blogs   = $body.find('.tumblr_blog');
-    $content = $body.find('p + blockquote');
+    trail   = post.trail;
+    content = _.last(trail).content;
 
     return { 'full_text': content.trim()
            , 'responses': getResponses($blogs, $content)
