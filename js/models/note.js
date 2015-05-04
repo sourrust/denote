@@ -4,33 +4,22 @@ var _        = require('underscore');
 var $        = require('jquery');
 var Backbone = require('backbone');
 
-function getResponses($blogs, $contents) {
-  var contentsLen, reponses;
+function getResponses(trail) {
+  return _.map(trail, function(post) {
+    var blog, blogName, content, postID;
 
-  contentsLen = $contents.length - 1;
+    content  = post.content;
+    blogName = post.blog.name;
+    postID   = post.post.id;
+    blog     = '<a href="http://' + blogName + '.tumblr.com/post/' +
+               postID + '" class="tumblr_blog" target="_blank">'   +
+               blogName + '</a>';
 
-  reponses = _.map($contents, function(content, i) {
-    var children, html, result;
-
-    result   = {};
-    children = content.children;
-
-    html = (i === contentsLen) ? children
-                               : _.drop(children, 2);
-
-    // check if there is a blog name present
-    if($blogs && $blogs[i]) {
-      result.blog = $blogs[i].outerHTML;
-    }
-
-    result.content = _.foldl(html, function(x, y) {
-      return x + y.outerHTML;
-    }, '');
-
-    return result;
+    return {
+      blog: blog,
+      content: content
+    };
   });
-
-  return reponses.reverse();
 }
 
 var router;
