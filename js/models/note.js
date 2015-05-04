@@ -55,12 +55,15 @@ module.exports = Backbone.Model.extend({
 
     // Parse function in model gets called when the collection fetch
     // method gets called. Simply returns the model that has already been
-    // parsed because we are looking for tumblr api reponses to parse.
+    // parsed because we are looking for tumblr API responses to parse.
     if(options.dataType) return response;
 
     post = response.response.posts[0];
     body = post.body || post.description || post.caption;
 
+    // Trail follow the conversation of reblogs in descending order.
+    // Leveraging tumblr's API is far simpler than parsing the full post
+    // content and dealing with all the edge cases.
     trail   = post.trail;
     content = _.last(trail).content;
 
