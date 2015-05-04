@@ -1,36 +1,24 @@
 'use strict';
 
 var _        = require('underscore');
-var $        = require('jquery');
 var Backbone = require('backbone');
 
-function getResponses($blogs, $contents) {
-  var contentsLen, reponses;
+function getResponses(trail) {
+  return _.map(trail, function(post) {
+    var blog, blogName, content, postID;
 
-  contentsLen = $contents.length - 1;
+    content  = post.content;
+    blogName = post.blog.name;
+    postID   = post.post.id;
+    blog     = '<a href="http://' + blogName + '.tumblr.com/post/' +
+               postID + '" class="tumblr_blog" target="_blank">'   +
+               blogName + '</a>';
 
-  reponses = _.map($contents, function(content, i) {
-    var children, html, result;
-
-    result   = {};
-    children = content.children;
-
-    html = (i === contentsLen) ? children
-                               : _.drop(children, 2);
-
-    // check if there is a blog name present
-    if($blogs && $blogs[i]) {
-      result.blog = $blogs[i].outerHTML;
-    }
-
-    result.content = _.foldl(html, function(x, y) {
-      return x + y.outerHTML;
-    }, '');
-
-    return result;
+    return {
+      blog: blog,
+      content: content
+    };
   });
-
-  return reponses.reverse();
 }
 
 var router;
@@ -63,27 +51,24 @@ module.exports = Backbone.Model.extend({
   },
 
   parse: function(response, options) {
-    var $blogs, $content, $body, body, content, post;
+    var body, content, post, trail;
 
     // Parse function in model gets called when the collection fetch
     // method gets called. Simply returns the model that has already been
-    // parsed because we are looking for tumblr api reponses to parse.
+    // parsed because we are looking for tumblr API responses to parse.
     if(options.dataType) return response;
 
     post = response.response.posts[0];
     body = post.body || post.description || post.caption;
 
-    // Appending a container onto the body of the post contents allows
-    // jQuery to find top level tags. This is mainly for finding blockquote
-    // tags because when there is only one response, and one top level
-    // blockquote, jQuery couldn't find that tag.
-    $body    = $('<div></div>').append(body);
-    content  = _.last(body.split('</blockquote>'));
-    $blogs   = $body.find('.tumblr_blog');
-    $content = $body.find('p + blockquote');
+    // Trail follow the conversation of reblogs in descending order.
+    // Leveraging tumblr's API is far simpler than parsing the full post
+    // content and dealing with all the edge cases.
+    trail   = post.trail;
+    content = _.last(trail).content;
 
     return { 'full_text': content.trim()
-           , 'responses': getResponses($blogs, $content)
+           , 'responses': getResponses(_.initial(trail))
            };
   }
 });
