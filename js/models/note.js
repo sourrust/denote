@@ -66,7 +66,7 @@ module.exports = Backbone.Model.extend({
     content = _.last(trail).content;
 
     return { 'full_text': content.trim()
-           , 'responses': getResponses($blogs, $content)
+           , 'responses': getResponses(_.initial(trail))
            };
   }
 });
