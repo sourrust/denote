@@ -51,7 +51,7 @@ module.exports = Backbone.Model.extend({
   },
 
   parse: function(response, options) {
-    var body, content, post, trail;
+    var content, post, trail;
 
     // Parse function in model gets called when the collection fetch
     // method gets called. Simply returns the model that has already been
@@ -59,7 +59,6 @@ module.exports = Backbone.Model.extend({
     if(options.dataType) return response;
 
     post = response.response.posts[0];
-    body = post.body || post.description || post.caption;
 
     // Trail follow the conversation of reblogs in descending order.
     // Leveraging tumblr's API is far simpler than parsing the full post
