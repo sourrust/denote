@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Denote",
   "description": "Displays reblogs with comments on tumblr posts.",
-  "version": "0.2.1",
+  "version": "0.3.0",
 
   "permissions": [
     "http://*.tumblr.com/post/*"
