@@ -64,6 +64,7 @@ gulp.task('copy:main', function() {
               , 'manifest.json'
               , 'LICENSE'
               , 'js/contentscript.js'
+              , 'js/configuration.js'
               , 'css/*'
               , 'images/*'
               ];
