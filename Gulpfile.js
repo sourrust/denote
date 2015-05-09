@@ -1,13 +1,12 @@
 'use strict';
 
-var gulp      = require('gulp');
-var jshint    = require('gulp-jshint');
-var jst       = require('gulp-amd-jst');
-var less      = require('gulp-less');
-var path      = require('path');
-var rename    = require('gulp-rename');
-var requirejs = require('requirejs');
-var vmap      = require('vinyl-map');
+var gulp   = require('gulp');
+var jshint = require('gulp-jshint');
+var jst    = require('gulp-amd-jst');
+var less   = require('gulp-less');
+var path   = require('path');
+var rename = require('gulp-rename');
+var vmap   = require('vinyl-map');
 
 var defaults = {
   dest: 'build',
