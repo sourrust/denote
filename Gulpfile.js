@@ -15,7 +15,7 @@ var defaults = {
   reporter: jshint.reporter('default')
 };
 
-gulp.task('default', ['jshint', 'less', 'jst', 'copy', 'requirejs']);
+gulp.task('default', ['jshint', 'less', 'jst', 'copy', 'translate']);
 
 gulp.task('less', function() {
   var options = {
