@@ -17,6 +17,7 @@ var defaults = {
 gulp.task('default', ['jshint', 'less', 'jst', 'copy', 'translate']);
 
 gulp.task('less', function() {
+  var dest    = path.join(defaults.dest, 'css');
   var options = {
     paths: ['less', 'node_modules/normalize.css']
   };
@@ -24,7 +25,7 @@ gulp.task('less', function() {
   return gulp.src('less/main.less')
     .pipe(less(options))
     .pipe(rename('popup.css'))
-    .pipe(gulp.dest('css'));
+    .pipe(gulp.dest(dest));
 });
 
 gulp.task('jshint', function() {
@@ -71,7 +72,6 @@ gulp.task('copy:main', function() {
               , 'LICENSE'
               , 'js/contentscript.js'
               , 'js/configuration.js'
-              , 'css/*'
               , 'images/*'
               ];
 
