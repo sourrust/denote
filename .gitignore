@@ -4,14 +4,8 @@
 # Node modules
 node_modules/
 
-# Generated css
-css/
-
 # Build folder
 build/
-
-# precompiled templates
-templates/*.js
 
 # Place to keep things like API keys secret
 .secret/

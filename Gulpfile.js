@@ -1,13 +1,12 @@
 'use strict';
 
-var gulp      = require('gulp');
-var jshint    = require('gulp-jshint');
-var jst       = require('gulp-jst');
-var less      = require('gulp-less');
-var path      = require('path');
-var rename    = require('gulp-rename');
-var requirejs = require('requirejs');
-var vmap      = require('vinyl-map');
+var gulp   = require('gulp');
+var jshint = require('gulp-jshint');
+var jst    = require('gulp-amd-jst');
+var less   = require('gulp-less');
+var path   = require('path');
+var rename = require('gulp-rename');
+var vmap   = require('vinyl-map');
 
 var defaults = {
   dest: 'build',
@@ -15,9 +14,10 @@ var defaults = {
   reporter: jshint.reporter('default')
 };
 
-gulp.task('default', ['jshint', 'less', 'jst', 'copy', 'requirejs']);
+gulp.task('default', ['jshint', 'less', 'jst', 'copy', 'translate']);
 
 gulp.task('less', function() {
+  var dest    = path.join(defaults.dest, 'css');
   var options = {
     paths: ['less', 'node_modules/normalize.css']
   };
@@ -25,11 +25,11 @@ gulp.task('less', function() {
   return gulp.src('less/main.less')
     .pipe(less(options))
     .pipe(rename('popup.css'))
-    .pipe(gulp.dest('css'));
+    .pipe(gulp.dest(dest));
 });
 
 gulp.task('jshint', function() {
-  var files   = ['Gulpfile.js', 'js/**/*.js'];
+  var files   = ['Gulpfile.js', 'js/**/!(configuration).js'];
   var options = defaults.jshint;
 
   return gulp.src(files)
@@ -54,7 +54,14 @@ function _copy(files, dest, useBaseDir) {
 
 gulp.task('copy:vendor', function() {
   var dest  = path.join(defaults.dest, 'js', 'lib');
-  var files = 'node_modules/requirejs/require.js';
+  var files = [ 'node_modules/backbone/backbone.js'
+              , 'node_modules/jquery/dist/jquery.js'
+              , 'node_modules/requirejs/require.js'
+              ];
+
+  gulp.src('node_modules/lodash/index.js')
+    .pipe(rename('lodash.js'))
+    .pipe(gulp.dest(dest));
 
   return _copy(files, dest);
 });
@@ -64,7 +71,7 @@ gulp.task('copy:main', function() {
               , 'manifest.json'
               , 'LICENSE'
               , 'js/contentscript.js'
-              , 'css/*'
+              , 'js/configuration.js'
               , 'images/*'
               ];
 
@@ -73,9 +80,21 @@ gulp.task('copy:main', function() {
 
 gulp.task('copy', ['copy:vendor', 'copy:main']);
 
-function addAmdWrapper(content) {
-  var template = [ 'define(function(){'
-                 , 'return ' + content.toString()
+gulp.task('jst', function() {
+  var dest    = path.join(defaults.dest, 'js', 'templates');
+  var options = {
+    amd: true,
+    namespace: false
+  };
+
+  return gulp.src(['templates/*.html'])
+    .pipe(jst(options))
+    .pipe(gulp.dest(dest));
+});
+
+function commonJSWrapper(content) {
+  var template = [ 'define(function(require, exports, module) {'
+                 , content.toString().trim()
                  , '});'
                  ];
 
@@ -84,28 +103,13 @@ function addAmdWrapper(content) {
   return new Buffer(content);
 }
 
-gulp.task('jst', function() {
-  return gulp.src(['templates/*.html'])
-    .pipe(jst())
-    .pipe(vmap(addAmdWrapper))
-    .pipe(gulp.dest('templates'));
-});
+gulp.task('translate', function() {
+  var dest  = path.join(defaults.dest, 'js');
+  var files = [ 'js/**/!(contentscript|configuration).js'
+              , 'js/.secret-api.js'
+              ];
 
-gulp.task('requirejs', function(callback) {
-  var dest = path.join(defaults.dest, 'js', 'popup.js');
-  var options = {
-    baseUrl: 'js',
-    name: 'popup',
-    out: dest,
-    cjsTranslate: true,
-    optimize: 'none',
-    paths: {
-      backbone: '../node_modules/backbone/backbone',
-      jquery: '../node_modules/jquery/dist/jquery',
-      underscore: '../node_modules/lodash/index',
-      template: '../templates'
-    }
-  };
-
-  requirejs.optimize(options, function() { callback(); }, callback);
+  return gulp.src(files)
+    .pipe(vmap(commonJSWrapper))
+    .pipe(gulp.dest(dest));
 });
