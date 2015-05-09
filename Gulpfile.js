@@ -29,7 +29,7 @@ gulp.task('less', function() {
 });
 
 gulp.task('jshint', function() {
-  var files   = ['Gulpfile.js', 'js/**/*.js'];
+  var files   = ['Gulpfile.js', 'js/**/!(configuration).js'];
   var options = defaults.jshint;
 
   return gulp.src(files)
