@@ -2,7 +2,7 @@
 
 var gulp      = require('gulp');
 var jshint    = require('gulp-jshint');
-var jst       = require('gulp-jst');
+var jst       = require('gulp-amd-jst');
 var less      = require('gulp-less');
 var path      = require('path');
 var rename    = require('gulp-rename');
@@ -81,22 +81,16 @@ gulp.task('copy:main', function() {
 
 gulp.task('copy', ['copy:vendor', 'copy:main']);
 
-function addAmdWrapper(content) {
-  var template = [ 'define(function(){'
-                 , 'return ' + content.toString()
-                 , '});'
-                 ];
-
-  content = template.join('\n\n');
-
-  return new Buffer(content);
-}
-
 gulp.task('jst', function() {
+  var dest    = path.join(defaults.dest, 'js', 'templates');
+  var options = {
+    amd: true,
+    namespace: false
+  };
+
   return gulp.src(['templates/*.html'])
-    .pipe(jst())
-    .pipe(vmap(addAmdWrapper))
-    .pipe(gulp.dest('templates'));
+    .pipe(jst(options))
+    .pipe(gulp.dest(dest));
 });
 
 gulp.task('requirejs', function(callback) {
