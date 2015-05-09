@@ -54,7 +54,14 @@ function _copy(files, dest, useBaseDir) {
 
 gulp.task('copy:vendor', function() {
   var dest  = path.join(defaults.dest, 'js', 'lib');
-  var files = 'node_modules/requirejs/require.js';
+  var files = [ 'node_modules/backbone/backbone.js'
+              , 'node_modules/jquery/dist/jquery.js'
+              , 'node_modules/requirejs/require.js'
+              ];
+
+  gulp.src('node_modules/lodash/index.js')
+    .pipe(rename('lodash.js'))
+    .pipe(gulp.dest(dest));
 
   return _copy(files, dest);
 });
