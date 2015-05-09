@@ -1,6 +1,5 @@
 'use strict';
 
-var _         = require('lodash');
 var gulp      = require('gulp');
 var jshint    = require('gulp-jshint');
 var jst       = require('gulp-jst');
@@ -105,17 +104,6 @@ gulp.task('requirejs', function(callback) {
       jquery: '../node_modules/jquery/dist/jquery',
       underscore: '../node_modules/lodash/index',
       template: '../templates'
-    },
-    onBuildRead: function(moduleName, path, content) {
-      var apiKey;
-      var newContent = content;
-
-      if(moduleName === 'models/note') {
-        apiKey     = require('./.secret/config.json');
-        newContent = _.template(content)(apiKey);
-      }
-
-      return newContent;
     }
   };
 

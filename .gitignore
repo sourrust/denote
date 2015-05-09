@@ -15,3 +15,4 @@ templates/*.js
 
 # Place to keep things like API keys secret
 .secret/
+js/.secret-api.js

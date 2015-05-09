@@ -1,6 +1,7 @@
 'use strict';
 
 var _        = require('underscore');
+var API      = require('../.secret-api');
 var Backbone = require('backbone');
 
 function getResponses(trail) {
@@ -39,7 +40,7 @@ module.exports = Backbone.Model.extend({
     var apibase, apikey, base, blogs, permalink, postid;
 
     apibase   = 'http://api.tumblr.com/v2/blog/';
-    apikey    = '&api_key=<%= apikey %>';
+    apikey    = '&api_key=' + API.key;
 
     permalink = this.get('permalink');
     blogs     = this.get('blogs');
