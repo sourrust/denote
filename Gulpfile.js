@@ -93,21 +93,24 @@ gulp.task('jst', function() {
     .pipe(gulp.dest(dest));
 });
 
-gulp.task('requirejs', function(callback) {
-  var dest = path.join(defaults.dest, 'js', 'popup.js');
-  var options = {
-    baseUrl: 'js',
-    name: 'popup',
-    out: dest,
-    cjsTranslate: true,
-    optimize: 'none',
-    paths: {
-      backbone: '../node_modules/backbone/backbone',
-      jquery: '../node_modules/jquery/dist/jquery',
-      underscore: '../node_modules/lodash/index',
-      template: '../templates'
-    }
-  };
+function commonJSWrapper(content) {
+  var template = [ 'define(function(require, exports, module) {'
+                 , content.toString().trim()
+                 , '});'
+                 ];
 
-  requirejs.optimize(options, function() { callback(); }, callback);
+  content = template.join('\n\n');
+
+  return new Buffer(content);
+}
+
+gulp.task('translate', function() {
+  var dest  = path.join(defaults.dest, 'js');
+  var files = [ 'js/**/!(contentscript|configuration).js'
+              , 'js/.secret-api.js'
+              ];
+
+  return gulp.src(files)
+    .pipe(vmap(commonJSWrapper))
+    .pipe(gulp.dest(dest));
 });
