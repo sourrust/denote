@@ -26,23 +26,23 @@ One part of this extension uses the [Tumblr API][4] to pull in the full
 contents of a post that was clicked. With the reliance on the API calls,
 you will need to add in your own api key to actually get this feature
 working locally without it 401-ing on you. Where you put the api key is
-in a file located in `.secret/config.json`. This file will be read and
-added in during the build step.
+in the file `js/.secret-api.js`. This file will act as a normal commonjs
+module and be used during API calls.
 
-The JSON for this is pretty simple, it only have one key entry:
+The module for this is pretty simple, it only have one key entry:
 
-```json
-{
-  "apikey": "Enter api key here..."
-}
+```javascript
+module.exports = {
+  key: "Enter api key here..."
+};
 ```
 
-API keys are not to be put into the repository, which is why the
-`.secret` folder is ignored in [.gitignore][5]. However, just a small
-side note, when I release the extension to the chrome web store, my api
-key will be package in there; If you wish to go though the steps to get
-it, I don't compress the code in the packaged extension, so it will be
-some where in the generated `popup.js` file.
+API keys are not to be put into the repository, which is why the file is
+ignored in [.gitignore][5]. However, just a small side note, when I
+release the extension to the chrome web store, my api key will be
+package in there; If you wish to go though the steps to get it, I don't
+compress the code in the packaged extension, so it will be some where in
+the generated `popup.js` file.
 
 [1]: https://chrome.google.com/webstore/detail/denote/ibfbkmghalfjcfeoocejnhhenidpgnbg
 [2]: http://nodejs.org/
