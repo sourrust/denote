@@ -10,7 +10,6 @@ var vmap   = require('vinyl-map');
 
 var defaults = {
   dest: 'build',
-  jshint: require('./.jshintrc'),
   reporter: jshint.reporter('default')
 };
 
@@ -29,11 +28,10 @@ gulp.task('less', function() {
 });
 
 gulp.task('jshint', function() {
-  var files   = ['Gulpfile.js', 'js/**/!(configuration).js'];
-  var options = defaults.jshint;
+  var files = ['Gulpfile.js', 'js/**/!(configuration).js'];
 
   return gulp.src(files)
-    .pipe(jshint(options))
+    .pipe(jshint())
     .pipe(defaults.reporter);
 });
 
