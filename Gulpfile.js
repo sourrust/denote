@@ -40,7 +40,7 @@ gulp.task('jshint', function() {
 gulp.task('watch', function() {
   gulp.watch('less/*.less', ['less']);
   gulp.watch('templates/*.html', ['jst']);
-  gulp.watch('js/**/*.js', ['jshint', 'requirejs']);
+  gulp.watch('js/**/*.js', ['jshint', 'translate']);
 });
 
 function _copy(files, dest, useBaseDir) {
