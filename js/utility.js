@@ -1,13 +1,13 @@
 import _ from 'underscore';
 import $ from 'jquery';
 
-
-function getAvatar($el) {
-  return $el.attr('src');
-}
+let getAvatar      = $el => $el.attr('src');
+let getPreviewText = $el => $el.html().trim();
+let getPermalink   = $el => $el.attr('data-post-url');
+let getClasses     = $el => $el.attr('class').split(' ');
 
 function getBlogInfo($el, $avatarEl) {
-  var info = {
+  let info = {
     username: $el.html(),
     link: $el.attr('href'),
     title: $el.attr('title')
@@ -20,29 +20,8 @@ function getBlogInfo($el, $avatarEl) {
   return info;
 }
 
-function getPreviewText($el) {
-  return $el.html().trim();
-}
-
-function getPermalink($el) {
-  return $el.attr('data-post-url');
-}
-
-function getClasses($el) {
-  return $el.attr('class').split(' ');
-}
-
-exports.toggleVisiblity = function($el) {
-  return $el.toggleClass('show hide');
-};
-
-exports.swapClass = function($el, exchange, forClass) {
-  return $el.addClass(forClass)
-            .removeClass(exchange);
-};
-
 function noteToJSON(note) {
-  var $note, classes;
+  let $note, classes;
 
   $note   = $(note);
   classes = getClasses($note);
@@ -70,10 +49,14 @@ function noteToJSON(note) {
   }
 }
 
-exports.notesToJSON = function(context) {
-  var $notes = context.find('.with_commentary, .reply');
+export let toggleVisiblity = $el => $el.toggleClass('show hide');
+export let swapClass       = ($el, exchange, forClass) =>
+  $el.addClass(forClass).removeClass(exchange);
+
+export function notesToJSON(context) {
+  let $notes = context.find('.with_commentary, .reply');
 
   return _.map($notes, noteToJSON);
-};
+}
 
 export default { toggleVisiblity, swapClass, notesToJSON };

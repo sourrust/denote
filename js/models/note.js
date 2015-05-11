@@ -9,18 +9,14 @@ function getResponses(trail) {
     content  = post.content;
     blogName = post.blog.name;
     postID   = post.post.id;
-    blog     = '<a href="http://' + blogName + '.tumblr.com/post/' +
-               postID + '" class="tumblr_blog" target="_blank">'   +
-               blogName + '</a>';
+    blog     = `<a href="http://${blogName}.tumblr.com/post/${postID}" ` +
+               `class="tumblr_blog" target="_blank">${blogName}</a>`;
 
-    return {
-      blog: blog,
-      content: content
-    };
+    return { blog, content };
   });
 }
 
-var router;
+let router;
 
 export default Model.extend({
   defaults: {
@@ -35,18 +31,16 @@ export default Model.extend({
   },
 
   url: function() {
-    var apibase, apikey, base, blogs, permalink, postid;
-
-    apibase   = 'http://api.tumblr.com/v2/blog/';
-    apikey    = '&api_key=' + API.key;
+    let blogs, blogname, permalink, postid;
 
     permalink = this.get('permalink');
     blogs     = this.get('blogs');
 
+    blogname  = blogs[0].username;
     postid    = permalink.match(/\d+$/)[0];
-    base      = blogs[0].username + '.tumblr.com';
 
-    return apibase + base + '/posts?id=' + postid + apikey;
+    return `http://api.tumblr.com/v2/blog/${blogname}.tumblr.com` +
+           `/posts?id=${postid}&api_key=${API.key}`;
   },
 
   parse: function(response, options) {

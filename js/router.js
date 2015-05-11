@@ -3,8 +3,7 @@ import Notes      from './collections/notes';
 import NotesView  from './views/notecontainer';
 import PostView   from './views/post';
 
-
-var collection, views = {};
+let collection, views = {};
 
 export default Router.extend({
   routes: {
@@ -12,15 +11,12 @@ export default Router.extend({
     'post/:id': 'fullPost'
   },
 
-  initialize: function(options) {
-    collection = new Notes(null, { data: options.data });
+  initialize: function({ data }) {
+    let router = this;
+    collection = new Notes(null, { data });
 
-    views.notes = new NotesView({
-      collection: collection,
-      router: this
-    });
-
-    views.fullPost = new PostView({ router: this });
+    views.notes    = new NotesView({ collection, router });
+    views.fullPost = new PostView({ router });
   },
 
   noteContainer: function() {
@@ -29,7 +25,7 @@ export default Router.extend({
   },
 
   fullPost: function(id) {
-    var oldView = views.notes,
+    let oldView = views.notes,
         newView = views.fullPost;
 
     newView.model = collection.get(id);
