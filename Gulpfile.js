@@ -34,7 +34,7 @@ gulp.task('lint', function() {
   return gulp.src(files)
     .pipe(jshint())
     .pipe(defaults.reporter)
-    .pipe(jscs());
+    .pipe(jscs({ esnext: true }));
 });
 
 gulp.task('watch', function() {
