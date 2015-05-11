@@ -1,13 +1,13 @@
 'use strict';
 
 var gulp   = require('gulp');
+var babel  = require('gulp-babel');
 var jscs   = require('gulp-jscs');
 var jshint = require('gulp-jshint');
 var jst    = require('gulp-amd-jst');
 var less   = require('gulp-less');
 var path   = require('path');
 var rename = require('gulp-rename');
-var vmap   = require('vinyl-map');
 
 var defaults = {
   dest: 'build',
@@ -92,17 +92,6 @@ gulp.task('jst', function() {
     .pipe(gulp.dest(dest));
 });
 
-function commonJSWrapper(content) {
-  var template = [ 'define(function(require, exports, module) {'
-                 , content.toString().trim()
-                 , '});'
-                 ];
-
-  content = template.join('\n\n');
-
-  return new Buffer(content);
-}
-
 gulp.task('translate', function() {
   var dest  = path.join(defaults.dest, 'js');
   var files = [ 'js/**/!(contentscript|configuration).js'
@@ -110,6 +99,6 @@ gulp.task('translate', function() {
               ];
 
   return gulp.src(files)
-    .pipe(vmap(commonJSWrapper))
+    .pipe(babel({ modules: 'amd' }))
     .pipe(gulp.dest(dest));
 });
