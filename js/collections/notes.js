@@ -33,7 +33,7 @@ export default Collection.extend({
   },
 
   parse: function(response) {
-    var endstr, htmlstr, json;
+    let endstr, htmlstr, json;
 
     endstr  = ' NOTES -->';
     htmlstr = response.split('<!-- START' + endstr)[1]
@@ -49,7 +49,7 @@ export default Collection.extend({
   },
 
   canFetchMore: function() {
-    var correctLength, endOfNotes;
+    let correctLength, endOfNotes;
 
     correctLength = this.count < 5;
     endOfNotes    = findOffset(this.notesHTML) != null;
