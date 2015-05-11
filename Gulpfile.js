@@ -14,7 +14,7 @@ var defaults = {
   reporter: jshint.reporter('default')
 };
 
-gulp.task('default', ['jshint', 'less', 'jst', 'copy', 'translate']);
+gulp.task('default', ['lint', 'less', 'jst', 'copy', 'translate']);
 
 gulp.task('less', function() {
   var dest    = path.join(defaults.dest, 'css');
@@ -28,7 +28,7 @@ gulp.task('less', function() {
     .pipe(gulp.dest(dest));
 });
 
-gulp.task('jshint', function() {
+gulp.task('lint', function() {
   var files = ['Gulpfile.js', 'js/**/!(configuration).js'];
 
   return gulp.src(files)
@@ -40,7 +40,7 @@ gulp.task('jshint', function() {
 gulp.task('watch', function() {
   gulp.watch('less/*.less', ['less']);
   gulp.watch('templates/*.html', ['jst']);
-  gulp.watch('js/**/*.js', ['jshint', 'translate']);
+  gulp.watch('js/**/*.js', ['lint', 'translate']);
 });
 
 function _copy(files, dest, useBaseDir) {
