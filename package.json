@@ -8,6 +8,7 @@
   "devDependencies": {
     "gulp": "^3.8.7",
     "gulp-amd-jst": "0.0.1",
+    "gulp-babel": "^5.1.0",
     "gulp-jscs": "^1.6.0",
     "gulp-jshint": "^1.8.4",
     "gulp-less": "^3.0.3",

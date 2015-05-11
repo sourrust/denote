@@ -1,13 +1,11 @@
-'use strict';
+import _            from 'underscore';
+import { View }     from 'backbone';
+import postTemplate from 'template/post';
+import utility      from '../utility';
 
-var _            = require('underscore');
-var Backbone     = require('backbone');
-var postTemplate = require('template/post');
-var utility      = require('utility');
+let router;
 
-var router;
-
-module.exports = Backbone.View.extend({
+export default View.extend({
   el: '#post-container',
 
   template: postTemplate,
@@ -24,7 +22,7 @@ module.exports = Backbone.View.extend({
   },
 
   render: function() {
-    var html = this.template(this.model.toJSON());
+    let html = this.template(this.model.toJSON());
 
     this.$el.html(html);
 
@@ -45,7 +43,7 @@ module.exports = Backbone.View.extend({
   },
 
   toggleResponses: function() {
-    var $button, $responses, visiblity;
+    let $button, $responses, visiblity;
 
     $button    = this.$el.find('#response-button');
     $responses = this.$el.find('ol.responses');

@@ -1,16 +1,14 @@
-'use strict';
+import _              from 'underscore';
+import $              from 'jquery';
+import { View }       from 'backbone';
+import utility        from '../utility';
+import MoreButtonView from './morenotesbutton';
+import ReblogView     from './reblog';
+import ReplyView      from './reply';
 
-var _              = require('underscore');
-var $              = require('jquery');
-var Backbone       = require('backbone');
-var utility        = require('utility');
-var MoreButtonView = require('views/morenotesbutton');
-var ReblogView     = require('views/reblog');
-var ReplyView      = require('views/reply');
+let router, $loader = $('#loader');
 
-var router, $loader = $('#loader');
-
-module.exports = Backbone.View.extend({
+export default View.extend({
   el: '.notes',
 
   initialize: function(options) {
@@ -31,16 +29,13 @@ module.exports = Backbone.View.extend({
   },
 
   renderNote: function(model) {
-    var note, NoteType, isReply;
+    let className, note, NoteType, isReply;
 
-    isReply  = model.get('note_type') === 'reply';
-    NoteType = isReply ? ReplyView : ReblogView;
+    isReply   = model.get('note_type') === 'reply';
+    NoteType  = isReply ? ReplyView : ReblogView;
+    className = model.get('classes').join(' ');
 
-    note = new NoteType({
-      model: model,
-      className: model.get('classes').join(' '),
-      router: router
-    });
+    note = new NoteType({ model, className, router });
 
     this.$el.append(note.render().el);
   },
@@ -56,19 +51,19 @@ module.exports = Backbone.View.extend({
   requestMoreNotes: function() {
     if(!this.collection.canFetchMore()) return;
 
-    var that = this;
+    let onSucess = collection => {
+      if(collection.canFetchMore()) {
+        this.requestMoreNotes.call(this);
+      } else {
+        collection.count = 0;
+
+        utility.toggleVisiblity($loader);
+        this.addMoreNotesButton();
+      }
+    };
 
     this.collection.fetch({
-      success: function(collection) {
-        if(collection.canFetchMore()) {
-          that.requestMoreNotes.call(that);
-        } else {
-          collection.count = 0;
-
-          utility.toggleVisiblity($loader);
-          that.addMoreNotesButton();
-        }
-      },
+      success: onSucess,
       remove: false,
       dataType: 'html'
     });
@@ -77,7 +72,7 @@ module.exports = Backbone.View.extend({
   addMoreNotesButton: function() {
     if(!this.collection.canFetchMore()) return;
 
-    var moreNotesView = new MoreButtonView({ parentView: this });
+    let moreNotesView = new MoreButtonView({ parentView: this });
 
     this.$el.append(moreNotesView.render().el);
   }
