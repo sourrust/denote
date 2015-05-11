@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp   = require('gulp');
+var jscs   = require('gulp-jscs');
 var jshint = require('gulp-jshint');
 var jst    = require('gulp-amd-jst');
 var less   = require('gulp-less');
@@ -32,7 +33,8 @@ gulp.task('jshint', function() {
 
   return gulp.src(files)
     .pipe(jshint())
-    .pipe(defaults.reporter);
+    .pipe(defaults.reporter)
+    .pipe(jscs());
 });
 
 gulp.task('watch', function() {
