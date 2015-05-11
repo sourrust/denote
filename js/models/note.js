@@ -4,7 +4,7 @@ import API       from '../.secret-api';
 
 function getResponses(trail) {
   return _.map(trail, function(post) {
-    var blog, blogName, content, postID;
+    let blog, blogName, content, postID;
 
     content  = post.content;
     blogName = post.blog.name;
@@ -44,7 +44,7 @@ export default Model.extend({
   },
 
   parse: function(response, options) {
-    var content, post, trail;
+    let content, post, trail;
 
     // Parse function in model gets called when the collection fetch
     // method gets called. Simply returns the model that has already been

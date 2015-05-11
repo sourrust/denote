@@ -12,7 +12,7 @@ export default View.extend({
   },
 
   render: function() {
-    var html = this.template(this.model.toJSON());
+    let html = this.template(this.model.toJSON());
 
     this.$el.html(html);
 
