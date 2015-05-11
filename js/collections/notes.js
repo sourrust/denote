@@ -1,9 +1,7 @@
-'use strict';
-
-var _         = require('underscore');
-var Backbone  = require('backbone');
-var NoteModel = require('models/note');
-var utility   = require('utility');
+import _               from 'underscore';
+import { Collection }  from 'backbone';
+import NoteModel       from '../models/note';
+import { notesToJSON } from '../utility';
 
 function findOffset($context) {
   var $moreNotes, offset;
@@ -17,7 +15,7 @@ function findOffset($context) {
   return offset;
 }
 
-module.exports = Backbone.Collection.extend({
+export default Collection.extend({
   model: NoteModel,
 
   initialize: function(models, options) {

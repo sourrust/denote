@@ -1,7 +1,6 @@
-'use strict';
+import _ from 'underscore';
+import $ from 'jquery';
 
-var _ = require('underscore');
-var $ = require('jquery');
 
 function getAvatar($el) {
   return $el.attr('src');
@@ -76,3 +75,5 @@ exports.notesToJSON = function(context) {
 
   return _.map($notes, noteToJSON);
 };
+
+export default { toggleVisiblity, swapClass, notesToJSON };

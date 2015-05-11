@@ -1,13 +1,12 @@
-'use strict';
+import _            from 'underscore';
+import { View }     from 'backbone';
+import postTemplate from 'template/post';
+import utility      from '../utility';
 
-var _            = require('underscore');
-var Backbone     = require('backbone');
-var postTemplate = require('template/post');
-var utility      = require('utility');
 
 var router;
 
-module.exports = Backbone.View.extend({
+export default View.extend({
   el: '#post-container',
 
   template: postTemplate,

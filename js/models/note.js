@@ -1,8 +1,6 @@
-'use strict';
-
-var _        = require('underscore');
-var API      = require('../.secret-api');
-var Backbone = require('backbone');
+import _         from 'underscore';
+import { Model } from 'backbone';
+import API       from '../.secret-api';
 
 function getResponses(trail) {
   return _.map(trail, function(post) {
@@ -24,7 +22,7 @@ function getResponses(trail) {
 
 var router;
 
-module.exports = Backbone.Model.extend({
+export default Model.extend({
   defaults: {
     blogs: [],
     permalink: ''

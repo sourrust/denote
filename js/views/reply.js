@@ -1,10 +1,8 @@
-'use strict';
+import _             from 'underscore';
+import { View }      from 'backbone';
+import replyTemplate from 'template/reply';
 
-var _             = require('underscore');
-var Backbone      = require('backbone');
-var replyTemplate = require('template/reply');
-
-module.exports = Backbone.View.extend({
+export default View.extend({
   tagName: 'li',
 
   template: replyTemplate,

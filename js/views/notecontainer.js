@@ -1,16 +1,15 @@
-'use strict';
+import _              from 'underscore';
+import $              from 'jquery';
+import { View }       from 'backbone';
+import utility        from '../utility';
+import MoreButtonView from './morenotesbutton';
+import ReblogView     from './reblog';
+import ReplyView      from './reply';
 
-var _              = require('underscore');
-var $              = require('jquery');
-var Backbone       = require('backbone');
-var utility        = require('utility');
-var MoreButtonView = require('views/morenotesbutton');
-var ReblogView     = require('views/reblog');
-var ReplyView      = require('views/reply');
 
 var router, $loader = $('#loader');
 
-module.exports = Backbone.View.extend({
+export default View.extend({
   el: '.notes',
 
   initialize: function(options) {

@@ -1,13 +1,12 @@
-'use strict';
+import { Router } from 'backbone';
+import Notes      from './collections/notes';
+import NotesView  from './views/notecontainer';
+import PostView   from './views/post';
 
-var Backbone  = require('backbone');
-var Notes     = require('collections/notes');
-var NotesView = require('views/notecontainer');
-var PostView  = require('views/post');
 
 var collection, views = {};
 
-module.exports = Backbone.Router.extend({
+export default Router.extend({
   routes: {
     'index': 'noteContainer',
     'post/:id': 'fullPost'

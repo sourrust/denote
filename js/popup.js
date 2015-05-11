@@ -1,8 +1,6 @@
-'use strict';
-
-var $        = require('jquery');
-var Backbone = require('backbone');
-var Router   = require('router');
+import $        from 'jquery';
+import Backbone from 'backbone';
+import Router   from './router';
 
 var tabInfo = {
   active: true,

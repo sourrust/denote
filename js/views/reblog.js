@@ -1,12 +1,11 @@
-'use strict';
+import _              from 'underscore';
+import { View }       from 'backbone';
+import reblogTemplate from 'template/reblog';
 
-var _              = require('underscore');
-var Backbone       = require('backbone');
-var reblogTemplate = require('template/reblog');
 
 var router;
 
-module.exports = Backbone.View.extend({
+export default View.extend({
   tagName: 'li',
 
   template: reblogTemplate,
