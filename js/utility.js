@@ -28,7 +28,7 @@ function noteToJSON(note) {
 
   if(_.contains(classes, 'reply')) {
     return {
-      note_type: 'reply',
+      noteType: 'reply',
       text: getPreviewText($note.find('.answer_content')),
       classes: classes,
       blog: getBlogInfo($note.find('.action > a'),
@@ -36,8 +36,8 @@ function noteToJSON(note) {
     };
   } else {
     return {
-      note_type: 'reblog',
-      preview_text: getPreviewText($note.find('blockquote > a')),
+      noteType: 'reblog',
+      previewText: getPreviewText($note.find('blockquote > a')),
       permalink: getPermalink($note.find('.action')),
       classes: classes,
       blogs: [

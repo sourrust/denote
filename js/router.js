@@ -25,8 +25,10 @@ export default Router.extend({
   },
 
   fullPost: function(id) {
-    let oldView = views.notes,
-        newView = views.fullPost;
+    let oldView, newView;
+
+    oldView = views.notes;
+    newView = views.fullPost;
 
     newView.model = collection.get(id);
     newView.render();

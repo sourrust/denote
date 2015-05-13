@@ -1,7 +1,7 @@
 (function(win, doc) {
   'use strict';
 
-  var moreNotes, notes, notesStr, noteUrl, urlStr;
+  var moreNotes, notes, notesStr, noteURL, urlStr;
 
   notes = doc.querySelector('ol.notes');
 
@@ -10,10 +10,10 @@
     moreNotes = doc.querySelector('.more_notes_link_container');
 
     if(moreNotes) {
-      noteUrl = moreNotes.innerHTML.match(/\/notes\/\d+\/\w+\???/)[0];
+      noteURL = moreNotes.innerHTML.match(/\/notes\/\d+\/\w+\???/)[0];
 
       // Concat the base blog url with note url
-      urlStr  = win.location.origin + noteUrl;
+      urlStr  = win.location.origin + noteURL;
     }
 
     notesStr  = notes.innerHTML;

@@ -13,8 +13,8 @@ chrome.tabs.query(tabInfo, function([tab]) {
 
     if(response.notes) {
       data = {
-        post_url: response.url,
-        notes_html: $('<ol>').html(response.notes)
+        postURL: response.url,
+        notesHTML: $('<ol>').html(response.notes)
       };
 
       router = new Router({ data });
