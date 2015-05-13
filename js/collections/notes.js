@@ -22,8 +22,8 @@ export default Collection.extend({
     _.bindAll(this);
 
     this.count     = 0;
-    this.postURL   = data.post_url;
-    this.notesHTML = data.notes_html;
+    this.postURL   = data.postURL;
+    this.notesHTML = data.notesHTML;
 
     this.add(notesToJSON(this.notesHTML));
   },

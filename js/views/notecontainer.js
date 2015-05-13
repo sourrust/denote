@@ -31,7 +31,7 @@ export default View.extend({
   renderNote: function(model) {
     let className, note, NoteType, isReply;
 
-    isReply   = model.get('note_type') === 'reply';
+    isReply   = model.get('noteType') === 'reply';
     NoteType  = isReply ? ReplyView : ReblogView;
     className = model.get('classes').join(' ');
 

@@ -59,8 +59,8 @@ export default Model.extend({
     trail   = post.trail;
     content = _.last(trail).content;
 
-    return { 'full_text': content.trim()
-           , 'responses': getResponses(_.initial(trail))
+    return { fullText: content.trim()
+           , responses: getResponses(_.initial(trail))
            };
   }
 });
