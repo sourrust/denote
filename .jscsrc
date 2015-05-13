@@ -22,6 +22,7 @@
   "disallowTrailingComma": true,
   "disallowTrailingWhitespace": true,
   "disallowYodaConditions": true,
+  "esnext": true,
   "maximumLineLength": 76,
   "requireCamelCaseOrUpperCaseIdentifiers": true,
   "requireDollarBeforejQueryAssignment": true,
