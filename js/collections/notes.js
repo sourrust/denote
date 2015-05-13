@@ -33,13 +33,13 @@ export default Collection.extend({
   },
 
   parse: function(response) {
-    let endstr, htmlstr, json;
+    let endStr, htmlStr, json;
 
-    endstr  = ' NOTES -->';
-    htmlstr = response.split('<!-- START' + endstr)[1]
-                      .split('<!-- END'   + endstr)[0];
+    endStr  = ' NOTES -->';
+    htmlStr = response.split('<!-- START' + endStr)[1]
+                      .split('<!-- END'   + endStr)[0];
 
-    this.notesHTML.html(htmlstr);
+    this.notesHTML.html(htmlStr);
 
     json = notesToJSON(this.notesHTML);
 

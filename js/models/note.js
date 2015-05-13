@@ -31,16 +31,16 @@ export default Model.extend({
   },
 
   url: function() {
-    let blogs, blogname, permalink, postid;
+    let blogs, blogName, permalink, postID;
 
     permalink = this.get('permalink');
     blogs     = this.get('blogs');
 
-    blogname  = blogs[0].username;
-    postid    = permalink.match(/\d+$/)[0];
+    blogName  = blogs[0].username;
+    postID    = permalink.match(/\d+$/)[0];
 
-    return `http://api.tumblr.com/v2/blog/${blogname}.tumblr.com` +
-           `/posts?id=${postid}&api_key=${API.key}`;
+    return `http://api.tumblr.com/v2/blog/${blogName}.tumblr.com` +
+           `/posts?id=${postID}&api_key=${API.key}`;
   },
 
   parse: function(response, options) {
