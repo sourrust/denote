@@ -23,7 +23,7 @@
   "disallowTrailingWhitespace": true,
   "disallowYodaConditions": true,
   "maximumLineLength": 76,
-  "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties",
+  "requireCamelCaseOrUpperCaseIdentifiers": true,
   "requireDollarBeforejQueryAssignment": true,
   "requireSemicolons": true,
   "requireParenthesesAroundIIFE": true,
