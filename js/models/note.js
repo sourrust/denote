@@ -4,13 +4,13 @@ import API       from '../.secret-api';
 
 function getResponses(trail) {
   return _.map(trail, function(post) {
-    let blog, blogName, content, postID;
+    let blog, content;
 
-    content  = post.content;
-    blogName = post.blog.name;
-    postID   = post.post.id;
-    blog     = `<a href="http://${blogName}.tumblr.com/post/${postID}" ` +
-               `class="tumblr_blog" target="_blank">${blogName}</a>`;
+    content = post.content;
+    blog    = {
+      name: post.blog.name,
+      postID: post.post.id
+    };
 
     return { blog, content };
   });

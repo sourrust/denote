@@ -8,7 +8,7 @@ function findOffset($context) {
 
   $moreNotes = $context.find('.more_notes_link');
 
-  if(!$moreNotes.length) return;
+  if(_.isEmpty($moreNotes)) return;
 
   offset = $moreNotes.attr('onclick').match(/\?from_c=\d+/)[0];
 
