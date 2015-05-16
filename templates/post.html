@@ -4,8 +4,12 @@
   <p id="response-button">Show Previous Responses</p>
   <ol class="responses hide">
   <% _.each(responses, function(response) { %>
+    <%= var blog = response.blog; %>
     <li class="response">
-      <%= response.blog %>
+      <a href="http://<%= blog.name %>.tumblr.com/post/<%= blog.postID %>"
+         class="tumblr_blog" target="_blank">
+        <%= blog.name %>
+      </a>
       <div class="content">
         <%= response.content %>
       </div>
