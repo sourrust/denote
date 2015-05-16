@@ -3,15 +3,14 @@
 <div id="response-container">
   <p id="response-button">Show Previous Responses</p>
   <ol class="responses hide">
-  <% for(var i = 0, l = responses.length; i < l; i++) { %>
-    <% var response = responses[i]; %>
+  <% _.each(responses, function(response) { %>
     <li class="response">
       <%= response.blog %>
       <div class="content">
         <%= response.content %>
       </div>
     </li>
-  <% } %>
+  <% }); %>
   </ol>
 </div>
 <% } %>
