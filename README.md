@@ -20,6 +20,10 @@ Depending on what you want to work on, the `watch` tasks will come in
 handy to lint JavaScript or transpile less files. The safest choice is
 to use `gulp watch` to watch for both.
 
+## Contributing
+
+To see how to contribute, see the [CONTRIBUTING.md][4] file.
+
 ## Tumblr API Calls
 
 One part of this extension uses the [Tumblr API][4] to pull in the full
@@ -47,5 +51,6 @@ the generated `popup.js` file.
 [1]: https://chrome.google.com/webstore/detail/denote/ibfbkmghalfjcfeoocejnhhenidpgnbg
 [2]: http://nodejs.org/
 [3]: https://npmjs.org/
+[4]: https://github.com/sourrust/denote/blob/master/CONTRIBUTING.md
 [4]: http://www.tumblr.com/docs/en/api/v2
 [5]: https://github.com/sourrust/denote/blob/master/.gitignore
