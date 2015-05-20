@@ -30,7 +30,7 @@ tpope's, guide][2]. And if you want to make things easier on yourself,
 use a client for working with commit message. For me personally, I use
 [fugitive][3] because my editor of choice is vim.
 
-## Run `gulp jshint` before committing
+## Run `gulp lint` before committing
 
 This is just so I know, at the very least, the code is in the style I
 want it to be. Much rather have the code base be consistent with
