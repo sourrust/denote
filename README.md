@@ -26,7 +26,7 @@ To see how to contribute, see the [CONTRIBUTING.md][4] file.
 
 ## Tumblr API Calls
 
-One part of this extension uses the [Tumblr API][4] to pull in the full
+One part of this extension uses the [Tumblr API][5] to pull in the full
 contents of a post that was clicked. With the reliance on the API calls,
 you will need to add in your own api key to actually get this feature
 working locally without it 401-ing on you. Where you put the api key is
@@ -42,7 +42,7 @@ module.exports = {
 ```
 
 API keys are not to be put into the repository, which is why the file is
-ignored in [.gitignore][5]. However, just a small side note, when I
+ignored in [.gitignore][6]. However, just a small side note, when I
 release the extension to the chrome web store, my api key will be
 package in there; If you wish to go though the steps to get it, I don't
 compress the code in the packaged extension, so it will be some where in
@@ -52,5 +52,5 @@ the generated `popup.js` file.
 [2]: http://nodejs.org/
 [3]: https://npmjs.org/
 [4]: https://github.com/sourrust/denote/blob/master/CONTRIBUTING.md
-[4]: http://www.tumblr.com/docs/en/api/v2
-[5]: https://github.com/sourrust/denote/blob/master/.gitignore
+[5]: http://www.tumblr.com/docs/en/api/v2
+[6]: https://github.com/sourrust/denote/blob/master/.gitignore
