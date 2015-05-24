@@ -1,6 +1,7 @@
 import $        from 'jquery';
 import Backbone from 'backbone';
 import Router   from './router';
+import utility  from './utility';
 
 let tabInfo = {
   active: true,
@@ -20,6 +21,9 @@ chrome.tabs.query(tabInfo, function([tab]) {
       router = new Router({ data });
 
       Backbone.history.start({ pushState: true });
+    } else {
+      utility.toggleVisiblity(utility.$loader);
+      utility.toggleVisiblity($('#error-message'));
     }
   });
 });

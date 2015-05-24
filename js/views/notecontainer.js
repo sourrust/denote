@@ -1,12 +1,11 @@
 import _              from 'underscore';
-import $              from 'jquery';
 import { View }       from 'backbone';
 import utility        from '../utility';
 import MoreButtonView from './morenotesbutton';
 import ReblogView     from './reblog';
 import ReplyView      from './reply';
 
-let router, $loader = $('#loader');
+let router, $loader = utility.$loader;
 
 export default View.extend({
   el: '.notes',
