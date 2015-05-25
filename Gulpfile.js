@@ -94,11 +94,12 @@ gulp.task('jst', function() {
 
 gulp.task('translate', function() {
   var dest  = path.join(defaults.dest, 'js');
-  var files = [ 'js/**/!(contentscript|configuration).js'
-              , 'js/.secret-api.js'
-              ];
+  var options = { ignore: 'js/con(tentscript|figuration).js' };
+  var files   = [ 'js/**/*.js'
+                , 'js/.secret-api.js'
+                ];
 
-  return gulp.src(files)
+  return gulp.src(files, options)
     .pipe(babel({ modules: 'amd' }))
     .pipe(gulp.dest(dest));
 });
