@@ -6,7 +6,6 @@ var jscs   = require('gulp-jscs');
 var jshint = require('gulp-jshint');
 var jst    = require('gulp-amd-jst');
 var less   = require('gulp-less');
-var path   = require('path');
 var rename = require('gulp-rename');
 
 var defaults = {
@@ -17,7 +16,7 @@ var defaults = {
 gulp.task('default', ['lint', 'less', 'jst', 'copy', 'translate']);
 
 gulp.task('less', function() {
-  var dest    = path.join(defaults.dest, 'css');
+  var dest    = 'build/css';
   var options = {
     paths: ['less', 'node_modules/normalize.css']
   };
@@ -29,7 +28,7 @@ gulp.task('less', function() {
 });
 
 gulp.task('lint', function() {
-  var files = ['Gulpfile.js', 'js/**/!(configuration).js'];
+  var files = ['Gulpfile.js', 'js/**/*.js'];
 
   return gulp.src(files)
     .pipe(jshint())
@@ -53,17 +52,20 @@ function _copy(files, dest, useBaseDir) {
 }
 
 gulp.task('copy:vendor', function() {
-  var dest  = path.join(defaults.dest, 'js', 'lib');
+  var dest  = 'build/js/lib';
   var files = [ 'node_modules/backbone/backbone.js'
               , 'node_modules/jquery/dist/jquery.js'
               , 'node_modules/requirejs/require.js'
+              , 'node_modules/lodash/index.js'
               ];
 
-  gulp.src('node_modules/lodash/index.js')
-    .pipe(rename('lodash.js'))
+  return gulp.src(files)
+    .pipe(rename(function(path) {
+      if(path.basename === 'index') {
+        path.basename = 'lodash';
+      }
+    }))
     .pipe(gulp.dest(dest));
-
-  return _copy(files, dest);
 });
 
 gulp.task('copy:main', function() {
@@ -81,24 +83,25 @@ gulp.task('copy:main', function() {
 gulp.task('copy', ['copy:vendor', 'copy:main']);
 
 gulp.task('jst', function() {
-  var dest    = path.join(defaults.dest, 'js', 'templates');
+  var dest    = 'build/js/templates';
   var options = {
     amd: true,
     namespace: false
   };
 
-  return gulp.src(['templates/*.html'])
+  return gulp.src('templates/*.html')
     .pipe(jst(options))
     .pipe(gulp.dest(dest));
 });
 
 gulp.task('translate', function() {
-  var dest  = path.join(defaults.dest, 'js');
-  var files = [ 'js/**/!(contentscript|configuration).js'
-              , 'js/.secret-api.js'
-              ];
+  var dest    = 'build/js';
+  var options = { ignore: 'js/con(tentscript|figuration).js' };
+  var files   = [ 'js/**/*.js'
+                , 'js/.secret-api.js'
+                ];
 
-  return gulp.src(files)
+  return gulp.src(files, options)
     .pipe(babel({ modules: 'amd' }))
     .pipe(gulp.dest(dest));
 });
