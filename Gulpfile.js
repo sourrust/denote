@@ -6,7 +6,6 @@ var jscs   = require('gulp-jscs');
 var jshint = require('gulp-jshint');
 var jst    = require('gulp-amd-jst');
 var less   = require('gulp-less');
-var path   = require('path');
 var rename = require('gulp-rename');
 
 var defaults = {
@@ -17,7 +16,7 @@ var defaults = {
 gulp.task('default', ['lint', 'less', 'jst', 'copy', 'translate']);
 
 gulp.task('less', function() {
-  var dest    = path.join(defaults.dest, 'css');
+  var dest    = 'build/css';
   var options = {
     paths: ['less', 'node_modules/normalize.css']
   };
@@ -53,7 +52,7 @@ function _copy(files, dest, useBaseDir) {
 }
 
 gulp.task('copy:vendor', function() {
-  var dest  = path.join(defaults.dest, 'js', 'lib');
+  var dest  = 'build/js/lib';
   var files = [ 'node_modules/backbone/backbone.js'
               , 'node_modules/jquery/dist/jquery.js'
               , 'node_modules/requirejs/require.js'
@@ -84,7 +83,7 @@ gulp.task('copy:main', function() {
 gulp.task('copy', ['copy:vendor', 'copy:main']);
 
 gulp.task('jst', function() {
-  var dest    = path.join(defaults.dest, 'js', 'templates');
+  var dest    = 'build/js/templates';
   var options = {
     amd: true,
     namespace: false
@@ -96,7 +95,7 @@ gulp.task('jst', function() {
 });
 
 gulp.task('translate', function() {
-  var dest  = path.join(defaults.dest, 'js');
+  var dest    = 'build/js';
   var options = { ignore: 'js/con(tentscript|figuration).js' };
   var files   = [ 'js/**/*.js'
                 , 'js/.secret-api.js'
