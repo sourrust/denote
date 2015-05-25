@@ -57,13 +57,16 @@ gulp.task('copy:vendor', function() {
   var files = [ 'node_modules/backbone/backbone.js'
               , 'node_modules/jquery/dist/jquery.js'
               , 'node_modules/requirejs/require.js'
+              , 'node_modules/lodash/index.js'
               ];
 
-  gulp.src('node_modules/lodash/index.js')
-    .pipe(rename('lodash.js'))
+  return gulp.src(files)
+    .pipe(rename(function(path) {
+      if(path.basename === 'index') {
+        path.basename = 'lodash';
+      }
+    }))
     .pipe(gulp.dest(dest));
-
-  return _copy(files, dest);
 });
 
 gulp.task('copy:main', function() {
