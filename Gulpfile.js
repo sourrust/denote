@@ -90,7 +90,7 @@ gulp.task('jst', function() {
     namespace: false
   };
 
-  return gulp.src(['templates/*.html'])
+  return gulp.src('templates/*.html')
     .pipe(jst(options))
     .pipe(gulp.dest(dest));
 });
