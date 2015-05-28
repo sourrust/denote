@@ -9,11 +9,6 @@ var jst    = require('gulp-amd-jst');
 var less   = require('gulp-less');
 var rename = require('gulp-rename');
 
-var defaults = {
-  dest: 'build',
-  reporter: jshint.reporter('default')
-};
-
 gulp.task('default', ['lint', 'less', 'jst', 'copy', 'translate']);
 
 gulp.task('less', function() {
@@ -29,11 +24,12 @@ gulp.task('less', function() {
 });
 
 gulp.task('lint', function() {
-  var files = ['Gulpfile.js', 'js/**/*.js'];
+  var files    = ['Gulpfile.js', 'js/**/*.js'];
+  var reporter = jshint.reporter('default');
 
   return gulp.src(files)
     .pipe(jshint())
-    .pipe(defaults.reporter)
+    .pipe(reporter)
     .pipe(jscs());
 });
 
@@ -42,15 +38,6 @@ gulp.task('watch', function() {
   gulp.watch('templates/*.html', ['jst']);
   gulp.watch('js/**/*.js', ['lint', 'translate']);
 });
-
-function _copy(files, dest, useBaseDir) {
-  var options;
-
-  if(useBaseDir) options = { base: '.' };
-
-  return gulp.src(files, options)
-    .pipe(gulp.dest(dest));
-}
 
 gulp.task('copy:vendor', function() {
   var dest  = 'build/js/lib';
@@ -70,15 +57,18 @@ gulp.task('copy:vendor', function() {
 });
 
 gulp.task('copy:main', function() {
-  var files = [ 'popup.html'
-              , 'manifest.json'
-              , 'LICENSE'
-              , 'js/contentscript.js'
-              , 'js/configuration.js'
-              , 'images/*'
-              ];
+  var dest    = 'build';
+  var options = { base: '.' };
+  var files   = [ 'popup.html'
+                , 'manifest.json'
+                , 'LICENSE'
+                , 'js/contentscript.js'
+                , 'js/configuration.js'
+                , 'images/*'
+                ];
 
-  return _copy(files, defaults.dest, true);
+  return gulp.src(files, options)
+    .pipe(gulp.dest(dest));
 });
 
 gulp.task('copy', ['copy:vendor', 'copy:main']);
