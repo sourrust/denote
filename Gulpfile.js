@@ -9,11 +9,6 @@ var jst    = require('gulp-amd-jst');
 var less   = require('gulp-less');
 var rename = require('gulp-rename');
 
-var defaults = {
-  dest: 'build',
-  reporter: jshint.reporter('default')
-};
-
 gulp.task('default', ['lint', 'less', 'jst', 'copy', 'translate']);
 
 gulp.task('less', function() {
@@ -29,11 +24,12 @@ gulp.task('less', function() {
 });
 
 gulp.task('lint', function() {
-  var files = ['Gulpfile.js', 'js/**/*.js'];
+  var files    = ['Gulpfile.js', 'js/**/*.js'];
+  var reporter = jshint.reporter('default');
 
   return gulp.src(files)
     .pipe(jshint())
-    .pipe(defaults.reporter)
+    .pipe(reporter)
     .pipe(jscs());
 });
 
