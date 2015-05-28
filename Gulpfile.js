@@ -43,15 +43,6 @@ gulp.task('watch', function() {
   gulp.watch('js/**/*.js', ['lint', 'translate']);
 });
 
-function _copy(files, dest, useBaseDir) {
-  var options;
-
-  if(useBaseDir) options = { base: '.' };
-
-  return gulp.src(files, options)
-    .pipe(gulp.dest(dest));
-}
-
 gulp.task('copy:vendor', function() {
   var dest  = 'build/js/lib';
   var files = [ 'node_modules/backbone/backbone.js'
@@ -70,15 +61,18 @@ gulp.task('copy:vendor', function() {
 });
 
 gulp.task('copy:main', function() {
-  var files = [ 'popup.html'
-              , 'manifest.json'
-              , 'LICENSE'
-              , 'js/contentscript.js'
-              , 'js/configuration.js'
-              , 'images/*'
-              ];
+  var dest    = 'build';
+  var options = { base: '.' };
+  var files   = [ 'popup.html'
+                , 'manifest.json'
+                , 'LICENSE'
+                , 'js/contentscript.js'
+                , 'js/configuration.js'
+                , 'images/*'
+                ];
 
-  return _copy(files, defaults.dest, true);
+  return gulp.src(files, options)
+    .pipe(gulp.dest(dest));
 });
 
 gulp.task('copy', ['copy:vendor', 'copy:main']);
