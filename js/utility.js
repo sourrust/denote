@@ -31,30 +31,39 @@ function slug(blogName, text) {
 }
 
 function noteToJSON(note) {
-  let $note, classes;
+  let $note, blogInfo, classes, text;
 
   $note   = $(note);
   classes = getClasses($note);
 
   if(_.contains(classes, 'reply')) {
+    text     = getPreviewText($note.find('.answer_content'));
+    blogInfo = getBlogInfo($note.find('.action > a'),
+                           $note.find('.avatar'));
+
     return {
       noteType: 'reply',
-      text: getPreviewText($note.find('.answer_content')),
+      text: text,
       classes: classes,
-      blog: getBlogInfo($note.find('.action > a'),
-                          $note.find('.avatar'))
+      blog: blogInfo,
+      id: slug(blogInfo.username, text)
     };
   } else {
+    text     = getPreviewText($note.find('blockquote > a'));
+    blogInfo = getBlogInfo($note.find('.tumblelog'),
+                           $note.find('.avatar'));
+
+
     return {
       noteType: 'reblog',
-      previewText: getPreviewText($note.find('blockquote > a')),
+      previewText: text,
       permalink: getPermalink($note.find('.action')),
       classes: classes,
       blogs: [
-        getBlogInfo($note.find('.tumblelog'),
-                    $note.find('.avatar')),
+        blogInfo,
         getBlogInfo($note.find('.source_tumblelog'))
-      ]
+      ],
+      id: slug(blogInfo.username, text)
     };
   }
 }
