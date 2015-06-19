@@ -20,6 +20,16 @@ function getBlogInfo($el, $avatarEl) {
   return info;
 }
 
+function slug(blogName, text) {
+  let result = _.kebabCase(`${blogName} ${text}`);
+
+  return _.trunc(result, {
+    length: Math.pow(2, 6),
+    omission: '',
+    separator: '-'
+  });
+}
+
 function noteToJSON(note) {
   let $note, classes;
 
