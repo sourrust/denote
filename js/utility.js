@@ -68,7 +68,7 @@ function noteToJSON(note) {
   }
 }
 
-export let $loader = $('#loader');
+export let $loader         = $('#loader');
 export let toggleVisiblity = $el => $el.toggleClass('show hide');
 export let swapClass       = ($el, exchange, forClass) =>
   $el.addClass(forClass).removeClass(exchange);
