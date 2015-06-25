@@ -49,7 +49,7 @@ export default View.extend({
     $responses = this.$el.find('ol.responses');
     visiblity  = $responses.hasClass('hide') ? 'Hide' : 'Show';
 
-    $button.html(visiblity + ' Previous Responses');
+    $button.html(`${visiblity} Previous Responses`);
 
     utility.toggleVisiblity($responses);
   }

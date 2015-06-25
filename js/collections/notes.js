@@ -4,15 +4,11 @@ import NoteModel       from '../models/note';
 import { notesToJSON } from '../utility';
 
 function findOffset($context) {
-  let $moreNotes, offset;
+  let $moreNotes = $context.find('.more_notes_link');
 
-  $moreNotes = $context.find('.more_notes_link');
-
-  if(_.isEmpty($moreNotes)) return;
-
-  offset = $moreNotes.attr('onclick').match(/\?from_c=\d+/)[0];
-
-  return offset;
+  if(!_.isEmpty($moreNotes)) {
+    return $moreNotes.attr('onclick').match(/\?from_c=\d+/)[0];
+  }
 }
 
 export default Collection.extend({
