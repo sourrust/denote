@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Denote",
-  "description": "Displays reblogs with comments on tumblr posts.",
-  "version": "0.3.0",
+  "name": "<%= name %>",
+  "description": "<%= description %>",
+  "version": "<%= version %>",
 
   "permissions": [
     "http://*.tumblr.com/post/*"
