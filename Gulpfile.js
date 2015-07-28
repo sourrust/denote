@@ -65,7 +65,6 @@ gulp.task('copy:main', function() {
   var dest    = 'build';
   var options = { base: '.' };
   var files   = [ 'popup.html'
-                , 'manifest.json'
                 , 'LICENSE'
                 , 'js/contentscript.js'
                 , 'js/configuration.js'
