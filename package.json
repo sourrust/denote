@@ -1,10 +1,12 @@
 {
   "name": "denote",
+  "description": "Displays reblogs with comments on tumblr posts.",
   "version": "0.3.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/sourrust/denote.git"
   },
+  "license": "BSD-3-Clause",
   "scripts": {
     "lint": "jshint js/**.js Gulpfile.js && jscs js/**.js Gulpfile.js"
   },
@@ -15,7 +17,8 @@
     "gulp-jscs": "^1.6.0",
     "gulp-jshint": "^1.8.4",
     "gulp-less": "^3.0.3",
-    "gulp-rename": "^1.2.0"
+    "gulp-rename": "^1.2.0",
+    "gulp-template": "^3.0.0"
   },
   "dependencies": {
     "backbone": "^1.1.2",

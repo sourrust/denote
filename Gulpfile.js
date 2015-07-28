@@ -1,15 +1,20 @@
 /* jshint node: true */
 'use strict';
 
-var gulp   = require('gulp');
-var babel  = require('gulp-babel');
-var jscs   = require('gulp-jscs');
-var jshint = require('gulp-jshint');
-var jst    = require('gulp-amd-jst');
-var less   = require('gulp-less');
-var rename = require('gulp-rename');
+var gulp     = require('gulp');
+var babel    = require('gulp-babel');
+var jscs     = require('gulp-jscs');
+var jshint   = require('gulp-jshint');
+var jst      = require('gulp-amd-jst');
+var less     = require('gulp-less');
+var rename   = require('gulp-rename');
+var template = require('gulp-template');
 
-gulp.task('default', ['lint', 'less', 'jst', 'copy', 'translate']);
+var packageJSON = require('./package');
+
+gulp.task('default',
+  ['lint', 'less', 'jst', 'copy', 'manifest', 'translate']
+);
 
 gulp.task('less', function() {
   var dest    = 'build/css';
@@ -60,7 +65,6 @@ gulp.task('copy:main', function() {
   var dest    = 'build';
   var options = { base: '.' };
   var files   = [ 'popup.html'
-                , 'manifest.json'
                 , 'LICENSE'
                 , 'js/contentscript.js'
                 , 'js/configuration.js'
@@ -94,5 +98,14 @@ gulp.task('translate', function() {
 
   return gulp.src(files, options)
     .pipe(babel({ modules: 'amd' }))
+    .pipe(gulp.dest(dest));
+});
+
+gulp.task('manifest', function() {
+  var file = 'manifest.json';
+  var dest = 'build';
+
+  return gulp.src(file)
+    .pipe(template(packageJSON))
     .pipe(gulp.dest(dest));
 });
