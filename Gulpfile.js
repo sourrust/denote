@@ -10,7 +10,11 @@ var less     = require('gulp-less');
 var rename   = require('gulp-rename');
 var template = require('gulp-template');
 
-gulp.task('default', ['lint', 'less', 'jst', 'copy', 'translate']);
+var packageJSON = require('./package');
+
+gulp.task('default',
+  ['lint', 'less', 'jst', 'copy', 'manifest', 'translate']
+);
 
 gulp.task('less', function() {
   var dest    = 'build/css';
