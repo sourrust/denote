@@ -11,6 +11,7 @@
     "lint": "jshint js/**.js Gulpfile.js && jscs js/**.js Gulpfile.js"
   },
   "devDependencies": {
+    "babel-plugin-transform-es2015-modules-amd": "^6.6.5",
     "gulp": "^3.8.7",
     "gulp-amd-jst": "0.0.1",
     "gulp-babel": "^6.1.2",
