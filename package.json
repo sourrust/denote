@@ -13,9 +13,9 @@
   "devDependencies": {
     "gulp": "^3.8.7",
     "gulp-amd-jst": "0.0.1",
-    "gulp-babel": "^5.1.0",
-    "gulp-jscs": "^2.0.0",
-    "gulp-jshint": "^1.8.4",
+    "gulp-babel": "^6.1.2",
+    "gulp-jscs": "^3.0.2",
+    "gulp-jshint": "^2.0.0",
     "gulp-less": "^3.0.3",
     "gulp-rename": "^1.2.0",
     "gulp-template": "^3.0.0"
@@ -23,8 +23,8 @@
   "dependencies": {
     "backbone": "^1.1.2",
     "jquery": "^2.1.1",
-    "lodash": "^3.6.0",
-    "normalize.css": "^3.0.2",
+    "lodash": "^4.6.1",
+    "normalize.css": "^4.0.0",
     "requirejs": "^2.1.14"
   }
 }
