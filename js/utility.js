@@ -23,7 +23,7 @@ function getBlogInfo($el, $avatarEl) {
 function slug(blogName, text) {
   let result = _.kebabCase(`${blogName} ${text}`);
 
-  return _.trunc(result, {
+  return _.truncate(result, {
     length: Math.pow(2, 6),
     omission: '',
     separator: '-'
@@ -36,7 +36,7 @@ function noteToJSON(note) {
   $note   = $(note);
   classes = getClasses($note);
 
-  if(_.contains(classes, 'reply')) {
+  if(_.includes(classes, 'reply')) {
     text     = getPreviewText($note.find('.answer_content'));
     blogInfo = getBlogInfo($note.find('.action > a'),
                            $note.find('.avatar'));
