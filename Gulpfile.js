@@ -49,7 +49,7 @@ gulp.task('copy:vendor', function() {
   var files = [ 'node_modules/backbone/backbone.js'
               , 'node_modules/jquery/dist/jquery.js'
               , 'node_modules/requirejs/require.js'
-              , 'node_modules/lodash/index.js'
+              , 'node_modules/lodash/lodash.js'
               ];
 
   return gulp.src(files)
@@ -97,7 +97,7 @@ gulp.task('translate', function() {
                 ];
 
   return gulp.src(files, options)
-    .pipe(babel({ modules: 'amd' }))
+    .pipe(babel({ plugins: ['transform-es2015-modules-amd'] }))
     .pipe(gulp.dest(dest));
 });
 
