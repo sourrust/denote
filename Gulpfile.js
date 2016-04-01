@@ -97,7 +97,10 @@ gulp.task('translate', function() {
                 ];
 
   return gulp.src(files, options)
-    .pipe(babel({ plugins: ['transform-es2015-modules-amd'] }))
+    .pipe(babel({
+      presets: ['es2015'],
+      plugins: ['transform-es2015-modules-amd']
+    }))
     .pipe(gulp.dest(dest));
 });
 
