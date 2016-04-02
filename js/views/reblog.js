@@ -27,8 +27,8 @@ export default View.extend({
     return this;
   },
 
-  showFullPreview: function(e) {
-    e.preventDefault();
+  showFullPreview: function(event) {
+    event.preventDefault();
 
     let model = this.model;
     let route = () =>
