@@ -11,7 +11,7 @@ export default View.extend({
   el: '.notes',
 
   initialize: function(options) {
-    _.bindAll(this);
+    _.bindAll(this, 'renderNote');
 
     this.collection.on('add', this.renderNote);
 
