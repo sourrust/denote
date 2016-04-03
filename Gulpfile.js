@@ -53,11 +53,6 @@ gulp.task('copy:vendor', function() {
               ];
 
   return gulp.src(files)
-    .pipe(rename(function(path) {
-      if(path.basename === 'index') {
-        path.basename = 'lodash';
-      }
-    }))
     .pipe(gulp.dest(dest));
 });
 
