@@ -23,7 +23,7 @@ chrome.tabs.query(tabInfo, function([tab]) {
       Backbone.history.start({ pushState: true });
     } else {
       utility.toggleVisiblity(utility.$loader);
-      utility.toggleVisiblity($('#error-message'));
+      utility.toggleVisiblity(utility.$error);
     }
   });
 });
