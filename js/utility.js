@@ -69,6 +69,7 @@ function noteToJSON(note) {
 }
 
 export let $loader         = $('#loader');
+export let $error          = $('#error-message');
 export let toggleVisiblity = $el => $el.toggleClass('show hide');
 export let swapClass       = ($el, exchange, forClass) =>
   $el.addClass(forClass).removeClass(exchange);
@@ -79,4 +80,4 @@ export function notesToJSON(context) {
   return _.map($notes, noteToJSON);
 }
 
-export default { $loader, toggleVisiblity, swapClass, notesToJSON };
+export default { $loader, $error, toggleVisiblity, swapClass, notesToJSON };

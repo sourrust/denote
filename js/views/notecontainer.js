@@ -5,7 +5,9 @@ import MoreButtonView from './morenotesbutton';
 import ReblogView     from './reblog';
 import ReplyView      from './reply';
 
-let router, $loader = utility.$loader;
+let router,
+    $loader = utility.$loader,
+    $error  = utility.$error;
 
 export default View.extend({
   el: '.notes',
@@ -16,6 +18,11 @@ export default View.extend({
     this.collection.on('add', this.renderNote);
 
     router = options.router;
+
+    $error.find('p').html(
+      'The current tab doesn\'t have any notes with reblog comments ' +
+      'or replies.'
+    );
 
     this.render();
     this.requestMoreNotes();
@@ -48,13 +55,25 @@ export default View.extend({
   },
 
   requestMoreNotes: function() {
-    if(!this.collection.canFetchMore()) return;
+    if(!this.collection.canFetchMore()) {
+      utility.toggleVisiblity($loader);
+
+      if(this.collection.isEmpty()) {
+        utility.toggleVisiblity($error);
+      }
+
+      return;
+    }
 
     let onSucess = collection => {
       if(collection.canFetchMore()) {
         this.requestMoreNotes.call(this);
       } else {
         collection.count = 0;
+
+        if(this.collection.isEmpty()) {
+          utility.toggleVisiblity($error);
+        }
 
         utility.toggleVisiblity($loader);
         this.addMoreNotesButton();
