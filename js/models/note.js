@@ -4,10 +4,8 @@ import API       from '../.secret-api';
 
 function getResponses(trail) {
   return _.map(trail, function(post) {
-    let blog, content;
-
-    content = post.content;
-    blog    = {
+    let content = post.content;
+    let blog    = {
       name: post.blog.name,
       postID: post.post.id
     };
@@ -31,33 +29,29 @@ export default Model.extend({
   },
 
   url: function() {
-    let blogs, blogName, permalink, postID;
+    let permalink = this.get('permalink');
+    let blogs     = this.get('blogs');
 
-    permalink = this.get('permalink');
-    blogs     = this.get('blogs');
-
-    blogName  = blogs[0].username;
-    postID    = permalink.match(/\d+$/)[0];
+    let blogName  = blogs[0].username;
+    let postID    = permalink.match(/\d+$/)[0];
 
     return `http://api.tumblr.com/v2/blog/${blogName}.tumblr.com` +
            `/posts?id=${postID}&api_key=${API.key}`;
   },
 
   parse: function(response, options) {
-    let content, post, trail;
-
     // Parse function in model gets called when the collection fetch
     // method gets called. Simply returns the model that has already been
     // parsed because we are looking for tumblr API responses to parse.
     if(options.dataType) return response;
 
-    post = response.response.posts[0];
+    let post = response.response.posts[0];
 
     // Trail follow the conversation of reblogs in descending order.
     // Leveraging tumblr's API is far simpler than parsing the full post
     // content and dealing with all the edge cases.
-    trail   = post.trail;
-    content = _.last(trail).content;
+    let trail   = post.trail;
+    let content = _.last(trail).content;
 
     return { fullText: content.trim()
            , responses: getResponses(_.initial(trail))
