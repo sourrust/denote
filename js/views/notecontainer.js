@@ -5,9 +5,10 @@ import MoreButtonView from './morenotesbutton';
 import ReblogView     from './reblog';
 import ReplyView      from './reply';
 
-let router,
-    $loader = utility.$loader,
-    $error  = utility.$error;
+let router;
+
+let $loader = utility.$loader;
+let $error  = utility.$error;
 
 export default View.extend({
   el: '.notes',
@@ -35,13 +36,11 @@ export default View.extend({
   },
 
   renderNote: function(model) {
-    let className, note, NoteType, isReply;
+    let isReply   = model.get('noteType') === 'reply';
+    let NoteType  = isReply ? ReplyView : ReblogView;
+    let className = model.get('classes').join(' ');
 
-    isReply   = model.get('noteType') === 'reply';
-    NoteType  = isReply ? ReplyView : ReblogView;
-    className = model.get('classes').join(' ');
-
-    note = new NoteType({ model, className, router });
+    let note = new NoteType({ model, className, router });
 
     this.$el.append(note.render().el);
   },
