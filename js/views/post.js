@@ -43,11 +43,9 @@ export default View.extend({
   },
 
   toggleResponses: function() {
-    let $button, $responses, visiblity;
-
-    $button    = this.$el.find('#response-button');
-    $responses = this.$el.find('ol.responses');
-    visiblity  = $responses.hasClass('hide') ? 'Hide' : 'Show';
+    let $button    = this.$el.find('#response-button');
+    let $responses = this.$el.find('ol.responses');
+    let visiblity  = $responses.hasClass('hide') ? 'Hide' : 'Show';
 
     $button.html(`${visiblity} Previous Responses`);
 

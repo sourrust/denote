@@ -2,9 +2,10 @@ import _        from 'underscore';
 import { View } from 'backbone';
 import utility  from '../utility';
 
-let parentView,
-    $loader         = utility.$loader,
-    toggleVisiblity = utility.toggleVisiblity;
+let parentView;
+
+let $loader         = utility.$loader;
+let toggleVisiblity = utility.toggleVisiblity;
 
 export default View.extend({
   tagName: 'li',

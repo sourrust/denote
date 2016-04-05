@@ -3,7 +3,9 @@ import Notes      from './collections/notes';
 import NotesView  from './views/notecontainer';
 import PostView   from './views/post';
 
-let collection, views = {};
+let collection;
+
+let views = {};
 
 export default Router.extend({
   routes: {
@@ -25,10 +27,8 @@ export default Router.extend({
   },
 
   fullPost: function(id) {
-    let oldView, newView;
-
-    oldView = views.notes;
-    newView = views.fullPost;
+    let oldView = views.notes;
+    let newView = views.fullPost;
 
     newView.model = collection.get(id);
     newView.render();

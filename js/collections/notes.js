@@ -29,11 +29,11 @@ export default Collection.extend({
   },
 
   parse: function(response) {
-    let endStr, htmlStr, json;
+    let json;
 
-    endStr  = ' NOTES -->';
-    htmlStr = response.split('<!-- START' + endStr)[1]
-                      .split('<!-- END'   + endStr)[0];
+    let endStr  = ' NOTES -->';
+    let htmlStr = response.split('<!-- START' + endStr)[1]
+                          .split('<!-- END'   + endStr)[0];
 
     this.notesHTML.html(htmlStr);
 
@@ -45,10 +45,8 @@ export default Collection.extend({
   },
 
   canFetchMore: function() {
-    let correctLength, endOfNotes;
-
-    correctLength = this.count < 5;
-    endOfNotes    = findOffset(this.notesHTML) != null;
+    let correctLength = this.count < 5;
+    let endOfNotes    = findOffset(this.notesHTML) != null;
 
     return correctLength && endOfNotes;
   }
