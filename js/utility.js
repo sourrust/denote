@@ -31,10 +31,10 @@ function slug(blogName, text) {
 }
 
 function noteToJSON(note) {
-  let $note, blogInfo, classes, text;
+  let blogInfo, text;
 
-  $note   = $(note);
-  classes = getClasses($note);
+  let $note   = $(note);
+  let classes = getClasses($note);
 
   if(_.includes(classes, 'reply')) {
     text     = getPreviewText($note.find('.answer_content'));
