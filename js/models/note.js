@@ -40,9 +40,9 @@ export default Model.extend({
   },
 
   parse: function(response, options) {
-    // Parse function in model gets called when the collection fetch
-    // method gets called. Simply returns the model that has already been
-    // parsed because we are looking for tumblr API responses to parse.
+    // Parse function in model gets called when the collection fetch method
+    // gets called. Simply returns the model that has already been parsed
+    // because we are looking for tumblr API responses to parse.
     if(options.dataType) return response;
 
     let post = response.response.posts[0];

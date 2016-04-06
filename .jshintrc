@@ -5,7 +5,7 @@
   "esnext": true,
   "indent": 2,
   "laxcomma": true,
-  "maxlen": 76,
+  "maxlen": 78,
   "plusplus": true,
   "quotmark": "single",
   "trailing": true,

@@ -31,8 +31,7 @@ export default View.extend({
     event.preventDefault();
 
     let model = this.model;
-    let route = () =>
-      router.navigate(`post/${model.id}`, { trigger: true });
+    let route = () => router.navigate(`post/${model.id}`, { trigger: true });
 
     if(_.isEmpty(model.get('full_text'))) {
       model.fetch({ success: route });
