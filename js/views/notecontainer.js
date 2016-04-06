@@ -21,8 +21,8 @@ export default View.extend({
     router = options.router;
 
     $error.find('p').html(
-      'The current tab doesn\'t have any notes with reblog comments ' +
-      'or replies.'
+      'The current tab doesn\'t have any notes with reblog comments or ' +
+      'replies.'
     );
 
     this.render();

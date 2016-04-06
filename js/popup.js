@@ -23,8 +23,8 @@ chrome.tabs.query(tabInfo, function([tab]) {
       Backbone.history.start({ pushState: true });
     } else {
       utility.$error.find('p').html(
-        'The current tab isn\'t a tumblr page or denote is unable to ' +
-        'find the notes in this page.'
+        'The current tab isn\'t a tumblr page or denote is unable to find ' +
+        'the notes in this page.'
       );
 
       utility.toggleVisiblity(utility.$loader);
