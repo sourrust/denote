@@ -1,14 +1,15 @@
 /* jshint node: true */
 'use strict';
 
-var gulp     = require('gulp');
-var babel    = require('gulp-babel');
-var jscs     = require('gulp-jscs');
-var jshint   = require('gulp-jshint');
-var jst      = require('gulp-amd-jst');
-var less     = require('gulp-less');
-var rename   = require('gulp-rename');
-var template = require('gulp-template');
+var gulp       = require('gulp');
+var babel      = require('gulp-babel');
+var jscs       = require('gulp-jscs');
+var jshint     = require('gulp-jshint');
+var jst        = require('gulp-amd-jst');
+var less       = require('gulp-less');
+var rename     = require('gulp-rename');
+var sourcemaps = require('gulp-sourcemaps');
+var template   = require('gulp-template');
 
 var packageJSON = require('./package');
 
@@ -92,10 +93,12 @@ gulp.task('translate', function() {
                 ];
 
   return gulp.src(files, options)
+    .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['es2015'],
       plugins: ['transform-es2015-modules-amd']
     }))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(dest));
 });
 
