@@ -18,8 +18,8 @@ gulp.task('default',
 );
 
 gulp.task('less', function() {
-  let dest    = 'build/css';
-  let options = {
+  const dest    = 'build/css';
+  const options = {
     paths: ['less', 'node_modules/normalize.css']
   };
 
@@ -30,8 +30,8 @@ gulp.task('less', function() {
 });
 
 gulp.task('lint', function() {
-  let files    = ['Gulpfile.js', 'js/**/*.js'];
-  let reporter = jshint.reporter('default');
+  const files    = ['Gulpfile.js', 'js/**/*.js'];
+  const reporter = jshint.reporter('default');
 
   return gulp.src(files)
     .pipe(jshint())
@@ -46,8 +46,8 @@ gulp.task('watch', function() {
 });
 
 gulp.task('copy:vendor', function() {
-  let dest  = 'build/js/lib';
-  let files = [ 'node_modules/backbone/backbone.js'
+  const dest  = 'build/js/lib';
+  const files = [ 'node_modules/backbone/backbone.js'
               , 'node_modules/jquery/dist/jquery.js'
               , 'node_modules/requirejs/require.js'
               , 'node_modules/lodash/lodash.js'
@@ -58,14 +58,14 @@ gulp.task('copy:vendor', function() {
 });
 
 gulp.task('copy:main', function() {
-  let dest    = 'build';
-  let options = { base: '.' };
-  let files   = [ 'popup.html'
-                , 'LICENSE'
-                , 'js/contentscript.js'
-                , 'js/configuration.js'
-                , 'images/*'
-                ];
+  const dest    = 'build';
+  const options = { base: '.' };
+  const files   = [ 'popup.html'
+                  , 'LICENSE'
+                  , 'js/contentscript.js'
+                  , 'js/configuration.js'
+                  , 'images/*'
+                  ];
 
   return gulp.src(files, options)
     .pipe(gulp.dest(dest));
@@ -74,8 +74,8 @@ gulp.task('copy:main', function() {
 gulp.task('copy', ['copy:vendor', 'copy:main']);
 
 gulp.task('jst', function() {
-  let dest    = 'build/js/templates';
-  let options = {
+  const dest    = 'build/js/templates';
+  const options = {
     amd: true,
     namespace: false
   };
@@ -86,11 +86,11 @@ gulp.task('jst', function() {
 });
 
 gulp.task('translate', function() {
-  let dest    = 'build/js';
-  let options = { ignore: 'js/con(tentscript|figuration).js' };
-  let files   = [ 'js/**/*.js'
-                , 'js/.secret-api.js'
-                ];
+  const dest    = 'build/js';
+  const options = { ignore: 'js/con(tentscript|figuration).js' };
+  const files   = [ 'js/**/*.js'
+                  , 'js/.secret-api.js'
+                  ];
 
   return gulp.src(files, options)
     .pipe(sourcemaps.init())
@@ -103,8 +103,8 @@ gulp.task('translate', function() {
 });
 
 gulp.task('manifest', function() {
-  let file = 'manifest.json';
-  let dest = 'build';
+  const file = 'manifest.json';
+  const dest = 'build';
 
   return gulp.src(file)
     .pipe(template(packageJSON))
