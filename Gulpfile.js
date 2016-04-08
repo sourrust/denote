@@ -48,10 +48,10 @@ gulp.task('watch', function() {
 gulp.task('copy:vendor', function() {
   const dest  = 'build/js/lib';
   const files = [ 'node_modules/backbone/backbone.js'
-              , 'node_modules/jquery/dist/jquery.js'
-              , 'node_modules/requirejs/require.js'
-              , 'node_modules/lodash/lodash.js'
-              ];
+                , 'node_modules/jquery/dist/jquery.js'
+                , 'node_modules/requirejs/require.js'
+                , 'node_modules/lodash/lodash.js'
+                ];
 
   return gulp.src(files)
     .pipe(gulp.dest(dest));
