@@ -9,6 +9,7 @@ let jst        = require('gulp-amd-jst');
 let less       = require('gulp-less');
 let rename     = require('gulp-rename');
 let sourcemaps = require('gulp-sourcemaps');
+let stylish    = require('jshint-stylish');
 let template   = require('gulp-template');
 
 let packageJSON = require('./package');
@@ -31,7 +32,7 @@ gulp.task('less', function() {
 
 gulp.task('lint', function() {
   const files    = ['Gulpfile.js', 'js/**/*.js'];
-  const reporter = jshint.reporter('default');
+  const reporter = jshint.reporter(stylish);
 
   return gulp.src(files)
     .pipe(jshint())
