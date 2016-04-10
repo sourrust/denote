@@ -21,7 +21,7 @@
     "gulp-less": "^3.0.3",
     "gulp-rename": "^1.2.0",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-template": "^3.0.0",
+    "gulp-template": "^4.0.0",
     "jshint-stylish": "^2.1.0"
   },
   "dependencies": {
