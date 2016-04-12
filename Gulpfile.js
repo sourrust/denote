@@ -75,14 +75,10 @@ gulp.task('copy:main', function() {
 gulp.task('copy', ['copy:vendor', 'copy:main']);
 
 gulp.task('jst', function() {
-  const dest    = 'build/js/templates';
-  const options = {
-    amd: true,
-    namespace: false
-  };
+  const dest = 'build/js/templates';
 
   return gulp.src('templates/*.html')
-    .pipe(jst(options))
+    .pipe(jst({ amd: true }))
     .pipe(gulp.dest(dest));
 });
 
