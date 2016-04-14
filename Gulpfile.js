@@ -5,7 +5,7 @@ let gulp       = require('gulp');
 let babel      = require('gulp-babel');
 let jscs       = require('gulp-jscs');
 let jshint     = require('gulp-jshint');
-let jst        = require('gulp-lodash-template');
+let jst        = require('gulp-amd-template');
 let less       = require('gulp-less');
 let rename     = require('gulp-rename');
 let sourcemaps = require('gulp-sourcemaps');
@@ -78,7 +78,7 @@ gulp.task('jst', function() {
   const dest = 'build/js/templates';
 
   return gulp.src('templates/*.html')
-    .pipe(jst({ amd: true }))
+    .pipe(jst())
     .pipe(gulp.dest(dest));
 });
 
