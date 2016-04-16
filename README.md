@@ -1,7 +1,7 @@
 # Denote
 
-A complement chrome extension for tumblr, that finds and displays
-reblogs with comments and replies.
+A chrome extension, made to complement tumblr posts, that finds and
+displays reblogs with comments and replies.
 
 [Chrome Extension][1]
 
