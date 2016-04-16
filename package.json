@@ -1,6 +1,6 @@
 {
   "name": "denote",
-  "description": "Displays reblogs with comments on tumblr posts.",
+  "description": "Displays reblogs with comments and replies on tumblr posts.",
   "version": "0.3.0",
   "repository": {
     "type": "git",
