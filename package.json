@@ -16,7 +16,7 @@
     "gulp": "^3.8.7",
     "gulp-amd-template": "^1.0.0",
     "gulp-babel": "^6.1.2",
-    "gulp-jscs": "^3.0.2",
+    "gulp-jscs": "^4.0.0",
     "gulp-jshint": "^2.0.0",
     "gulp-less": "^3.0.3",
     "gulp-rename": "^1.2.0",
