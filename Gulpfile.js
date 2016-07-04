@@ -2,6 +2,7 @@
 'use strict';
 
 let gulp     = require('gulp');
+let babel    = require('rollup-plugin-babel');
 let jscs     = require('gulp-jscs');
 let jshint   = require('gulp-jshint');
 let jst      = require('gulp-amd-template');
@@ -10,7 +11,6 @@ let rename   = require('gulp-rename');
 let rollup   = require('rollup').rollup;
 let stylish  = require('jshint-stylish');
 let template = require('gulp-template');
-var babel    = require('rollup-plugin-babel');
 
 let packageJSON = require('./package');
 
