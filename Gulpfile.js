@@ -1,16 +1,16 @@
 /* jshint node: true */
 'use strict';
 
-let gulp       = require('gulp');
-let babel      = require('gulp-babel');
-let jscs       = require('gulp-jscs');
-let jshint     = require('gulp-jshint');
-let jst        = require('gulp-amd-template');
-let less       = require('gulp-less');
-let rename     = require('gulp-rename');
-let sourcemaps = require('gulp-sourcemaps');
-let stylish    = require('jshint-stylish');
-let template   = require('gulp-template');
+let gulp     = require('gulp');
+let jscs     = require('gulp-jscs');
+let jshint   = require('gulp-jshint');
+let jst      = require('gulp-amd-template');
+let less     = require('gulp-less');
+let rename   = require('gulp-rename');
+let rollup   = require('rollup').rollup;
+let stylish  = require('jshint-stylish');
+let template = require('gulp-template');
+var babel    = require('rollup-plugin-babel');
 
 let packageJSON = require('./package');
 
@@ -83,20 +83,28 @@ gulp.task('jst', function() {
 });
 
 gulp.task('translate', function() {
-  const dest    = 'build/js';
-  const options = { ignore: 'js/con(tentscript|figuration).js' };
-  const files   = [ 'js/**/*.js'
-                  , 'js/.secret-api.js'
-                  ];
+  const options = {
+    entry: 'js/popup.js',
+    plugins: [
+      babel({ presets: ['es2015-rollup'] })
+    ]
+  };
 
-  return gulp.src(files, options)
-    .pipe(sourcemaps.init())
-    .pipe(babel({
-      presets: ['es2015'],
-      plugins: ['transform-es2015-modules-amd']
-    }))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest(dest));
+  return rollup(options)
+  .then(function(bundle) {
+    const options = {
+      globals: {
+        backbone: 'Backbone',
+        jquery: '$',
+        underscore: '_'
+      },
+      format: 'amd',
+      dest: 'build/js/popup.js',
+      sourceMap: true
+    };
+
+    return bundle.write(options);
+  });
 });
 
 gulp.task('manifest', function() {
