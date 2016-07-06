@@ -1,0 +1,20 @@
+{
+  "extends": "airbnb",
+  "installedESLint": true,
+  "rules": {
+    "no-multi-spaces": "off",
+    "comma-dangle": ["error", "never"],
+    "space-before-function-paren": ["error", "never"],
+    "prefer-arrow-callback": "off",
+    "func-names": "off",
+    "keyword-spacing": [
+      "error", {
+        "overrides": {
+          "if": { "after": false },
+          "for": { "after": false },
+          "while": { "after": false }
+        }
+      }
+    ]
+  }
+}
