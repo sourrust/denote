@@ -1,4 +1,6 @@
 /* jshint node: true */
+/* eslint strict: "off" */
+
 'use strict';
 
 let gulp     = require('gulp');

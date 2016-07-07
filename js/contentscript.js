@@ -1,3 +1,7 @@
+/* eslint strict: "off" */
+/* eslint no-var: "off" */
+/* global chrome */
+
 (function(win, doc) {
   'use strict';
 

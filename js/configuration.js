@@ -1,3 +1,6 @@
+/* eslint no-var: "off" */
+/* eslint no-unused-vars: "off" */
+
 var require = {
   baseUrl: 'js',
   paths: {
