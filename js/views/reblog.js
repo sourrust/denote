@@ -13,13 +13,13 @@ export default View.extend({
     'click .preview-link': 'showFullPreview'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     _.bindAll(this, 'render');
 
     router = options.router;
   },
 
-  render: function() {
+  render() {
     const html = this.template(this.model.toJSON());
 
     this.$el.html(html);
@@ -27,7 +27,7 @@ export default View.extend({
     return this;
   },
 
-  showFullPreview: function(event) {
+  showFullPreview(event) {
     event.preventDefault();
 
     const model = this.model;

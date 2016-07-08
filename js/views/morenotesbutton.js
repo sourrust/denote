@@ -15,13 +15,13 @@ export default View.extend({
     'click': 'loadMoreNotes'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     _.bindAll(this, 'render');
 
     parentView = options.parentView;
   },
 
-  render: function() {
+  render() {
     let html = 'More +';
 
     html += '<div class="clearfix"></div>';
@@ -31,7 +31,7 @@ export default View.extend({
     return this;
   },
 
-  loadMoreNotes: function() {
+  loadMoreNotes() {
     this.$el.addClass('hide');
     toggleVisiblity($loader);
     parentView.requestMoreNotes();

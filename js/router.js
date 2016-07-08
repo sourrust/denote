@@ -13,7 +13,7 @@ export default Router.extend({
     'post/:id': 'fullPost'
   },
 
-  initialize: function({ data }) {
+  initialize({ data }) {
     const router = this;
 
     collection = new Notes(null, { data });
@@ -22,12 +22,12 @@ export default Router.extend({
     views.fullPost = new PostView({ router });
   },
 
-  noteContainer: function() {
+  noteContainer() {
     views.fullPost.hide();
     views.notes.show();
   },
 
-  fullPost: function(id) {
+  fullPost(id) {
     const oldView = views.notes;
     const newView = views.fullPost;
 

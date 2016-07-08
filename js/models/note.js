@@ -22,13 +22,13 @@ export default Model.extend({
     permalink: ''
   },
 
-  initialize: function(options) {
+  initialize() {
     _.bindAll(this, 'url');
 
     router = options.router;
   },
 
-  url: function() {
+  url() {
     const permalink = this.get('permalink');
     const blogs     = this.get('blogs');
 
@@ -39,7 +39,7 @@ export default Model.extend({
            `/posts?id=${postID}&api_key=${API.key}`;
   },
 
-  parse: function(response, options) {
+  parse(response, options) {
     // Parse function in model gets called when the collection fetch method
     // gets called. Simply returns the model that has already been parsed
     // because we are looking for tumblr API responses to parse.
