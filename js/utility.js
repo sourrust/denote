@@ -1,13 +1,13 @@
 import _ from 'underscore';
 import $ from 'jquery';
 
-let getAvatar      = $el => $el.attr('src');
-let getPreviewText = $el => $el.html().trim();
-let getPermalink   = $el => $el.attr('data-post-url');
-let getClasses     = $el => $el.attr('class').split(' ');
+const getAvatar      = $el => $el.attr('src');
+const getPreviewText = $el => $el.html().trim();
+const getPermalink   = $el => $el.attr('data-post-url');
+const getClasses     = $el => $el.attr('class').split(' ');
 
 function getBlogInfo($el, $avatarEl) {
-  let info = {
+  const info = {
     username: $el.html(),
     link: $el.attr('href'),
     title: $el.attr('title')
@@ -21,7 +21,7 @@ function getBlogInfo($el, $avatarEl) {
 }
 
 function slug(blogName, text) {
-  let result = _.kebabCase(`${blogName} ${text}`);
+  const result = _.kebabCase(`${blogName} ${text}`);
 
   return _.truncate(result, {
     length: Math.pow(2, 6),
@@ -33,8 +33,8 @@ function slug(blogName, text) {
 function noteToJSON(note) {
   let blogInfo, text;
 
-  let $note   = $(note);
-  let classes = getClasses($note);
+  const $note   = $(note);
+  const classes = getClasses($note);
 
   if(_.includes(classes, 'reply')) {
     text     = getPreviewText($note.find('.answer_content'));
@@ -68,14 +68,14 @@ function noteToJSON(note) {
   }
 }
 
-export let $loader         = $('#loader');
-export let $error          = $('#error-message');
-export let toggleVisiblity = $el => $el.toggleClass('show hide');
-export let swapClass       = ($el, exchange, forClass) =>
+export const $loader         = $('#loader');
+export const $error          = $('#error-message');
+export const toggleVisiblity = $el => $el.toggleClass('show hide');
+export const swapClass       = ($el, exchange, forClass) =>
   $el.addClass(forClass).removeClass(exchange);
 
 export function notesToJSON(context) {
-  let $notes = context.find('.with_commentary, .reply');
+  const $notes = context.find('.with_commentary, .reply');
 
   return _.map($notes, noteToJSON);
 }

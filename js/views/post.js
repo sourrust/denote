@@ -15,37 +15,37 @@ export default View.extend({
     'click #response-button': 'toggleResponses'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     _.bindAll(this, 'render');
 
     router = options.router;
   },
 
-  render: function() {
-    let html = this.template(this.model.toJSON());
+  render() {
+    const html = this.template(this.model.toJSON());
 
     this.$el.html(html);
 
     return this;
   },
 
-  show: function() {
+  show() {
     utility.swapClass(this.$el, 'hide', 'show');
   },
 
-  hide: function() {
+  hide() {
     utility.swapClass(this.$el, 'show', 'hide');
   },
 
-  backToNotes: function(event) {
+  backToNotes(event) {
     event.preventDefault();
     router.navigate('index', { trigger: true });
   },
 
-  toggleResponses: function() {
-    let $button    = this.$el.find('#response-button');
-    let $responses = this.$el.find('ol.responses');
-    let visiblity  = $responses.hasClass('hide') ? 'Hide' : 'Show';
+  toggleResponses() {
+    const $button    = this.$el.find('#response-button');
+    const $responses = this.$el.find('ol.responses');
+    const visiblity  = $responses.hasClass('hide') ? 'Hide' : 'Show';
 
     $button.html(`${visiblity} Previous Responses`);
 

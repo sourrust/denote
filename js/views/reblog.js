@@ -13,25 +13,26 @@ export default View.extend({
     'click .preview-link': 'showFullPreview'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     _.bindAll(this, 'render');
 
     router = options.router;
   },
 
-  render: function() {
-    let html = this.template(this.model.toJSON());
+  render() {
+    const html = this.template(this.model.toJSON());
 
     this.$el.html(html);
 
     return this;
   },
 
-  showFullPreview: function(event) {
+  showFullPreview(event) {
     event.preventDefault();
 
-    let model = this.model;
-    let route = () => router.navigate(`post/${model.id}`, { trigger: true });
+    const model = this.model;
+    const route = () => router.navigate(`post/${model.id}`,
+                                        { trigger: true });
 
     if(_.isEmpty(model.get('full_text'))) {
       model.fetch({ success: route });

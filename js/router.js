@@ -5,7 +5,7 @@ import PostView   from './views/post';
 
 let collection;
 
-let views = {};
+const views = {};
 
 export default Router.extend({
   routes: {
@@ -13,22 +13,23 @@ export default Router.extend({
     'post/:id': 'fullPost'
   },
 
-  initialize: function({ data }) {
-    let router = this;
+  initialize({ data }) {
+    const router = this;
+
     collection = new Notes(null, { data });
 
     views.notes    = new NotesView({ collection, router });
     views.fullPost = new PostView({ router });
   },
 
-  noteContainer: function() {
+  noteContainer() {
     views.fullPost.hide();
     views.notes.show();
   },
 
-  fullPost: function(id) {
-    let oldView = views.notes;
-    let newView = views.fullPost;
+  fullPost(id) {
+    const oldView = views.notes;
+    const newView = views.fullPost;
 
     newView.model = collection.get(id);
     newView.render();

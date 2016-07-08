@@ -4,17 +4,19 @@ import NoteModel       from '../models/note';
 import { notesToJSON } from '../utility';
 
 function findOffset($context) {
-  let $moreNotes = $context.find('.more_notes_link');
+  const $moreNotes = $context.find('.more_notes_link');
 
   if(!_.isEmpty($moreNotes)) {
     return $moreNotes.attr('onclick').match(/\?from_c=\d+/)[0];
   }
+
+  return null;
 }
 
 export default Collection.extend({
   model: NoteModel,
 
-  initialize: function(models, { data }) {
+  initialize(models, { data }) {
     _.bindAll(this);
 
     this.count     = 0;
@@ -24,11 +26,11 @@ export default Collection.extend({
     this.add(notesToJSON(this.notesHTML));
   },
 
-  url: function() {
+  url() {
     return this.postURL + findOffset(this.notesHTML);
   },
 
-  parse: function(response) {
+  parse(response) {
     let json;
 
     let endStr  = ' NOTES -->';
@@ -44,9 +46,9 @@ export default Collection.extend({
     return json;
   },
 
-  canFetchMore: function() {
-    let correctLength = this.count < 5;
-    let endOfNotes    = findOffset(this.notesHTML) != null;
+  canFetchMore() {
+    const correctLength = this.count < 5;
+    const endOfNotes    = findOffset(this.notesHTML) != null;
 
     return correctLength && endOfNotes;
   }

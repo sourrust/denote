@@ -7,13 +7,13 @@ import ReplyView      from './reply';
 
 let router;
 
-let $loader = utility.$loader;
-let $error  = utility.$error;
+const $loader = utility.$loader;
+const $error  = utility.$error;
 
 export default View.extend({
   el: '.notes',
 
-  initialize: function(options) {
+  initialize(options) {
     _.bindAll(this, 'renderNote');
 
     this.collection.on('add', this.renderNote);
@@ -29,31 +29,31 @@ export default View.extend({
     this.requestMoreNotes();
   },
 
-  render: function() {
+  render() {
     this.collection.each(this.renderNote);
 
     return this;
   },
 
-  renderNote: function(model) {
-    let isReply   = model.get('noteType') === 'reply';
-    let NoteType  = isReply ? ReplyView : ReblogView;
-    let className = model.get('classes').join(' ');
+  renderNote(model) {
+    const isReply   = model.get('noteType') === 'reply';
+    const NoteType  = isReply ? ReplyView : ReblogView;
+    const className = model.get('classes').join(' ');
 
-    let note = new NoteType({ model, className, router });
+    const note = new NoteType({ model, className, router });
 
     this.$el.append(note.render().el);
   },
 
-  show: function() {
+  show() {
     utility.swapClass(this.$el, 'hide', 'show');
   },
 
-  hide: function() {
+  hide() {
     utility.swapClass(this.$el, 'show', 'hide');
   },
 
-  requestMoreNotes: function() {
+  requestMoreNotes() {
     if(!this.collection.canFetchMore()) {
       utility.toggleVisiblity($loader);
 
@@ -64,7 +64,7 @@ export default View.extend({
       return;
     }
 
-    let onSucess = collection => {
+    const onSuccess = collection => {
       if(collection.canFetchMore()) {
         this.requestMoreNotes.call(this);
       } else {
@@ -86,10 +86,10 @@ export default View.extend({
     });
   },
 
-  addMoreNotesButton: function() {
+  addMoreNotesButton() {
     if(!this.collection.canFetchMore()) return;
 
-    let moreNotesView = new MoreButtonView({ parentView: this });
+    const moreNotesView = new MoreButtonView({ parentView: this });
 
     this.$el.append(moreNotesView.render().el);
   }

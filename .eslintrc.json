@@ -4,6 +4,7 @@
   "rules": {
     "comma-dangle": ["error", "never"],
     "func-names": "off",
+    "import/no-unresolved": ["error", { "ignore": ["^template"] }],
     "keyword-spacing": [
       "error", {
         "overrides": {

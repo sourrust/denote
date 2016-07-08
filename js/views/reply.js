@@ -7,12 +7,12 @@ export default View.extend({
 
   template: replyTemplate,
 
-  initialize: function() {
+  initialize() {
     _.bindAll(this, 'render');
   },
 
-  render: function() {
-    let html = this.template(this.model.toJSON());
+  render() {
+    const html = this.template(this.model.toJSON());
 
     this.$el.html(html);
 
