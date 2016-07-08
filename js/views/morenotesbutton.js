@@ -4,8 +4,8 @@ import utility  from '../utility';
 
 let parentView;
 
-let $loader         = utility.$loader;
-let toggleVisiblity = utility.toggleVisiblity;
+const $loader         = utility.$loader;
+const toggleVisiblity = utility.toggleVisiblity;
 
 export default View.extend({
   tagName: 'li',

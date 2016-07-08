@@ -22,7 +22,7 @@ export default View.extend({
   },
 
   render: function() {
-    let html = this.template(this.model.toJSON());
+    const html = this.template(this.model.toJSON());
 
     this.$el.html(html);
 
@@ -43,9 +43,9 @@ export default View.extend({
   },
 
   toggleResponses: function() {
-    let $button    = this.$el.find('#response-button');
-    let $responses = this.$el.find('ol.responses');
-    let visiblity  = $responses.hasClass('hide') ? 'Hide' : 'Show';
+    const $button    = this.$el.find('#response-button');
+    const $responses = this.$el.find('ol.responses');
+    const visiblity  = $responses.hasClass('hide') ? 'Hide' : 'Show';
 
     $button.html(`${visiblity} Previous Responses`);
 

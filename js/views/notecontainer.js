@@ -7,8 +7,8 @@ import ReplyView      from './reply';
 
 let router;
 
-let $loader = utility.$loader;
-let $error  = utility.$error;
+const $loader = utility.$loader;
+const $error  = utility.$error;
 
 export default View.extend({
   el: '.notes',
@@ -36,11 +36,11 @@ export default View.extend({
   },
 
   renderNote: function(model) {
-    let isReply   = model.get('noteType') === 'reply';
-    let NoteType  = isReply ? ReplyView : ReblogView;
-    let className = model.get('classes').join(' ');
+    const isReply   = model.get('noteType') === 'reply';
+    const NoteType  = isReply ? ReplyView : ReblogView;
+    const className = model.get('classes').join(' ');
 
-    let note = new NoteType({ model, className, router });
+    const note = new NoteType({ model, className, router });
 
     this.$el.append(note.render().el);
   },
@@ -64,7 +64,7 @@ export default View.extend({
       return;
     }
 
-    let onSucess = collection => {
+    const onSuccess = collection => {
       if(collection.canFetchMore()) {
         this.requestMoreNotes.call(this);
       } else {
@@ -89,7 +89,7 @@ export default View.extend({
   addMoreNotesButton: function() {
     if(!this.collection.canFetchMore()) return;
 
-    let moreNotesView = new MoreButtonView({ parentView: this });
+    const moreNotesView = new MoreButtonView({ parentView: this });
 
     this.$el.append(moreNotesView.render().el);
   }

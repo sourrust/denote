@@ -3,18 +3,18 @@
 
 'use strict';
 
-let gulp     = require('gulp');
-let babel    = require('rollup-plugin-babel');
-let jscs     = require('gulp-jscs');
-let jshint   = require('gulp-jshint');
-let jst      = require('gulp-amd-template');
-let less     = require('gulp-less');
-let rename   = require('gulp-rename');
-let rollup   = require('rollup').rollup;
-let stylish  = require('jshint-stylish');
-let template = require('gulp-template');
+const gulp     = require('gulp');
+const babel    = require('rollup-plugin-babel');
+const jscs     = require('gulp-jscs');
+const jshint   = require('gulp-jshint');
+const jst      = require('gulp-amd-template');
+const less     = require('gulp-less');
+const rename   = require('gulp-rename');
+const rollup   = require('rollup').rollup;
+const stylish  = require('jshint-stylish');
+const template = require('gulp-template');
 
-let packageJSON = require('./package');
+const packageJSON = require('./package');
 
 gulp.task('default',
   ['lint', 'less', 'jst', 'copy', 'manifest', 'translate']
@@ -50,11 +50,12 @@ gulp.task('watch', function() {
 
 gulp.task('copy:vendor', function() {
   const dest  = 'build/js/lib';
-  const files = [ 'node_modules/backbone/backbone.js'
-                , 'node_modules/jquery/dist/jquery.js'
-                , 'node_modules/requirejs/require.js'
-                , 'node_modules/lodash/lodash.js'
-                ];
+  const files = [
+    'node_modules/backbone/backbone.js',
+    'node_modules/jquery/dist/jquery.js',
+    'node_modules/requirejs/require.js',
+    'node_modules/lodash/lodash.js'
+  ];
 
   return gulp.src(files)
     .pipe(gulp.dest(dest));
@@ -63,12 +64,13 @@ gulp.task('copy:vendor', function() {
 gulp.task('copy:main', function() {
   const dest    = 'build';
   const options = { base: '.' };
-  const files   = [ 'popup.html'
-                  , 'LICENSE'
-                  , 'js/contentscript.js'
-                  , 'js/configuration.js'
-                  , 'images/*'
-                  ];
+  const files   = [
+    'popup.html',
+    'LICENSE',
+    'js/contentscript.js',
+    'js/configuration.js',
+    'images/*'
+  ];
 
   return gulp.src(files, options)
     .pipe(gulp.dest(dest));

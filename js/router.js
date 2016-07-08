@@ -5,7 +5,7 @@ import PostView   from './views/post';
 
 let collection;
 
-let views = {};
+const views = {};
 
 export default Router.extend({
   routes: {
@@ -14,7 +14,8 @@ export default Router.extend({
   },
 
   initialize: function({ data }) {
-    let router = this;
+    const router = this;
+
     collection = new Notes(null, { data });
 
     views.notes    = new NotesView({ collection, router });
@@ -27,8 +28,8 @@ export default Router.extend({
   },
 
   fullPost: function(id) {
-    let oldView = views.notes;
-    let newView = views.fullPost;
+    const oldView = views.notes;
+    const newView = views.fullPost;
 
     newView.model = collection.get(id);
     newView.render();

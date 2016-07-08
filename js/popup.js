@@ -5,7 +5,7 @@ import Backbone from 'backbone';
 import Router   from './router';
 import utility  from './utility';
 
-let tabInfo = {
+const tabInfo = {
   active: true,
   currentWindow: true
 };
