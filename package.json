@@ -8,7 +8,7 @@
   },
   "license": "BSD-3-Clause",
   "scripts": {
-    "lint": "jshint js/**.js Gulpfile.js && jscs js/**.js Gulpfile.js"
+    "lint": "eslint js/**.js Gulpfile.js"
   },
   "devDependencies": {
     "babel-preset-es2015-rollup": "^1.1.1",
