@@ -12,7 +12,7 @@ export default View.extend({
   className: 'note more-comments',
 
   events: {
-    'click': 'loadMoreNotes'
+    click: 'loadMoreNotes'
   },
 
   initialize(options) {

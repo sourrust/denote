@@ -8,7 +8,7 @@
   },
   "license": "BSD-3-Clause",
   "scripts": {
-    "lint": "jshint js/**.js Gulpfile.js && jscs js/**.js Gulpfile.js"
+    "lint": "eslint js/**.js Gulpfile.js"
   },
   "devDependencies": {
     "babel-preset-es2015-rollup": "^1.1.1",
@@ -17,12 +17,10 @@
     "eslint-plugin-react": "^5.2.2",
     "gulp": "^3.8.7",
     "gulp-amd-template": "^1.0.0",
-    "gulp-jscs": "^4.0.0",
-    "gulp-jshint": "^2.0.0",
+    "gulp-eslint": "^3.0.1",
     "gulp-less": "^3.0.3",
     "gulp-rename": "^1.2.0",
     "gulp-template": "^4.0.0",
-    "jshint-stylish": "^2.1.0",
     "rollup": "^0.33.0",
     "rollup-plugin-babel": "^2.6.1"
   },

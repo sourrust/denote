@@ -1,3 +1,5 @@
+/* eslint object-shorthand: off */
+
 import _ from 'underscore';
 import $ from 'jquery';
 
@@ -48,24 +50,23 @@ function noteToJSON(note) {
       blog: blogInfo,
       id: slug(blogInfo.username, text)
     };
-  } else {
-    text     = getPreviewText($note.find('blockquote > a'));
-    blogInfo = getBlogInfo($note.find('.tumblelog'),
-                           $note.find('.avatar'));
-
-
-    return {
-      noteType: 'reblog',
-      previewText: text,
-      permalink: getPermalink($note.find('.action')),
-      classes: classes,
-      blogs: [
-        blogInfo,
-        getBlogInfo($note.find('.source_tumblelog'))
-      ],
-      id: slug(blogInfo.username, text)
-    };
   }
+
+  text     = getPreviewText($note.find('blockquote > a'));
+  blogInfo = getBlogInfo($note.find('.tumblelog'),
+                         $note.find('.avatar'));
+
+  return {
+    noteType: 'reblog',
+    previewText: text,
+    permalink: getPermalink($note.find('.action')),
+    classes: classes,
+    blogs: [
+      blogInfo,
+      getBlogInfo($note.find('.source_tumblelog'))
+    ],
+    id: slug(blogInfo.username, text)
+  };
 }
 
 export const $loader         = $('#loader');

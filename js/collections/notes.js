@@ -31,15 +31,12 @@ export default Collection.extend({
   },
 
   parse(response) {
-    let json;
-
-    let endStr  = ' NOTES -->';
-    let htmlStr = response.split('<!-- START' + endStr)[1]
-                          .split('<!-- END'   + endStr)[0];
+    const htmlStr = response.split('<!-- START NOTES -->')[1]
+                            .split('<!-- END NOTES -->')[0];
 
     this.notesHTML.html(htmlStr);
 
-    json = notesToJSON(this.notesHTML);
+    const json = notesToJSON(this.notesHTML);
 
     this.count += json.length;
 

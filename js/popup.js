@@ -1,3 +1,4 @@
+/* eslint no-unused-vars: ["error", { "varsIgnorePattern": "router" }] */
 /* global chrome */
 
 import $        from 'jquery';
