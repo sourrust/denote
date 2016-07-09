@@ -14,8 +14,6 @@ function getResponses(trail) {
   });
 }
 
-let router;
-
 export default Model.extend({
   defaults: {
     blogs: [],
@@ -24,8 +22,6 @@ export default Model.extend({
 
   initialize() {
     _.bindAll(this, 'url');
-
-    router = options.router;
   },
 
   url() {
@@ -53,8 +49,9 @@ export default Model.extend({
     const trail   = post.trail;
     const content = _.last(trail).content;
 
-    return { fullText: content.trim()
-           , responses: getResponses(_.initial(trail))
-           };
+    return {
+      fullText: content.trim(),
+      responses: getResponses(_.initial(trail))
+    };
   }
 });

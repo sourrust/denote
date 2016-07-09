@@ -80,7 +80,7 @@ export default View.extend({
     };
 
     this.collection.fetch({
-      success: onSucess,
+      success: onSuccess,
       remove: false,
       dataType: 'html'
     });
