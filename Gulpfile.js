@@ -5,13 +5,11 @@
 
 const gulp     = require('gulp');
 const babel    = require('rollup-plugin-babel');
-const jscs     = require('gulp-jscs');
-const jshint   = require('gulp-jshint');
 const jst      = require('gulp-amd-template');
 const less     = require('gulp-less');
+const eslint   = require('gulp-eslint');
 const rename   = require('gulp-rename');
-const rollup   = require('rollup').rollup;
-const stylish  = require('jshint-stylish');
+const rollup   = require('rollup');
 const template = require('gulp-template');
 
 const packageJSON = require('./package');
@@ -33,13 +31,12 @@ gulp.task('less', function() {
 });
 
 gulp.task('lint', function() {
-  const files    = ['Gulpfile.js', 'js/**/*.js'];
-  const reporter = jshint.reporter(stylish);
+  const files = ['Gulpfile.js', 'js/**/*.js'];
 
   return gulp.src(files)
-    .pipe(jshint())
-    .pipe(reporter)
-    .pipe(jscs());
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });
 
 gulp.task('watch', function() {
@@ -87,14 +84,12 @@ gulp.task('jst', function() {
 });
 
 gulp.task('translate', function() {
-  const options = {
+  return rollup.rollup({
     entry: 'js/popup.js',
     plugins: [
       babel({ presets: ['es2015-rollup'] })
     ]
-  };
-
-  return rollup(options)
+  })
   .then(function(bundle) {
     const options = {
       globals: {
