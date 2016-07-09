@@ -1,3 +1,5 @@
+/* eslint object-shorthand: off */
+
 import _ from 'underscore';
 import $ from 'jquery';
 
