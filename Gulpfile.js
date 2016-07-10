@@ -1,4 +1,3 @@
-/* jshint node: true */
 /* eslint strict: "off" */
 
 'use strict';
